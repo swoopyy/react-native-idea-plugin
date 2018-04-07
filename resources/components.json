@@ -1,2142 +1,2297 @@
-{
-  "ActivityIndicator": {
+[
+  {
+    "name": "ActivityIndicator",
     "description": "Displays a circular loading indicator.",
-    "animating": {
-      "type": "bool",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/activityindicator.html",
-    "color": {
-      "type": "color",
-      "required": "No"
-    },
-    "size": {
-      "type": "enum('small', 'large'), ,number",
-      "required": "No"
-    },
-    "hidesWhenStopped": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "animating": {
+        "type": "bool",
+        "required": "No"
+      },
+      "color": {
+        "type": "color",
+        "required": "No"
+      },
+      "size": {
+        "type": "enum('small', 'large'), ,number",
+        "required": "No"
+      },
+      "hidesWhenStopped": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "Button": {
-    "description": "A basic button component that should render nicely on any platform. Supports a minimal level of customization."
-    "onPress": {
-      "type": "function",
-      "required": "Yes"
-    },
+  {
+    "name": "Button",
+    "description": "A basic button component that should render nicely on any platform. Supports a minimal level of customization.",
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/button.html",
-    "title": {
-      "type": "string",
-      "required": "Yes"
-    },
-    "accessibilityLabel": {
-      "type": "string",
-      "required": "No"
-    },
-    "color": {
-      "type": "color",
-      "required": "No"
-    },
-    "disabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "hasTVPreferredFocus": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "onPress": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "title": {
+        "type": "string",
+        "required": "Yes"
+      },
+      "accessibilityLabel": {
+        "type": "string",
+        "required": "No"
+      },
+      "color": {
+        "type": "color",
+        "required": "No"
+      },
+      "disabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "hasTVPreferredFocus": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "DatePickerIOS": {
+  {
+    "name": "DatePickerIOS",
     "description": "Use DatePickerIOS to render a date/time picker (selector) on iOS.",
-    "date": {
-      "type": "Date",
-      "required": "Yes"
-    },
+    "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/datepickerios.html",
-    "onDateChange": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "maximumDate": {
-      "type": "Date",
-      "required": "No"
-    },
-    "minimumDate": {
-      "type": "Date",
-      "required": "No"
-    },
-    "minuteInterval": {
-      "type": "enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30)",
-      "required": "No"
-    },
-    "mode": {
-      "type": "enum('date', 'time', 'datetime')",
-      "required": "No"
-    },
-    "locale": {
-      "type": "String",
-      "required": "No"
-    },
-    "timeZoneOffsetInMinutes": {
-      "type": "number",
-      "required": "No"
+    "properties": {
+      "date": {
+        "type": "Date",
+        "required": "Yes"
+      },
+      "onDateChange": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "maximumDate": {
+        "type": "Date",
+        "required": "No"
+      },
+      "minimumDate": {
+        "type": "Date",
+        "required": "No"
+      },
+      "minuteInterval": {
+        "type": "enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30)",
+        "required": "No"
+      },
+      "mode": {
+        "type": "enum('date', 'time', 'datetime')",
+        "required": "No"
+      },
+      "locale": {
+        "type": "String",
+        "required": "No"
+      },
+      "timeZoneOffsetInMinutes": {
+        "type": "number",
+        "required": "No"
+      }
     }
   },
-  "DrawerLayoutAndroid": {
-    "description": "React component that wraps the platform DrawerLayout (Android only). The Drawer (typically used for navigation) is rendered with renderNavigationView and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the drawerPosition prop and its width can be set by the drawerWidth prop."
-    "renderNavigationView": {
-      "type": "function",
-      "required": "Yes"
-    },
+  {
+    "name": "DrawerLayoutAndroid",
+    "description": "React component that wraps the platform DrawerLayout (Android only). The Drawer (typically used for navigation) is rendered with renderNavigationView and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the drawerPosition prop and its width can be set by the drawerWidth prop.",
+    "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/drawerlayoutandroid.html",
-    "onDrawerClose": {
-      "type": "function",
-      "required": "No"
-    },
-    "drawerPosition": {
-      "type": "enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)",
-      "required": "No"
-    },
-    "drawerWidth": {
-      "type": "number",
-      "required": "No"
-    },
-    "keyboardDismissMode": {
-      "type": "enum('none', 'on-drag')",
-      "required": "No"
-    },
-    "drawerLockMode": {
-      "type": "enum('unlocked', 'locked-closed', 'locked-open')",
-      "required": "No"
-    },
-    "onDrawerOpen": {
-      "type": "function",
-      "required": "No"
-    },
-    "onDrawerSlide": {
-      "type": "function",
-      "required": "No"
-    },
-    "onDrawerStateChanged": {
-      "type": "function",
-      "required": "No"
-    },
-    "drawerBackgroundColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "statusBarBackgroundColor": {
-      "type": "color",
-      "required": "No"
+    "properties": {
+      "renderNavigationView": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "onDrawerClose": {
+        "type": "function",
+        "required": "No"
+      },
+      "drawerPosition": {
+        "type": "enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)",
+        "required": "No"
+      },
+      "drawerWidth": {
+        "type": "number",
+        "required": "No"
+      },
+      "keyboardDismissMode": {
+        "type": "enum('none', 'on-drag')",
+        "required": "No"
+      },
+      "drawerLockMode": {
+        "type": "enum('unlocked', 'locked-closed', 'locked-open')",
+        "required": "No"
+      },
+      "onDrawerOpen": {
+        "type": "function",
+        "required": "No"
+      },
+      "onDrawerSlide": {
+        "type": "function",
+        "required": "No"
+      },
+      "onDrawerStateChanged": {
+        "type": "function",
+        "required": "No"
+      },
+      "drawerBackgroundColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "statusBarBackgroundColor": {
+        "type": "color",
+        "required": "No"
+      }
     }
   },
-  "FlatList": {
+  {
+    "name": "FlatList",
     "description": "A performant interface for rendering simple, flat lists, supporting the most handy features",
-    "renderItem": {
-      "type": "function",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/flatlist.html",
-    "data": {
-      "type": "array",
-      "required": "Yes"
-    },
-    "ItemSeparatorComponent": {
-      "type": "component",
-      "required": "No"
-    },
-    "ListEmptyComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "ListFooterComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "ListHeaderComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "columnWrapperStyle": {
-      "type": "style object",
-      "required": "No"
-    },
-    "extraData": {
-      "type": "any",
-      "required": "No"
-    },
-    "getItemLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "horizontal": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "initialNumToRender": {
-      "type": "number",
-      "required": "No"
-    },
-    "initialScrollIndex": {
-      "type": "number",
-      "required": "No"
-    },
-    "inverted": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "keyExtractor": {
-      "type": "function",
-      "required": "No"
-    },
-    "numColumns": {
-      "type": "number",
-      "required": "No"
-    },
-    "onEndReached": {
-      "type": "function",
-      "required": "No"
-    },
-    "onEndReachedThreshold": {
-      "type": "number",
-      "required": "No"
-    },
-    "onRefresh": {
-      "type": "function",
-      "required": "No"
-    },
-    "onViewableItemsChanged": {
-      "type": "function",
-      "required": "No"
-    },
-    "progressViewOffset": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
-    },
-    "legacyImplementation": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "refreshing": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "viewabilityConfig": {
-      "type": "ViewabilityConfig",
-      "required": "No"
-    },
-    "viewabilityConfigCallbackPairs": {
-      "type": "array of ViewabilityConfigCallbackPair",
-      "required": "No"
+    "properties": {
+      "renderItem": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "data": {
+        "type": "array",
+        "required": "Yes"
+      },
+      "ItemSeparatorComponent": {
+        "type": "component",
+        "required": "No"
+      },
+      "ListEmptyComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "ListFooterComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "ListHeaderComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "columnWrapperStyle": {
+        "type": "style object",
+        "required": "No"
+      },
+      "extraData": {
+        "type": "any",
+        "required": "No"
+      },
+      "getItemLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "horizontal": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "initialNumToRender": {
+        "type": "number",
+        "required": "No"
+      },
+      "initialScrollIndex": {
+        "type": "number",
+        "required": "No"
+      },
+      "inverted": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "keyExtractor": {
+        "type": "function",
+        "required": "No"
+      },
+      "numColumns": {
+        "type": "number",
+        "required": "No"
+      },
+      "onEndReached": {
+        "type": "function",
+        "required": "No"
+      },
+      "onEndReachedThreshold": {
+        "type": "number",
+        "required": "No"
+      },
+      "onRefresh": {
+        "type": "function",
+        "required": "No"
+      },
+      "onViewableItemsChanged": {
+        "type": "function",
+        "required": "No"
+      },
+      "progressViewOffset": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      },
+      "legacyImplementation": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "refreshing": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "viewabilityConfig": {
+        "type": "ViewabilityConfig",
+        "required": "No"
+      },
+      "viewabilityConfigCallbackPairs": {
+        "type": "array of ViewabilityConfigCallbackPair",
+        "required": "No"
+      }
     }
   },
-  "Image": {
+  {
+    "name": "Image",
     "description": "A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.",
-    "style": {
-      "type": "style",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/image.html",
-    "blurRadius": {
-      "type": "number",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoad": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoadEnd": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoadStart": {
-      "type": "function",
-      "required": "No"
-    },
-    "resizeMode": {
-      "type": "enum('cover', 'contain', 'stretch', 'repeat', 'center')",
-      "required": "No"
-    },
-    "source": {
-      "type": "ImageSourcePropType",
-      "required": "No"
-    },
-    "loadingIndicatorSource": {
-      "type": "array of ImageSourcePropTypes, number",
-      "required": "No"
-    },
-    "onError": {
-      "type": "function",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "resizeMethod": {
-      "type": "enum('auto', 'resize', 'scale')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "accessibilityLabel": {
-      "type": "node",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "accessible": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "capInsets": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "defaultSource": {
-      "type": "object, number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "onPartialLoad": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "onProgress": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "style": {
+        "type": "style",
+        "required": "No"
+      },
+      "blurRadius": {
+        "type": "number",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoad": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoadEnd": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoadStart": {
+        "type": "function",
+        "required": "No"
+      },
+      "resizeMode": {
+        "type": "enum('cover', 'contain', 'stretch', 'repeat', 'center')",
+        "required": "No"
+      },
+      "source": {
+        "type": "ImageSourcePropType",
+        "required": "No"
+      },
+      "loadingIndicatorSource": {
+        "type": "array of ImageSourcePropTypes, number",
+        "required": "No"
+      },
+      "onError": {
+        "type": "function",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "resizeMethod": {
+        "type": "enum('auto', 'resize', 'scale')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "accessibilityLabel": {
+        "type": "node",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "accessible": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "capInsets": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "defaultSource": {
+        "type": "object, number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "onPartialLoad": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "onProgress": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "KeyboardAvoidingView": {
+  {
+    "name": "KeyboardAvoidingView",
     "description": "It is a component to solve the common problem of views that need to move out of the way of the virtual keyboard. It can automatically adjust either its position or bottom padding based on the position of the keyboard.",
-    "keyboardVerticalOffset": {
-      "type": "number",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/keyboardavoidingview.html",
-    "behavior": {
-      "type": "enum('height', 'position', 'padding')",
-      "required": "No"
-    },
-    "contentContainerStyle": {
-      "type": "View.style",
-      "required": "No"
+    "properties": {
+      "keyboardVerticalOffset": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "behavior": {
+        "type": "enum('height', 'position', 'padding')",
+        "required": "No"
+      },
+      "contentContainerStyle": {
+        "type": "View.style",
+        "required": "No"
+      }
     }
   },
-  "ListView": {
+  {
+    "name": "ListView",
     "description": "DEPRECATED - use one of the new list components, such as FlatList or SectionList for bounded memory use, fewer bugs, better performance, an easier to use API, and more features. Check out this blog post for more details.",
-    "dataSource": {
-      "type": "ListViewDataSource",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/listview.html",
-    "initialListSize": {
-      "type": "number",
-      "required": "Yes"
-    },
-    "onEndReachedThreshold": {
-      "type": "number",
-      "required": "Yes"
-    },
-    "pageSize": {
-      "type": "number",
-      "required": "Yes"
-    },
-    "renderRow": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "renderScrollComponent": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "scrollRenderAheadDistance": {
-      "type": "number",
-      "required": "Yes"
-    },
-    "stickyHeaderIndices": {
-      "type": "array of number",
-      "required": "Yes"
-    },
-    "enableEmptySections": {
-      "type": "bool",
-      "required": "No"
-    },
-    "renderHeader": {
-      "type": "function",
-      "required": "No"
-    },
-    "onEndReached": {
-      "type": "function",
-      "required": "No"
-    },
-    "stickySectionHeadersEnabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "renderSectionHeader": {
-      "type": "function",
-      "required": "No"
-    },
-    "renderSeparator": {
-      "type": "function",
-      "required": "No"
-    },
-    "onChangeVisibleRows": {
-      "type": "function",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "bool",
-      "required": "No"
-    },
-    "renderFooter": {
-      "type": "function",
-      "required": "No"
+    "properties": {
+      "dataSource": {
+        "type": "ListViewDataSource",
+        "required": "Yes"
+      },
+      "initialListSize": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "onEndReachedThreshold": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "pageSize": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "renderRow": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "renderScrollComponent": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "scrollRenderAheadDistance": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "stickyHeaderIndices": {
+        "type": "array of number",
+        "required": "Yes"
+      },
+      "enableEmptySections": {
+        "type": "bool",
+        "required": "No"
+      },
+      "renderHeader": {
+        "type": "function",
+        "required": "No"
+      },
+      "onEndReached": {
+        "type": "function",
+        "required": "No"
+      },
+      "stickySectionHeadersEnabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "renderSectionHeader": {
+        "type": "function",
+        "required": "No"
+      },
+      "renderSeparator": {
+        "type": "function",
+        "required": "No"
+      },
+      "onChangeVisibleRows": {
+        "type": "function",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "bool",
+        "required": "No"
+      },
+      "renderFooter": {
+        "type": "function",
+        "required": "No"
+      }
     }
   },
-  "MaskedViewIOS": {
+  {
+    "name": "MaskedViewIOS",
     "description": "Renders the child view with a mask specified in the maskElement prop.",
-    "maskElement": {
-      "type": "element",
-      "required": "Yes"
+    "platform": "ios",
+    "properties": {
+      "maskElement": {
+        "type": "element",
+        "required": "Yes"
+      }
     }
   },
-  "Modal": {
+  {
+    "name": "Modal",
     "description": "The Modal component is a simple way to present content above an enclosing view.",
-    "visible": {
-      "type": "bool",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/modal.html",
-    "supportedOrientations": {
-      "type": "array of enum('portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "onRequestClose": {
-      "type": "function",
-      "required": "Yes",
-      "platform": "Android, Platform.isTVOS"
-    },
-    "onShow": {
-      "type": "function",
-      "required": "No"
-    },
-    "transparent": {
-      "type": "bool",
-      "required": "No"
-    },
-    "animationType": {
-      "type": "enum('none', 'slide', 'fade')",
-      "required": "No"
-    },
-    "hardwareAccelerated": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "onDismiss": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "onOrientationChange": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "presentationStyle": {
-      "type": "enum('fullScreen', 'pageSheet', 'formSheet', 'overFullScreen')",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "visible": {
+        "type": "bool",
+        "required": "No"
+      },
+      "supportedOrientations": {
+        "type": "array of enum('portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "onRequestClose": {
+        "type": "function",
+        "required": "Yes",
+        "platform": "Android, Platform.isTVOS"
+      },
+      "onShow": {
+        "type": "function",
+        "required": "No"
+      },
+      "transparent": {
+        "type": "bool",
+        "required": "No"
+      },
+      "animationType": {
+        "type": "enum('none', 'slide', 'fade')",
+        "required": "No"
+      },
+      "hardwareAccelerated": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "onDismiss": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "onOrientationChange": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "presentationStyle": {
+        "type": "enum('fullScreen', 'pageSheet', 'formSheet', 'overFullScreen')",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "NavigatorIOS": {
+  {
+    "name": "NavigatorIOS",
     "description": "NavigatorIOS is a wrapper around UINavigationController, enabling you to implement a navigation stack. It works exactly the same as it would on a native app using UINavigationController, providing the same animations and behavior from UIKit.",
-    "initialRoute": {
-      "type": "object: {component: function,title: string,titleImage: Image.propTypes.source,passProps: object,backButtonIcon: Image.propTypes.source,backButtonTitle: string,leftButtonIcon: Image.propTypes.source,leftButtonTitle: string,leftButtonSystemIcon: Object.keys(SystemIcons),onLeftButtonPress: function,rightButtonIcon: Image.propTypes.source,rightButtonTitle: string,rightButtonSystemIcon: Object.keys(SystemIcons),onRightButtonPress: function,wrapperStyle: View.style,navigationBarHidden: bool,shadowHidden: bool,tintColor: string,barTintColor: string,barStyle: enum('default', 'black'),titleTextColor: string,translucent: bool}",
-      "required": "Yes"
-    },
+    "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/navigatorios.html",
-    "barStyle": {
-      "type": "enum('default', 'black')",
-      "required": "No"
-    },
-    "barTintColor": {
-      "type": "string",
-      "required": "No"
-    },
-    "interactivePopGestureEnabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "itemWrapperStyle": {
-      "type": "View.style",
-      "required": "No"
-    },
-    "navigationBarHidden": {
-      "type": "bool",
-      "required": "No"
-    },
-    "shadowHidden": {
-      "type": "bool",
-      "required": "No"
-    },
-    "tintColor": {
-      "type": "string",
-      "required": "No"
-    },
-    "titleTextColor": {
-      "type": "string",
-      "required": "No"
-    },
-    "translucent": {
-      "type": "bool",
-      "required": "No"
+    "properties": {
+      "initialRoute": {
+        "type": "object: {component: function,title: string,titleImage: Image.propTypes.source,passProps: object,backButtonIcon: Image.propTypes.source,backButtonTitle: string,leftButtonIcon: Image.propTypes.source,leftButtonTitle: string,leftButtonSystemIcon: Object.keys(SystemIcons),onLeftButtonPress: function,rightButtonIcon: Image.propTypes.source,rightButtonTitle: string,rightButtonSystemIcon: Object.keys(SystemIcons),onRightButtonPress: function,wrapperStyle: View.style,navigationBarHidden: bool,shadowHidden: bool,tintColor: string,barTintColor: string,barStyle: enum('default', 'black'),titleTextColor: string,translucent: bool}",
+        "required": "Yes"
+      },
+      "barStyle": {
+        "type": "enum('default', 'black')",
+        "required": "No"
+      },
+      "barTintColor": {
+        "type": "string",
+        "required": "No"
+      },
+      "interactivePopGestureEnabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "itemWrapperStyle": {
+        "type": "View.style",
+        "required": "No"
+      },
+      "navigationBarHidden": {
+        "type": "bool",
+        "required": "No"
+      },
+      "shadowHidden": {
+        "type": "bool",
+        "required": "No"
+      },
+      "tintColor": {
+        "type": "string",
+        "required": "No"
+      },
+      "titleTextColor": {
+        "type": "string",
+        "required": "No"
+      },
+      "translucent": {
+        "type": "bool",
+        "required": "No"
+      }
     }
   },
-  "Picker": {
+  {
+    "name": "Picker",
     "description": "Renders the native picker component on iOS and Android.",
-    "onValueChange": {
-      "type": "function",
-      "required": "No"
-    },
     "url": "https://facebook.github.io/react-native/docs/picker.html",
-    "selectedValue": {
-      "type": "any",
-      "required": "No"
-    },
-    "style": {
-      "type": "string",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "enabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "mode": {
-      "type": "enum('dialog', 'dropdown')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "prompt": {
-      "type": "string",
-      "required": "No",
-      "platform": "Android"
-    },
-    "itemStyle": {
-      "type": "text styles",
-      "required": "No",
-      "platform": "iOS"
+    "platform": "both",
+    "properties": {
+      "onValueChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "selectedValue": {
+        "type": "any",
+        "required": "No"
+      },
+      "style": {
+        "type": "string",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "enabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "mode": {
+        "type": "enum('dialog', 'dropdown')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "prompt": {
+        "type": "string",
+        "required": "No",
+        "platform": "Android"
+      },
+      "itemStyle": {
+        "type": "text styles",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "PickerIOS": {
+  {
+    "name": "PickerIOS",
     "description": "IOS picker",
-    "itemStyle": {},
-    "onValueChange": {},
-    "selectedValue": {}
+    "platform": "ios",
+    "url": "https://facebook.github.io/react-native/docs/pickerios.html",
+    "properties": {
+      "itemStyle": {
+        "type": "text styles",
+        "required": "No"
+      },
+      "onValueChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "selectedValue": {
+        "type": "any",
+        "required": "No"
+      }
+    }
   },
-  "ProgressBarAndroid": {
+  {
+    "name": "ProgressBarAndroid",
     "description": "React component that wraps the Android-only ProgressBar. This component is used to indicate that the app is loading or there is some activity in the app.",
-    "animating": {
-      "type": "bool",
-      "required": "No"
-    },
+    "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/progressbarandroid.html",
-    "color": {
-      "type": "color",
-      "required": "No"
-    },
-    "indeterminate": {
-      "type": "indeterminateType",
-      "required": "No"
-    },
-    "progress": {
-      "type": "number",
-      "required": "No"
-    },
-    "styleAttr": {
-      "type": "enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse')",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
+    "properties": {
+      "animating": {
+        "type": "bool",
+        "required": "No"
+      },
+      "color": {
+        "type": "color",
+        "required": "No"
+      },
+      "indeterminate": {
+        "type": "indeterminateType",
+        "required": "No"
+      },
+      "progress": {
+        "type": "number",
+        "required": "No"
+      },
+      "styleAttr": {
+        "type": "enum('Horizontal', 'Normal', 'Small', 'Large', 'Inverse', 'SmallInverse', 'LargeInverse')",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      }
     }
   },
-  "ProgressViewIOS": {
+  {
+    "name": "ProgressViewIOS",
     "descripption": "Use ProgressViewIOS to render a UIProgressView on iOS.",
-    "progress": {
-      "type": "number",
-      "required": "No"
-    },
+    "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/progressviewios.html",
-    "progressImage": {
-      "type": "Image.propTypes.source",
-      "required": "No"
-    },
-    "progressTintColor": {
-      "type": "string",
-      "required": "No"
-    },
-    "progressViewStyle": {
-      "type": "enum('default', 'bar')",
-      "required": "No"
-    },
-    "trackImage": {
-      "type": "Image.propTypes.source",
-      "required": "No"
-    },
-    "trackTintColor": {
-      "type": "string",
-      "required": "No"
+    "properties": {
+      "progress": {
+        "type": "number",
+        "required": "No"
+      },
+      "progressImage": {
+        "type": "Image.propTypes.source",
+        "required": "No"
+      },
+      "progressTintColor": {
+        "type": "string",
+        "required": "No"
+      },
+      "progressViewStyle": {
+        "type": "enum('default', 'bar')",
+        "required": "No"
+      },
+      "trackImage": {
+        "type": "Image.propTypes.source",
+        "required": "No"
+      },
+      "trackTintColor": {
+        "type": "string",
+        "required": "No"
+      }
     }
   },
-  "RefreshControl": {
+  {
+    "name": "RefreshControl",
     "description": "This component is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at scrollY: 0, swiping down triggers an onRefresh event.",
-    "refreshing": {
-      "type": "bool",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/refreshcontrol.html",
-    "onRefresh": {
-      "type": "function",
-      "required": "No"
-    },
-    "colors": {
-      "type": "array of ",
-      "required": "No",
-      "platform": "Android"
-    },
-    "enabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "progressBackgroundColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "progressViewOffset": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
-    },
-    "size": {
-      "type": "enum(RefreshLayoutConsts.SIZE.DEFAULT, RefreshLayoutConsts.SIZE.LARGE)",
-      "required": "No",
-      "platform": "Android"
-    },
-    "tintColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "title": {
-      "type": "string",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "titleColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "refreshing": {
+        "type": "bool",
+        "required": "Yes"
+      },
+      "onRefresh": {
+        "type": "function",
+        "required": "No"
+      },
+      "colors": {
+        "type": "array of ",
+        "required": "No",
+        "platform": "Android"
+      },
+      "enabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "progressBackgroundColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "progressViewOffset": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      },
+      "size": {
+        "type": "enum(RefreshLayoutConsts.SIZE.DEFAULT, RefreshLayoutConsts.SIZE.LARGE)",
+        "required": "No",
+        "platform": "Android"
+      },
+      "tintColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "title": {
+        "type": "string",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "titleColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "ScrollView": {
+  {
+    "name": "ScrollView",
     "description": "The purpose of SafeAreaView is to render content within the safe area boundaries of a device. It is currently only applicable to iOS devices.",
-    "alwaysBounceVertical": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/scrollview.html",
-    "contentContainerStyle": {
-      "type": "StyleSheetPropType(View Style props)",
-      "required": "No"
-    },
-    "keyboardDismissMode": {
-      "type": "enum('none', 'on-drag', 'interactive')",
-      "required": "No"
-    },
-    "keyboardShouldPersistTaps": {
-      "type": "enum('always', 'never', 'handled', false, true)",
-      "required": "No"
-    },
-    "onContentSizeChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMomentumScrollBegin": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMomentumScrollEnd": {
-      "type": "function",
-      "required": "No"
-    },
-    "onScroll": {
-      "type": "function",
-      "required": "No"
-    },
-    "onScrollBeginDrag": {
-      "type": "function",
-      "required": "No"
-    },
-    "onScrollEndDrag": {
-      "type": "function",
-      "required": "No"
-    },
-    "pagingEnabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "refreshControl": {
-      "type": "element",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "bool",
-      "required": "No"
-    },
-    "scrollEnabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "showsHorizontalScrollIndicator": {
-      "type": "bool",
-      "required": "No"
-    },
-    "showsVerticalScrollIndicator": {
-      "type": "bool",
-      "required": "No"
-    },
-    "stickyHeaderIndices": {
-      "type": "array of number",
-      "required": "No"
-    },
-    "endFillColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "overScrollMode": {
-      "type": "enum('auto', 'always', 'never')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "scrollPerfTag": {
-      "type": "string",
-      "required": "No",
-      "platform": "Android"
-    },
-    "DEPRECATED_sendUpdatedChildFrames": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "alwaysBounceHorizontal": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "horizontal": {
-      "type": "bool",
-      "required": "No"
-    },
-    "automaticallyAdjustContentInsets": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "bounces": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "bouncesZoom": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "canCancelContentTouches": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "centerContent": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "contentInset": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "contentInsetAdjustmentBehavior": {
-      "type": "enum('automatic', 'scrollableAxes', 'never', 'always')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "contentOffset": {
-      "type": "PointPropType",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "decelerationRate": {
-      "type": "enum('fast', 'normal'), ,number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "directionalLockEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "indicatorStyle": {
-      "type": "enum('default', 'black', 'white')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "maximumZoomScale": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "minimumZoomScale": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "pinchGestureEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "scrollEventThrottle": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "scrollIndicatorInsets": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "scrollsToTop": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "snapToAlignment": {
-      "type": "enum('start', 'center', 'end')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "snapToInterval": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "zoomScale": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "alwaysBounceVertical": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "contentContainerStyle": {
+        "type": "StyleSheetPropType(View Style props)",
+        "required": "No"
+      },
+      "keyboardDismissMode": {
+        "type": "enum('none', 'on-drag', 'interactive')",
+        "required": "No"
+      },
+      "keyboardShouldPersistTaps": {
+        "type": "enum('always', 'never', 'handled', false, true)",
+        "required": "No"
+      },
+      "onContentSizeChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMomentumScrollBegin": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMomentumScrollEnd": {
+        "type": "function",
+        "required": "No"
+      },
+      "onScroll": {
+        "type": "function",
+        "required": "No"
+      },
+      "onScrollBeginDrag": {
+        "type": "function",
+        "required": "No"
+      },
+      "onScrollEndDrag": {
+        "type": "function",
+        "required": "No"
+      },
+      "pagingEnabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "refreshControl": {
+        "type": "element",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "bool",
+        "required": "No"
+      },
+      "scrollEnabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "showsHorizontalScrollIndicator": {
+        "type": "bool",
+        "required": "No"
+      },
+      "showsVerticalScrollIndicator": {
+        "type": "bool",
+        "required": "No"
+      },
+      "stickyHeaderIndices": {
+        "type": "array of number",
+        "required": "No"
+      },
+      "endFillColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "overScrollMode": {
+        "type": "enum('auto', 'always', 'never')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "scrollPerfTag": {
+        "type": "string",
+        "required": "No",
+        "platform": "Android"
+      },
+      "DEPRECATED_sendUpdatedChildFrames": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "alwaysBounceHorizontal": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "horizontal": {
+        "type": "bool",
+        "required": "No"
+      },
+      "automaticallyAdjustContentInsets": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "bounces": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "bouncesZoom": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "canCancelContentTouches": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "centerContent": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "contentInset": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "contentInsetAdjustmentBehavior": {
+        "type": "enum('automatic', 'scrollableAxes', 'never', 'always')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "contentOffset": {
+        "type": "PointPropType",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "decelerationRate": {
+        "type": "enum('fast', 'normal'), ,number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "directionalLockEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "indicatorStyle": {
+        "type": "enum('default', 'black', 'white')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "maximumZoomScale": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "minimumZoomScale": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "pinchGestureEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "scrollEventThrottle": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "scrollIndicatorInsets": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "scrollsToTop": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "snapToAlignment": {
+        "type": "enum('start', 'center', 'end')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "snapToInterval": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "zoomScale": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "SectionList": {
+  {
+    "name": "SectionList",
     "description": "A performant interface for rendering sectioned lists, supporting the most handy features.",
-    "sections": {
-      "type": "array of ",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/sectionlist.html",
-    "initialNumToRender": {
-      "type": "number",
-      "required": "Yes"
-    },
-    "keyExtractor": {
-      "type": "(item: Item, index: number) => string",
-      "required": "Yes"
-    },
-    "renderItem": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "onEndReached": {
-      "type": "[(info: {distanceFromEnd: number}) => void]",
-      "required": "No"
-    },
-    "extraData": {
-      "type": "any",
-      "required": "No"
-    },
-    "ItemSeparatorComponent": {
-      "type": "[component, function, element]",
-      "required": "No"
-    },
-    "inverted": {
-      "type": "[boolean]",
-      "required": "No"
-    },
-    "ListFooterComponent": {
-      "type": "[component, function, element]",
-      "required": "No"
-    },
-    "legacyImplementation": {
-      "type": "[component, function, element]",
-      "required": "No"
-    },
-    "ListEmptyComponent": {
-      "type": "[component, function, element]",
-      "required": "No"
-    },
-    "onEndReachedThreshold": {
-      "type": "[number]",
-      "required": "No"
-    },
-    "onRefresh": {
-      "type": "[() => void]",
-      "required": "No"
-    },
-    "onViewableItemsChanged": {
-      "type": "function",
-      "required": "No"
-    },
-    "refreshing": {
-      "type": "[boolean]",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "ListHeaderComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "renderSectionFooter": {
-      "type": "[(info: {section: SectionT}) => ?React.Element",
-      "required": "No"
-    },
-    "renderSectionHeader": {
-      "type": "[(info: {section: SectionT}) => ?React.Element",
-      "required": "No"
-    },
-    "SectionSeparatorComponent": {
-      "type": "[ReactClass",
-      "required": "No"
-    },
-    "stickySectionHeadersEnabled": {
-      "type": "boolean",
-      "required": "No"
+    "properties": {
+      "sections": {
+        "type": "array of ",
+        "required": "Yes"
+      },
+      "initialNumToRender": {
+        "type": "number",
+        "required": "Yes"
+      },
+      "keyExtractor": {
+        "type": "(item: Item, index: number) => string",
+        "required": "Yes"
+      },
+      "renderItem": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "onEndReached": {
+        "type": "[(info: {distanceFromEnd: number}) => void]",
+        "required": "No"
+      },
+      "extraData": {
+        "type": "any",
+        "required": "No"
+      },
+      "ItemSeparatorComponent": {
+        "type": "[component, function, element]",
+        "required": "No"
+      },
+      "inverted": {
+        "type": "[boolean]",
+        "required": "No"
+      },
+      "ListFooterComponent": {
+        "type": "[component, function, element]",
+        "required": "No"
+      },
+      "legacyImplementation": {
+        "type": "[component, function, element]",
+        "required": "No"
+      },
+      "ListEmptyComponent": {
+        "type": "[component, function, element]",
+        "required": "No"
+      },
+      "onEndReachedThreshold": {
+        "type": "[number]",
+        "required": "No"
+      },
+      "onRefresh": {
+        "type": "[() => void]",
+        "required": "No"
+      },
+      "onViewableItemsChanged": {
+        "type": "function",
+        "required": "No"
+      },
+      "refreshing": {
+        "type": "[boolean]",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "ListHeaderComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "renderSectionFooter": {
+        "type": "[(info: {section: SectionT}) => ?React.Element",
+        "required": "No"
+      },
+      "renderSectionHeader": {
+        "type": "[(info: {section: SectionT}) => ?React.Element",
+        "required": "No"
+      },
+      "SectionSeparatorComponent": {
+        "type": "[ReactClass",
+        "required": "No"
+      },
+      "stickySectionHeadersEnabled": {
+        "type": "boolean",
+        "required": "No"
+      }
     }
   },
-  "SegmentedControlIOS": {
+  {
+    "name": "SegmentedControlIOS",
     "description": "Use SegmentedControlIOS to render a UISegmentedControl iOS.",
-    "enabled": {
-      "type": "bool",
-      "required": "No"
-    },
     "url": "https://facebook.github.io/react-native/docs/segmentedcontrolios.html",
-    "momentary": {
-      "type": "bool",
-      "required": "No"
-    },
-    "onChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "onValueChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "selectedIndex": {
-      "type": "number",
-      "required": "No"
-    },
-    "tintColor": {
-      "type": "string",
-      "required": "No"
-    },
-    "values": {
-      "type": "array of string",
-      "required": "No"
+    "platform": "ios",
+    "properties": {
+      "enabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "momentary": {
+        "type": "bool",
+        "required": "No"
+      },
+      "onChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "onValueChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "selectedIndex": {
+        "type": "number",
+        "required": "No"
+      },
+      "tintColor": {
+        "type": "string",
+        "required": "No"
+      },
+      "values": {
+        "type": "array of string",
+        "required": "No"
+      }
     }
   },
-  "Slider": {
+  {
+    "name": "Slider",
     "description": "A component used to select a single value from a range of values.",
-    "style": {
-      "type": "View.style",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/slider.html",
-    "disabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "maximumValue": {
-      "type": "number",
-      "required": "No"
-    },
-    "minimumTrackTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "minimumValue": {
-      "type": "number",
-      "required": "No"
-    },
-    "onSlidingComplete": {
-      "type": "function",
-      "required": "No"
-    },
-    "onValueChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "step": {
-      "type": "number",
-      "required": "No"
-    },
-    "maximumTrackTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "value": {
-      "type": "number",
-      "required": "No"
-    },
-    "thumbTintColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "maximumTrackImage": {
-      "type": "Image.propTypes.source",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "minimumTrackImage": {
-      "type": "Image.propTypes.source",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "thumbImage": {
-      "type": "Image.propTypes.source",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "trackImage": {
-      "type": "Image.propTypes.source",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "style": {
+        "type": "View.style",
+        "required": "No"
+      },
+      "disabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "maximumValue": {
+        "type": "number",
+        "required": "No"
+      },
+      "minimumTrackTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "minimumValue": {
+        "type": "number",
+        "required": "No"
+      },
+      "onSlidingComplete": {
+        "type": "function",
+        "required": "No"
+      },
+      "onValueChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "step": {
+        "type": "number",
+        "required": "No"
+      },
+      "maximumTrackTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "value": {
+        "type": "number",
+        "required": "No"
+      },
+      "thumbTintColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "maximumTrackImage": {
+        "type": "Image.propTypes.source",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "minimumTrackImage": {
+        "type": "Image.propTypes.source",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "thumbImage": {
+        "type": "Image.propTypes.source",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "trackImage": {
+        "type": "Image.propTypes.source",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "SnapshotViewIOS": {
+  {
+    "name": "SnapshotViewIOS",
     "descriotion": "IOS snapshot view",
-    "onSnapshotReady": {
-      "type": "function",
-      "required": "No"
-    },
-    "testIdentifier": {
-      "type": "string",
-      "required": "No"
+    "platform": "ios",
+    "url": "https://facebook.github.io/react-native/docs/snapshotviewios.html",
+    "properties": {
+      "onSnapshotReady": {
+        "type": "function",
+        "required": "No"
+      },
+      "testIdentifier": {
+        "type": "string",
+        "required": "No"
+      }
     }
   },
-  "StatusBar": {
+  {
+    "name": "StatusBar",
     "description": "Component to control the app status bar.",
-    "animated": {
-      "type": "bool",
-      "required": "No"
-    },
     "url": "https://facebook.github.io/react-native/docs/statusbar.html",
-    "barStyle": {
-      "type": "enum('default', 'light-content', 'dark-content')",
-      "required": "No"
-    },
-    "hidden": {
-      "type": "bool",
-      "required": "No"
-    },
-    "backgroundColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "translucent": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "networkActivityIndicatorVisible": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "showHideTransition": {
-      "type": "enum('fade', 'slide')",
-      "required": "No",
-      "platform": "iOS"
+    "platform": "both",
+    "properties": {
+      "animated": {
+        "type": "bool",
+        "required": "No"
+      },
+      "barStyle": {
+        "type": "enum('default', 'light-content', 'dark-content')",
+        "required": "No"
+      },
+      "hidden": {
+        "type": "bool",
+        "required": "No"
+      },
+      "backgroundColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "translucent": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "networkActivityIndicatorVisible": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "showHideTransition": {
+        "type": "enum('fade', 'slide')",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "Switch": {
+  {
+    "name": "Switch",
     "description": "Renders a boolean input. This is a controlled component that requires an onValueChange callback that updates the value prop in order for the component to reflect user actions. If the value prop is not updated, the component will continue to render the supplied value prop instead of the expected result of any user actions.",
-    "disabled": {
-      "type": "bool",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/switch.html",
-    "onTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "onValueChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "thumbTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "tintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "value": {
-      "type": "bool",
-      "required": "No"
+    "properties": {
+      "disabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "onTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "onValueChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "thumbTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "tintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "value": {
+        "type": "bool",
+        "required": "No"
+      }
     }
   },
-  "TabBarIOS": {
-    "description": "IOS TabBar"
-    "barStyle": {
-      "type": "enum('default', 'black')",
-      "required": "No"
-    },
+  {
+    "name": "TabBarIOS",
+    "description": "IOS TabBar",
+    "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/tabbarios.html",
-    "barTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "itemPositioning": {
-      "type": "enum('fill', 'center', 'auto')",
-      "required": "No"
-    },
-    "style": {
-      "type": "color",
-      "required": "No"
-    },
-    "tintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "translucent": {
-      "type": "bool",
-      "required": "No"
-    },
-    "unselectedItemTintColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "unselectedTintColor": {
-      "type": "color",
-      "required": "No"
+    "properties": {
+      "barStyle": {
+        "type": "enum('default', 'black')",
+        "required": "No"
+      },
+      "barTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "itemPositioning": {
+        "type": "enum('fill', 'center', 'auto')",
+        "required": "No"
+      },
+      "style": {
+        "type": "color",
+        "required": "No"
+      },
+      "tintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "translucent": {
+        "type": "bool",
+        "required": "No"
+      },
+      "unselectedItemTintColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "unselectedTintColor": {
+        "type": "color",
+        "required": "No"
+      }
     }
   },
-  "TabBarIOS.ItemText": {
+  {
+    "name": "TabBarIOS.ItemText",
     "description": "ItemText of TabBarIOS",
-    "selected": {
-      "type": "bool",
-      "required": "No"
-    },
     "url": "https://facebook.github.io/react-native/docs/tabbarios-item.html",
-    "badge": {
-      "type": "string, ,number",
-      "required": "No"
-    },
-    "icon": {
-      "type": "Image.propTypes.source",
-      "required": "No"
-    },
-    "onPress": {
-      "type": "function",
-      "required": "No"
-    },
-    "renderAsOriginal": {
-      "type": "bool",
-      "required": "No"
-    },
-    "badgeColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "selectedIcon": {
-      "type": "Image.propTypes.source",
-      "required": "No"
-    },
-    "style": {
-      "type": "View.style",
-      "required": "No"
-    },
-    "systemIcon": {
-      "type": "enum('bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated')",
-      "required": "No"
-    },
-    "title": {
-      "type": "string",
-      "required": "No"
-    },
-    "isTVSelectable": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "platform": "ios",
+    "properties": {
+      "selected": {
+        "type": "bool",
+        "required": "No"
+      },
+      "badge": {
+        "type": "string, ,number",
+        "required": "No"
+      },
+      "icon": {
+        "type": "Image.propTypes.source",
+        "required": "No"
+      },
+      "onPress": {
+        "type": "function",
+        "required": "No"
+      },
+      "renderAsOriginal": {
+        "type": "bool",
+        "required": "No"
+      },
+      "badgeColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "selectedIcon": {
+        "type": "Image.propTypes.source",
+        "required": "No"
+      },
+      "style": {
+        "type": "View.style",
+        "required": "No"
+      },
+      "systemIcon": {
+        "type": "enum('bookmarks', 'contacts', 'downloads', 'favorites', 'featured', 'history', 'more', 'most-recent', 'most-viewed', 'recents', 'search', 'top-rated')",
+        "required": "No"
+      },
+      "title": {
+        "type": "string",
+        "required": "No"
+      },
+      "isTVSelectable": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "Text": {
-    "description": "A React component for displaying text. Text supports nesting, styling, and touch handling. In the following example, the nested title and body text will inherit the fontFamily from styles.baseText, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:"
-    "selectable": {
-      "type": "bool",
-      "required": "No"
-    },
+  {
+    "name":  "Text",
+    "description": "A React component for displaying text. Text supports nesting, styling, and touch handling. In the following example, the nested title and body text will inherit the fontFamily from styles.baseText, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:",
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/text.html",
-    "accessible": {
-      "type": "bool",
-      "required": "No"
-    },
-    "ellipsizeMode": {
-      "type": "enum('head', 'middle', 'tail', 'clip')",
-      "required": "No"
-    },
-    "nativeID": {
-      "type": "string",
-      "required": "No"
-    },
-    "numberOfLines": {
-      "type": "number",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLongPress": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPress": {
-      "type": "function",
-      "required": "No"
-    },
-    "pressRetentionOffset": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No"
-    },
-    "allowFontScaling": {
-      "type": "bool",
-      "required": "No"
-    },
-    "style": {
-      "type": "string",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "disabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "selectionColor": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "textBreakStrategy": {
-      "type": "enum('simple', 'highQuality', 'balanced')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "adjustsFontSizeToFit": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "minimumFontScale": {
-      "type": "number",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "suppressHighlighting": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "selectable": {
+        "type": "bool",
+        "required": "No"
+      },
+      "accessible": {
+        "type": "bool",
+        "required": "No"
+      },
+      "ellipsizeMode": {
+        "type": "enum('head', 'middle', 'tail', 'clip')",
+        "required": "No"
+      },
+      "nativeID": {
+        "type": "string",
+        "required": "No"
+      },
+      "numberOfLines": {
+        "type": "number",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLongPress": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPress": {
+        "type": "function",
+        "required": "No"
+      },
+      "pressRetentionOffset": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No"
+      },
+      "allowFontScaling": {
+        "type": "bool",
+        "required": "No"
+      },
+      "style": {
+        "type": "string",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "disabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "selectionColor": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "textBreakStrategy": {
+        "type": "enum('simple', 'highQuality', 'balanced')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "adjustsFontSizeToFit": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "minimumFontScale": {
+        "type": "number",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "suppressHighlighting": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "TextInput": {
+  {
+    "name": "TextInput",
     "description": "A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.The simplest use case is to plop down a TextInput and subscribe to the onChangeText events to read the user input. There are also other events, such as onSubmitEditing and onFocus that can be subscribed to. ",
-    "placeholderTextColor": {
-      "type": "color",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/textinput.html",
-    "allowFontScaling": {
-      "type": "bool",
-      "required": "No"
-    },
-    "autoCorrect": {
-      "type": "bool",
-      "required": "No"
-    },
-    "autoFocus": {
-      "type": "bool",
-      "required": "No"
-    },
-    "blurOnSubmit": {
-      "type": "bool",
-      "required": "No"
-    },
-    "caretHidden": {
-      "type": "bool",
-      "required": "No"
-    },
-    "contextMenuHidden": {
-      "type": "bool",
-      "required": "No"
-    },
-    "defaultValue": {
-      "type": "string",
-      "required": "No"
-    },
-    "editable": {
-      "type": "bool",
-      "required": "No"
-    },
-    "keyboardType": {
-      "type": "enum('default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search', 'visible-password')",
-      "required": "No"
-    },
-    "maxHeight": {
-      "type": "number",
-      "required": "No"
-    },
-    "maxLength": {
-      "type": "number",
-      "required": "No"
-    },
-    "multiline": {
-      "type": "bool",
-      "required": "No"
-    },
-    "onBlur": {
-      "type": "function",
-      "required": "No"
-    },
-    "onChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "onChangeText": {
-      "type": "function",
-      "required": "No"
-    },
-    "onContentSizeChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "onEndEditing": {
-      "type": "function",
-      "required": "No"
-    },
-    "onFocus": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onScroll": {
-      "type": "function",
-      "required": "No"
-    },
-    "onSelectionChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "onSubmitEditing": {
-      "type": "function",
-      "required": "No"
-    },
-    "placeholder": {
-      "type": "string",
-      "required": "No"
-    },
-    "autoCapitalize": {
-      "type": "enum('none', 'sentences', 'words', 'characters')",
-      "required": "No"
-    },
-    "returnKeyType": {
-      "type": "enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo')",
-      "required": "No"
-    },
-    "secureTextEntry": {
-      "type": "bool",
-      "required": "No"
-    },
-    "selectTextOnFocus": {
-      "type": "bool",
-      "required": "No"
-    },
-    "selection": {
-      "type": "object: {start: number,end: number}",
-      "required": "No"
-    },
-    "selectionColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "style": {
-      "type": "Text",
-      "required": "No"
-    },
-    "value": {
-      "type": "string",
-      "required": "No"
-    },
-    "disableFullscreenUI": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "inlineImageLeft": {
-      "type": "string",
-      "required": "No",
-      "platform": "Android"
-    },
-    "inlineImagePadding": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
-    },
-    "numberOfLines": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
-    },
-    "returnKeyLabel": {
-      "type": "string",
-      "required": "No",
-      "platform": "Android"
-    },
-    "textBreakStrategy": {
-      "type": "enum('simple', 'highQuality', 'balanced')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "underlineColorAndroid": {
-      "type": "color",
-      "required": "No",
-      "platform": "Android"
-    },
-    "clearButtonMode": {
-      "type": "enum('never', 'while-editing', 'unless-editing', 'always')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "clearTextOnFocus": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "dataDetectorTypes": {
-      "type": "enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "enablesReturnKeyAutomatically": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "keyboardAppearance": {
-      "type": "enum('default', 'light', 'dark')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "onKeyPress": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "selectionState": {
-      "type": "DocumentSelectionState",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "spellCheck": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "placeholderTextColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "allowFontScaling": {
+        "type": "bool",
+        "required": "No"
+      },
+      "autoCorrect": {
+        "type": "bool",
+        "required": "No"
+      },
+      "autoFocus": {
+        "type": "bool",
+        "required": "No"
+      },
+      "blurOnSubmit": {
+        "type": "bool",
+        "required": "No"
+      },
+      "caretHidden": {
+        "type": "bool",
+        "required": "No"
+      },
+      "contextMenuHidden": {
+        "type": "bool",
+        "required": "No"
+      },
+      "defaultValue": {
+        "type": "string",
+        "required": "No"
+      },
+      "editable": {
+        "type": "bool",
+        "required": "No"
+      },
+      "keyboardType": {
+        "type": "enum('default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search', 'visible-password')",
+        "required": "No"
+      },
+      "maxHeight": {
+        "type": "number",
+        "required": "No"
+      },
+      "maxLength": {
+        "type": "number",
+        "required": "No"
+      },
+      "multiline": {
+        "type": "bool",
+        "required": "No"
+      },
+      "onBlur": {
+        "type": "function",
+        "required": "No"
+      },
+      "onChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "onChangeText": {
+        "type": "function",
+        "required": "No"
+      },
+      "onContentSizeChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "onEndEditing": {
+        "type": "function",
+        "required": "No"
+      },
+      "onFocus": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onScroll": {
+        "type": "function",
+        "required": "No"
+      },
+      "onSelectionChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "onSubmitEditing": {
+        "type": "function",
+        "required": "No"
+      },
+      "placeholder": {
+        "type": "string",
+        "required": "No"
+      },
+      "autoCapitalize": {
+        "type": "enum('none', 'sentences', 'words', 'characters')",
+        "required": "No"
+      },
+      "returnKeyType": {
+        "type": "enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo')",
+        "required": "No"
+      },
+      "secureTextEntry": {
+        "type": "bool",
+        "required": "No"
+      },
+      "selectTextOnFocus": {
+        "type": "bool",
+        "required": "No"
+      },
+      "selection": {
+        "type": "object: {start: number,end: number}",
+        "required": "No"
+      },
+      "selectionColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "style": {
+        "type": "Text",
+        "required": "No"
+      },
+      "value": {
+        "type": "string",
+        "required": "No"
+      },
+      "disableFullscreenUI": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "inlineImageLeft": {
+        "type": "string",
+        "required": "No",
+        "platform": "Android"
+      },
+      "inlineImagePadding": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      },
+      "numberOfLines": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      },
+      "returnKeyLabel": {
+        "type": "string",
+        "required": "No",
+        "platform": "Android"
+      },
+      "textBreakStrategy": {
+        "type": "enum('simple', 'highQuality', 'balanced')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "underlineColorAndroid": {
+        "type": "color",
+        "required": "No",
+        "platform": "Android"
+      },
+      "clearButtonMode": {
+        "type": "enum('never', 'while-editing', 'unless-editing', 'always')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "clearTextOnFocus": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "dataDetectorTypes": {
+        "type": "enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "enablesReturnKeyAutomatically": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "keyboardAppearance": {
+        "type": "enum('default', 'light', 'dark')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "onKeyPress": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "selectionState": {
+        "type": "DocumentSelectionState",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "spellCheck": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "ToolbarAndroid": {
+  {
+    "name": "ToolbarAndroid",
     "description": "React component that wraps the Android-only Toolbar widget. A Toolbar can display a logo, navigation icon (e.g. hamburger menu), a title & subtitle and a list of actions. The title and subtitle are expanded so the logo and navigation icons are displayed on the left, title and subtitle in the middle and the actions on the right.",
-    "overflowIcon": {
-      "type": "optionalImageSource",
-      "required": "No"
-    },
+    "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/toolbarandroid.html",
-    "actions": {
-      "type": "array of object: {title: string,icon: optionalImageSource,show: enum('always', 'ifRoom', 'never'),showWithText: bool}",
-      "required": "No"
-    },
-    "contentInsetStart": {
-      "type": "number",
-      "required": "No"
-    },
-    "logo": {
-      "type": "optionalImageSource",
-      "required": "No"
-    },
-    "navIcon": {
-      "type": "optionalImageSource",
-      "required": "No"
-    },
-    "onActionSelected": {
-      "type": "function",
-      "required": "No"
-    },
-    "onIconClicked": {
-      "type": "function",
-      "required": "No"
-    },
-    "contentInsetEnd": {
-      "type": "number",
-      "required": "No"
-    },
-    "rtl": {
-      "type": "bool",
-      "required": "No"
-    },
-    "subtitle": {
-      "type": "string",
-      "required": "No"
-    },
-    "subtitleColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "title": {
-      "type": "string",
-      "required": "No"
-    },
-    "titleColor": {
-      "type": "color",
-      "required": "No"
+    "properties": {
+      "overflowIcon": {
+        "type": "optionalImageSource",
+        "required": "No"
+      },
+      "actions": {
+        "type": "array of object: {title: string,icon: optionalImageSource,show: enum('always', 'ifRoom', 'never'),showWithText: bool}",
+        "required": "No"
+      },
+      "contentInsetStart": {
+        "type": "number",
+        "required": "No"
+      },
+      "logo": {
+        "type": "optionalImageSource",
+        "required": "No"
+      },
+      "navIcon": {
+        "type": "optionalImageSource",
+        "required": "No"
+      },
+      "onActionSelected": {
+        "type": "function",
+        "required": "No"
+      },
+      "onIconClicked": {
+        "type": "function",
+        "required": "No"
+      },
+      "contentInsetEnd": {
+        "type": "number",
+        "required": "No"
+      },
+      "rtl": {
+        "type": "bool",
+        "required": "No"
+      },
+      "subtitle": {
+        "type": "string",
+        "required": "No"
+      },
+      "subtitleColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "title": {
+        "type": "string",
+        "required": "No"
+      },
+      "titleColor": {
+        "type": "color",
+        "required": "No"
+      }
     }
   },
-  "TouchableHighlight": {
+  {
+    "name": "TouchableHighlight",
     "description": "A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, which allows the underlay color to show through, darkening or tinting the view.",
-    "activeOpacity": {
-      "type": "number",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablehighlight.html",
-    "onHideUnderlay": {
-      "type": "function",
-      "required": "No"
-    },
-    "onShowUnderlay": {
-      "type": "function",
-      "required": "No"
-    },
-    "style": {
-      "type": "color",
-      "required": "No"
-    },
-    "underlayColor": {
-      "type": "color",
-      "required": "No"
-    },
-    "hasTVPreferredFocus": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "tvParallaxProperties": {
-      "type": "object",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "activeOpacity": {
+        "type": "number",
+        "required": "No"
+      },
+      "onHideUnderlay": {
+        "type": "function",
+        "required": "No"
+      },
+      "onShowUnderlay": {
+        "type": "function",
+        "required": "No"
+      },
+      "style": {
+        "type": "color",
+        "required": "No"
+      },
+      "underlayColor": {
+        "type": "color",
+        "required": "No"
+      },
+      "hasTVPreferredFocus": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "tvParallaxProperties": {
+        "type": "object",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "TouchableNativeFeedback": {
-    "description": "A wrapper for making views respond properly to touches (Android only). On Android this component uses native state drawable to display touch feedback.At the moment it only supports having a single View instance as a child node, as it's implemented by replacing that View with another instance of RCTView node with some additional properties set."
-    "background": {
-      "type": "backgroundPropType",
-      "required": "No"
-    },
+  {
+    "name": "TouchableNativeFeedback",
+    "description": "A wrapper for making views respond properly to touches (Android only). On Android this component uses native state drawable to display touch feedback.At the moment it only supports having a single View instance as a child node, as it's implemented by replacing that View with another instance of RCTView node with some additional properties set.",
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablenativefeedback.html",
-    "useForeground": {
-      "type": "bool",
-      "required": "No"
+    "properties": {
+      "background": {
+        "type": "backgroundPropType",
+        "required": "No"
+      },
+      "useForeground": {
+        "type": "bool",
+        "required": "No"
+      }
     }
   },
-  "TouchableOpacity": {
+  {
+    "name": "TouchableOpacity",
     "description": "A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.",
-    "activeOpacity": {
-      "type": "number",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchableopacity.html",
-    "tvParallaxProperties": {
-      "type": "object",
-      "required": "No"
-    },
-    "hasTVPreferredFocus": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "activeOpacity": {
+        "type": "number",
+        "required": "No"
+      },
+      "tvParallaxProperties": {
+        "type": "object",
+        "required": "No"
+      },
+      "hasTVPreferredFocus": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "TouchableWithoutFeedback": {
+  {
+    "name": "TouchableWithoutFeedback",
     "description": "Do not use unless you have a very good reason. All elements that respond to press should have a visual feedback when touched.",
-    "hitSlop": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html",
-    "accessibilityComponentType": {
-      "type": "number",
-      "required": "No"
-    },
-    "accessible": {
-      "type": "number",
-      "required": "No"
-    },
-    "delayLongPress": {
-      "type": "number",
-      "required": "No"
-    },
-    "delayPressIn": {
-      "type": "number",
-      "required": "No"
-    },
-    "delayPressOut": {
-      "type": "number",
-      "required": "No"
-    },
-    "disabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "accessibilityTraits": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLongPress": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPress": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPressIn": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPressOut": {
-      "type": "function",
-      "required": "No"
-    },
-    "pressRetentionOffset": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No"
+    "properties": {
+      "hitSlop": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No"
+      },
+      "accessibilityComponentType": {
+        "type": "number",
+        "required": "No"
+      },
+      "accessible": {
+        "type": "number",
+        "required": "No"
+      },
+      "delayLongPress": {
+        "type": "number",
+        "required": "No"
+      },
+      "delayPressIn": {
+        "type": "number",
+        "required": "No"
+      },
+      "delayPressOut": {
+        "type": "number",
+        "required": "No"
+      },
+      "disabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "accessibilityTraits": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLongPress": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPress": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPressIn": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPressOut": {
+        "type": "function",
+        "required": "No"
+      },
+      "pressRetentionOffset": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No"
+      }
     }
   },
-  "View": {
+  {
+    "name": "View",
     "description": "The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.",
-    "onStartShouldSetResponder": {
-      "type": "function",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/view.html",
-    "accessibilityLabel": {
-      "type": "node",
-      "required": "No"
-    },
-    "hitSlop": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No"
-    },
-    "nativeID": {
-      "type": "string",
-      "required": "No"
-    },
-    "onAccessibilityTap": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMagicTap": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMoveShouldSetResponder": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMoveShouldSetResponderCapture": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderGrant": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderMove": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderReject": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderRelease": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderTerminate": {
-      "type": "function",
-      "required": "No"
-    },
-    "onResponderTerminationRequest": {
-      "type": "function",
-      "required": "No"
-    },
-    "accessible": {
-      "type": "bool",
-      "required": "No"
-    },
-    "onStartShouldSetResponderCapture": {
-      "type": "function",
-      "required": "No"
-    },
-    "pointerEvents": {
-      "type": "enum('box-none', 'none', 'box-only', 'auto')",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "bool",
-      "required": "No"
-    },
-    "style": {
-      "type": "string",
-      "required": "No"
-    },
-    "testID": {
-      "type": "string",
-      "required": "No"
-    },
-    "accessibilityComponentType": {
-      "type": "AccessibilityComponentTypes",
-      "required": "No",
-      "platform": "Android"
-    },
-    "accessibilityLiveRegion": {
-      "type": "enum('none', 'polite', 'assertive')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "collapsable": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "importantForAccessibility": {
-      "type": "enum('auto', 'yes', 'no', 'no-hide-descendants')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "needsOffscreenAlphaCompositing": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "renderToHardwareTextureAndroid": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "accessibilityTraits": {
-      "type": "AccessibilityTraits, ,array of AccessibilityTraits",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "accessibilityViewIsModal": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "shouldRasterizeIOS": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
+    "properties": {
+      "onStartShouldSetResponder": {
+        "type": "function",
+        "required": "No"
+      },
+      "accessibilityLabel": {
+        "type": "node",
+        "required": "No"
+      },
+      "hitSlop": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No"
+      },
+      "nativeID": {
+        "type": "string",
+        "required": "No"
+      },
+      "onAccessibilityTap": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMagicTap": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMoveShouldSetResponder": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMoveShouldSetResponderCapture": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderGrant": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderMove": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderReject": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderRelease": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderTerminate": {
+        "type": "function",
+        "required": "No"
+      },
+      "onResponderTerminationRequest": {
+        "type": "function",
+        "required": "No"
+      },
+      "accessible": {
+        "type": "bool",
+        "required": "No"
+      },
+      "onStartShouldSetResponderCapture": {
+        "type": "function",
+        "required": "No"
+      },
+      "pointerEvents": {
+        "type": "enum('box-none', 'none', 'box-only', 'auto')",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "bool",
+        "required": "No"
+      },
+      "style": {
+        "type": "string",
+        "required": "No"
+      },
+      "testID": {
+        "type": "string",
+        "required": "No"
+      },
+      "accessibilityComponentType": {
+        "type": "AccessibilityComponentTypes",
+        "required": "No",
+        "platform": "Android"
+      },
+      "accessibilityLiveRegion": {
+        "type": "enum('none', 'polite', 'assertive')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "collapsable": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "importantForAccessibility": {
+        "type": "enum('auto', 'yes', 'no', 'no-hide-descendants')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "needsOffscreenAlphaCompositing": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "renderToHardwareTextureAndroid": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "accessibilityTraits": {
+        "type": "AccessibilityTraits, ,array of AccessibilityTraits",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "accessibilityViewIsModal": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "shouldRasterizeIOS": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      }
     }
   },
-  "ViewPagerAndroid": {
+  {
+    "name": "ViewPagerAndroid",
     "description": "Container that allows to flip left and right between child views. Each child view of the ViewPagerAndroid will be treated as a separate page and will be stretched to fill the ViewPagerAndroid.",
-    "initialPage": {
-      "type": "number",
-      "required": "No"
-    },
+    "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/viewpagerandroid.html",
-    "keyboardDismissMode": {
-      "type": "enum('none', 'on-drag')",
-      "required": "No"
-    },
-    "onPageScroll": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPageScrollStateChanged": {
-      "type": "function",
-      "required": "No"
-    },
-    "onPageSelected": {
-      "type": "function",
-      "required": "No"
-    },
-    "pageMargin": {
-      "type": "number",
-      "required": "No"
-    },
-    "peekEnabled": {
-      "type": "bool",
-      "required": "No"
-    },
-    "scrollEnabled": {
-      "type": "bool",
-      "required": "No"
+    "properties": {
+      "initialPage": {
+        "type": "number",
+        "required": "No"
+      },
+      "keyboardDismissMode": {
+        "type": "enum('none', 'on-drag')",
+        "required": "No"
+      },
+      "onPageScroll": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPageScrollStateChanged": {
+        "type": "function",
+        "required": "No"
+      },
+      "onPageSelected": {
+        "type": "function",
+        "required": "No"
+      },
+      "pageMargin": {
+        "type": "number",
+        "required": "No"
+      },
+      "peekEnabled": {
+        "type": "bool",
+        "required": "No"
+      },
+      "scrollEnabled": {
+        "type": "bool",
+        "required": "No"
+      }
     }
   },
-  "VirtualizedList": {
+  {
+    "name": "VirtualizedList",
     "description": "Base implementation for the more convenient FlatList and SectionList components, which are also better documented. In general, this should only really be used if you need more flexibility than FlatList provides, e.g. for use with immutable data instead of plain arrays.",
-    "renderItem": {
-      "type": "function",
-      "required": "Yes"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/virtualizedlist.html",
-    "data": {
-      "type": "any",
-      "required": "Yes"
-    },
-    "getItem": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "getItemCount": {
-      "type": "function",
-      "required": "Yes"
-    },
-    "debug": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "extraData": {
-      "type": "any",
-      "required": "No"
-    },
-    "getItemLayout": {
-      "type": "number",
-      "required": "No"
-    },
-    "initialScrollIndex": {
-      "type": "number",
-      "required": "No"
-    },
-    "inverted": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "CellRendererComponent": {
-      "type": "component, function",
-      "required": "No"
-    },
-    "ListEmptyComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "ListFooterComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "ListHeaderComponent": {
-      "type": "component, function, element",
-      "required": "No"
-    },
-    "onLayout": {
-      "type": "function",
-      "required": "No"
-    },
-    "onRefresh": {
-      "type": "function",
-      "required": "No"
-    },
-    "onScrollToIndexFailed": {
-      "type": "function",
-      "required": "No"
-    },
-    "onViewableItemsChanged": {
-      "type": "function",
-      "required": "No"
-    },
-    "refreshing": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "removeClippedSubviews": {
-      "type": "boolean",
-      "required": "No"
-    },
-    "renderScrollComponent": {
-      "type": "function",
-      "required": "No"
-    },
-    "viewabilityConfig": {
-      "type": "ViewabilityConfig",
-      "required": "No"
-    },
-    "viewabilityConfigCallbackPairs": {
-      "type": "array of ViewabilityConfigCallbackPair",
-      "required": "No"
-    },
-    "horizontal": {
-      "type": "number",
-      "required": "No"
-    },
-    "initialNumToRender": {
-      "type": "number",
-      "required": "No"
-    },
-    "keyExtractor": {
-      "type": "function",
-      "required": "No"
-    },
-    "maxToRenderPerBatch": {
-      "type": "number",
-      "required": "No"
-    },
-    "onEndReached": {
-      "type": "function",
-      "required": "No"
-    },
-    "onEndReachedThreshold": {
-      "type": "number",
-      "required": "No"
-    },
-    "updateCellsBatchingPeriod": {
-      "type": "number",
-      "required": "No"
-    },
-    "windowSize": {
-      "type": "number",
-      "required": "No"
-    },
-    "disableVirtualization": {},
-    "progressViewOffset": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
+    "properties": {
+      "renderItem": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "data": {
+        "type": "any",
+        "required": "Yes"
+      },
+      "getItem": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "getItemCount": {
+        "type": "function",
+        "required": "Yes"
+      },
+      "debug": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "extraData": {
+        "type": "any",
+        "required": "No"
+      },
+      "getItemLayout": {
+        "type": "number",
+        "required": "No"
+      },
+      "initialScrollIndex": {
+        "type": "number",
+        "required": "No"
+      },
+      "inverted": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "CellRendererComponent": {
+        "type": "component, function",
+        "required": "No"
+      },
+      "ListEmptyComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "ListFooterComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "ListHeaderComponent": {
+        "type": "component, function, element",
+        "required": "No"
+      },
+      "onLayout": {
+        "type": "function",
+        "required": "No"
+      },
+      "onRefresh": {
+        "type": "function",
+        "required": "No"
+      },
+      "onScrollToIndexFailed": {
+        "type": "function",
+        "required": "No"
+      },
+      "onViewableItemsChanged": {
+        "type": "function",
+        "required": "No"
+      },
+      "refreshing": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "removeClippedSubviews": {
+        "type": "boolean",
+        "required": "No"
+      },
+      "renderScrollComponent": {
+        "type": "function",
+        "required": "No"
+      },
+      "viewabilityConfig": {
+        "type": "ViewabilityConfig",
+        "required": "No"
+      },
+      "viewabilityConfigCallbackPairs": {
+        "type": "array of ViewabilityConfigCallbackPair",
+        "required": "No"
+      },
+      "horizontal": {
+        "type": "number",
+        "required": "No"
+      },
+      "initialNumToRender": {
+        "type": "number",
+        "required": "No"
+      },
+      "keyExtractor": {
+        "type": "function",
+        "required": "No"
+      },
+      "maxToRenderPerBatch": {
+        "type": "number",
+        "required": "No"
+      },
+      "onEndReached": {
+        "type": "function",
+        "required": "No"
+      },
+      "onEndReachedThreshold": {
+        "type": "number",
+        "required": "No"
+      },
+      "updateCellsBatchingPeriod": {
+        "type": "number",
+        "required": "No"
+      },
+      "windowSize": {
+        "type": "number",
+        "required": "No"
+      },
+      "disableVirtualization": {},
+      "progressViewOffset": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      }
     }
   },
-  "WebView": {
+  {
+    "name": "WebView",
     "description": "WebView renders web content in a native view.",
-    "source": {
-      "type": "object: {uri: string,method: string,headers: object,body: string}, ,object: {html: string,baseUrl: string}, ,number",
-      "required": "No"
-    },
+    "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/webview.html",
-    "automaticallyAdjustContentInsets": {
-      "type": "bool",
-      "required": "No"
-    },
-    "injectJavaScript": {
-      "type": "function",
-      "required": "No"
-    },
-    "injectedJavaScript": {
-      "type": "string",
-      "required": "No"
-    },
-    "mediaPlaybackRequiresUserAction": {
-      "type": "bool",
-      "required": "No"
-    },
-    "nativeConfig": {
-      "type": "object: {component: any,props: object,viewManager: object}",
-      "required": "No"
-    },
-    "onError": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoad": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoadEnd": {
-      "type": "function",
-      "required": "No"
-    },
-    "onLoadStart": {
-      "type": "function",
-      "required": "No"
-    },
-    "onMessage": {
-      "type": "function",
-      "required": "No"
-    },
-    "onNavigationStateChange": {
-      "type": "function",
-      "required": "No"
-    },
-    "renderError": {
-      "type": "function",
-      "required": "No"
-    },
-    "renderLoading": {
-      "type": "function",
-      "required": "No"
-    },
-    "scalesPageToFit": {
-      "type": "bool",
-      "required": "No"
-    },
-    "initialScale": {
-      "type": "number",
-      "required": "No",
-      "platform": "Android"
-    },
-    "onShouldStartLoadWithRequest": {
-      "type": "function",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "startInLoadingState": {
-      "type": "bool",
-      "required": "No"
-    },
-    "style": {
-      "type": "View.style",
-      "required": "No"
-    },
-    "decelerationRate": {
-      "type": "ScrollView.propTypes.decelerationRate",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "domStorageEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "javaScriptEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "mixedContentMode": {
-      "type": "enum('never', 'always', 'compatibility')",
-      "required": "No",
-      "platform": "Android"
-    },
-    "thirdPartyCookiesEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "Android"
-    },
-    "userAgent": {
-      "type": "string",
-      "required": "No",
-      "platform": "Android"
-    },
-    "allowsInlineMediaPlayback": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "bounces": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "contentInset": {
-      "type": "object: {top: number, left: number, bottom: number, right: number}",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "dataDetectorTypes": {
-      "type": "enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all')",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "scrollEnabled": {
-      "type": "bool",
-      "required": "No",
-      "platform": "iOS"
-    },
-    "html": {
-      "type": "string",
-      "required": "No"
+    "properties": {
+      "source": {
+        "type": "object: {uri: string,method: string,headers: object,body: string}, ,object: {html: string,baseUrl: string}, ,number",
+        "required": "No"
+      },
+      "automaticallyAdjustContentInsets": {
+        "type": "bool",
+        "required": "No"
+      },
+      "injectJavaScript": {
+        "type": "function",
+        "required": "No"
+      },
+      "injectedJavaScript": {
+        "type": "string",
+        "required": "No"
+      },
+      "mediaPlaybackRequiresUserAction": {
+        "type": "bool",
+        "required": "No"
+      },
+      "nativeConfig": {
+        "type": "object: {component: any,props: object,viewManager: object}",
+        "required": "No"
+      },
+      "onError": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoad": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoadEnd": {
+        "type": "function",
+        "required": "No"
+      },
+      "onLoadStart": {
+        "type": "function",
+        "required": "No"
+      },
+      "onMessage": {
+        "type": "function",
+        "required": "No"
+      },
+      "onNavigationStateChange": {
+        "type": "function",
+        "required": "No"
+      },
+      "renderError": {
+        "type": "function",
+        "required": "No"
+      },
+      "renderLoading": {
+        "type": "function",
+        "required": "No"
+      },
+      "scalesPageToFit": {
+        "type": "bool",
+        "required": "No"
+      },
+      "initialScale": {
+        "type": "number",
+        "required": "No",
+        "platform": "Android"
+      },
+      "onShouldStartLoadWithRequest": {
+        "type": "function",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "startInLoadingState": {
+        "type": "bool",
+        "required": "No"
+      },
+      "style": {
+        "type": "View.style",
+        "required": "No"
+      },
+      "decelerationRate": {
+        "type": "ScrollView.propTypes.decelerationRate",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "domStorageEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "javaScriptEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "mixedContentMode": {
+        "type": "enum('never', 'always', 'compatibility')",
+        "required": "No",
+        "platform": "Android"
+      },
+      "thirdPartyCookiesEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "Android"
+      },
+      "userAgent": {
+        "type": "string",
+        "required": "No",
+        "platform": "Android"
+      },
+      "allowsInlineMediaPlayback": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "bounces": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "contentInset": {
+        "type": "object: {top: number, left: number, bottom: number, right: number}",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "dataDetectorTypes": {
+        "type": "enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all')",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "scrollEnabled": {
+        "type": "bool",
+        "required": "No",
+        "platform": "iOS"
+      },
+      "html": {
+        "type": "string",
+        "required": "No"
+      }
     }
   }
-}
+]
