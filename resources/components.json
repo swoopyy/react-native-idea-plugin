@@ -449,6 +449,7 @@
     "name": "MaskedViewIOS",
     "description": "Renders the child view with a mask specified in the maskElement prop.",
     "platform": "ios",
+    "url": "https://facebook.github.io/react-native/docs/maskedviewios.html",
     "properties": {
       "maskElement": {
         "type": "element",
@@ -656,7 +657,7 @@
   },
   {
     "name": "ProgressViewIOS",
-    "descripption": "Use ProgressViewIOS to render a UIProgressView on iOS.",
+    "description": "Use ProgressViewIOS to render a UIProgressView on iOS.",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/progressviewios.html",
     "properties": {
@@ -1155,7 +1156,7 @@
   },
   {
     "name": "SnapshotViewIOS",
-    "descriotion": "IOS snapshot view",
+    "description": "IOS snapshot view",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/snapshotviewios.html",
     "properties": {
@@ -2141,7 +2142,10 @@
         "type": "number",
         "required": "No"
       },
-      "disableVirtualization": {},
+      "disableVirtualization": {
+        "type": "bool",
+        "required": "No"
+      },
       "progressViewOffset": {
         "type": "number",
         "required": "No",

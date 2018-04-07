@@ -9,6 +9,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
+import ru.hse.plugin.core.ComponentCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class MainToolWindow implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         mainToolWindow = toolWindow;
+        ComponentCollection.getBuiltinComponents();
         this.createUIComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);

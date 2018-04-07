@@ -9,5 +9,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/apacheds-all-1.5.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jackson:jackson-asl:0.9.3" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.9.0.pr1" level="project" />
   </component>
 </module>
