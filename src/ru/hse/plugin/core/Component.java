@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Component {
+    private String name;
     private String description;
     private Platform platform;
     private String url;
@@ -21,6 +22,7 @@ public class Component {
         this.url = url;
         this.iconPath = iconPath;
         this.properties = properties;
+        this.name = name;
     }
 
     public static Component fromJsonNode(JsonNode jsonNode) {
@@ -28,34 +30,41 @@ public class Component {
         for (Iterator<Map.Entry<String, JsonNode>> it = jsonNode.get("properties").fields(); it.hasNext(); ) {
             Map.Entry<String, JsonNode> elt = it.next();
             JsonNode property = elt.getValue();
-            boolean isRequired = property.get("required").toString().equals("Yes");
+            boolean isRequired = property.get("required").textValue().equals("Yes");
             properties.add(
                     new Property(
                             elt.getKey(),
-                            property.get("type").toString(),
+                            property.get("type").textValue(),
                             isRequired
                     )
             );
         }
 
         Platform platform = Platform.BOTH;
-        if (jsonNode.get("platform").toString().equals("android")) {
+        if (jsonNode.get("platform").textValue().equals("android")) {
             platform = Platform.ANDROID;
         }
-        if (jsonNode.get("platform").toString().equals("ios")) {
+        if (jsonNode.get("platform").textValue().equals("ios")) {
             platform = Platform.IOS;
         }
 
         return new Component(
-                jsonNode.get("name").toString(),
-                jsonNode.get("description").toString(),
+                jsonNode.get("name").textValue(),
+                jsonNode.get("description").textValue(),
                 platform,
-                jsonNode.get("url").toString(),
+                jsonNode.get("url").textValue(),
                 "",
                 properties.toArray(new Property[0])
         );
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public String getDescription() {
         return description;
     }
@@ -94,5 +103,10 @@ public class Component {
 
     public void setProperties(Property[] properties) {
         this.properties = properties;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

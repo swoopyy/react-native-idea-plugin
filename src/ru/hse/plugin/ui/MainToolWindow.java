@@ -4,14 +4,19 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
 import ru.hse.plugin.core.ComponentCollection;
+import ru.hse.plugin.core.Component;
+import ru.hse.plugin.core.Platform;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class MainToolWindow implements ToolWindowFactory {
@@ -23,27 +28,58 @@ public class MainToolWindow implements ToolWindowFactory {
     private JPanel common;
     private JTextField searchField;
     private JLabel searchLabel;
-    private JList iosList;
-    private JList androidList;
-    private JList commonList;
+    private JList<Component> iosList;
+    private JList<Component> androidList;
+    private JList<Component> commonList;
+    Component[] builtinComponents = ComponentCollection.getBuiltinComponents();
+
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         mainToolWindow = toolWindow;
-        ComponentCollection.getBuiltinComponents();
         this.createUIComponents();
+        this.loadComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);
         toolWindow.getContentManager().addContent(content);
     }
 
     private void createUIComponents() {
-        iosList = new JBList();
-        androidList = new JBList();
-        commonList = new JBList();
-        ios.add(iosList, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        android.add(androidList, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        common.add(commonList, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        DefaultListModel<Component> iosListModel = new DefaultListModel<>();
+        DefaultListModel<Component> androidListModel = new DefaultListModel<>();
+        DefaultListModel<Component> commonListModel = new DefaultListModel<>();
+        for (Component component : builtinComponents) {
+            if (component.getPlatform() == Platform.IOS) {
+                iosListModel.addElement(component);
+            }
+            if (component.getPlatform() == Platform.ANDROID) {
+                androidListModel.addElement(component);
+            }
+            if (component.getPlatform() == Platform.BOTH) {
+                commonListModel.addElement(component);
+            }
+        }
+        iosList = new JBList<>(iosListModel);
+        androidList = new JBList<>(androidListModel);
+        commonList = new JBList<>(commonListModel);
+        ios.add(new JBScrollPane(iosList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        android.add(new JBScrollPane(androidList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        common.add(new JBScrollPane(commonList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+
+    }
+
+    private void loadComponents() {
+//        for (Component component : components) {
+//            if (component.getPlatform() == Platform.IOS) {
+//                iosList.add(component.getName(), null);
+//            }
+//            if (component.getPlatform() == Platform.ANDROID) {
+//                androidList.add(component.getName(), null);
+//            }
+//            if (component.getPlatform() == Platform.BOTH) {
+//                commonList.add(component.getName(), null);
+//            }
+//        }
     }
 
     {
