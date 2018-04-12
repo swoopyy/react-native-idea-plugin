@@ -3,6 +3,7 @@ package ru.hse.plugin.ui;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
@@ -10,6 +11,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
+import ru.hse.plugin.core.ComponentCellRenderer;
 import ru.hse.plugin.core.ComponentCollection;
 import ru.hse.plugin.core.Component;
 import ru.hse.plugin.core.Platform;
@@ -60,12 +62,26 @@ public class MainToolWindow implements ToolWindowFactory {
             }
         }
         iosList = new JBList<>(iosListModel);
+        iosList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        iosList.setVisibleRowCount(0);
         androidList = new JBList<>(androidListModel);
+        androidList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        androidList.setVisibleRowCount(0);
         commonList = new JBList<>(commonListModel);
-        ios.add(new JBScrollPane(iosList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        android.add(new JBScrollPane(androidList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        common.add(new JBScrollPane(commonList), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-
+        commonList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        commonList.setVisibleRowCount(0);
+        JBScrollPane iosPane = new JBScrollPane(iosList);
+        JBScrollPane androidPane = new JBScrollPane(androidList);
+        JBScrollPane commonPane = new JBScrollPane(commonList);
+        iosPane.setBackground(JBColor.WHITE);
+        androidPane.setBackground(JBColor.WHITE);
+        commonPane.setBackground(JBColor.WHITE);
+        ios.add(iosPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        android.add(androidPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        common.add(commonPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        iosList.setCellRenderer(new ComponentCellRenderer());
+        androidList.setCellRenderer(new ComponentCellRenderer());
+        commonList.setCellRenderer(new ComponentCellRenderer());
     }
 
     private void loadComponents() {
@@ -101,6 +117,7 @@ public class MainToolWindow implements ToolWindowFactory {
         contentPanel.setLayout(new GridLayoutManager(2, 1, new Insets(4, 4, 4, 4), -1, -1));
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayoutManager(2, 2, new Insets(0, 5, 0, 0), -1, -1));
+        panel1.setBackground(new Color(-1250068));
         contentPanel.add(panel1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         tabbedPane1 = new JTabbedPane();
@@ -118,6 +135,7 @@ public class MainToolWindow implements ToolWindowFactory {
         panel2.setLayout(new GridLayoutManager(1, 2, new Insets(0, 10, 0, 5), -1, -1));
         panel1.add(panel2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         searchLabel = new JLabel();
+        searchLabel.setBackground(new Color(-1));
         searchLabel.setText("Search");
         panel2.add(searchLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         searchField = new JTextField();
