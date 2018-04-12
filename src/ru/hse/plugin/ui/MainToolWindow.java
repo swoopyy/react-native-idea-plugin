@@ -17,8 +17,6 @@ import ru.hse.plugin.core.Component;
 import ru.hse.plugin.core.Platform;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class MainToolWindow implements ToolWindowFactory {
@@ -30,6 +28,9 @@ public class MainToolWindow implements ToolWindowFactory {
     private JPanel common;
     private JTextField searchField;
     private JLabel searchLabel;
+    private JPanel iosPanel;
+    private JPanel androidPanel;
+    private JPanel commonPanel;
     private JList<Component> iosList;
     private JList<Component> androidList;
     private JList<Component> commonList;
@@ -39,6 +40,9 @@ public class MainToolWindow implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         mainToolWindow = toolWindow;
+        iosPanel.setLayout(new BoxLayout(iosPanel, BoxLayout.Y_AXIS));
+        androidPanel.setLayout(new BoxLayout(androidPanel, BoxLayout.Y_AXIS));
+        commonPanel.setLayout(new BoxLayout(commonPanel, BoxLayout.Y_AXIS));
         this.createUIComponents();
         this.loadComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
@@ -47,41 +51,19 @@ public class MainToolWindow implements ToolWindowFactory {
     }
 
     private void createUIComponents() {
-        DefaultListModel<Component> iosListModel = new DefaultListModel<>();
-        DefaultListModel<Component> androidListModel = new DefaultListModel<>();
-        DefaultListModel<Component> commonListModel = new DefaultListModel<>();
+
         for (Component component : builtinComponents) {
+            ComponentListItem item = new ComponentListItem(component);
             if (component.getPlatform() == Platform.IOS) {
-                iosListModel.addElement(component);
+                iosPanel.add(item.$$$getRootComponent$$$());
             }
             if (component.getPlatform() == Platform.ANDROID) {
-                androidListModel.addElement(component);
+                androidPanel.add(item.$$$getRootComponent$$$());
             }
             if (component.getPlatform() == Platform.BOTH) {
-                commonListModel.addElement(component);
+                commonPanel.add(item.$$$getRootComponent$$$());
             }
         }
-        iosList = new JBList<>(iosListModel);
-        iosList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        iosList.setVisibleRowCount(0);
-        androidList = new JBList<>(androidListModel);
-        androidList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        androidList.setVisibleRowCount(0);
-        commonList = new JBList<>(commonListModel);
-        commonList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        commonList.setVisibleRowCount(0);
-        JBScrollPane iosPane = new JBScrollPane(iosList);
-        JBScrollPane androidPane = new JBScrollPane(androidList);
-        JBScrollPane commonPane = new JBScrollPane(commonList);
-        iosPane.setBackground(JBColor.WHITE);
-        androidPane.setBackground(JBColor.WHITE);
-        commonPane.setBackground(JBColor.WHITE);
-        ios.add(iosPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        android.add(androidPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        common.add(commonPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        iosList.setCellRenderer(new ComponentCellRenderer());
-        androidList.setCellRenderer(new ComponentCellRenderer());
-        commonList.setCellRenderer(new ComponentCellRenderer());
     }
 
     private void loadComponents() {
@@ -125,12 +107,27 @@ public class MainToolWindow implements ToolWindowFactory {
         ios = new JPanel();
         ios.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("IOS", ios);
+        final JBScrollPane jBScrollPane1 = new JBScrollPane();
+        ios.add(jBScrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        iosPanel = new JPanel();
+        iosPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        jBScrollPane1.setViewportView(iosPanel);
         android = new JPanel();
         android.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("Android", android);
+        final JBScrollPane jBScrollPane2 = new JBScrollPane();
+        android.add(jBScrollPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        androidPanel = new JPanel();
+        androidPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        jBScrollPane2.setViewportView(androidPanel);
         common = new JPanel();
         common.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("Common", common);
+        final JBScrollPane jBScrollPane3 = new JBScrollPane();
+        common.add(jBScrollPane3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        commonPanel = new JPanel();
+        commonPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        jBScrollPane3.setViewportView(commonPanel);
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(1, 2, new Insets(0, 10, 0, 5), -1, -1));
         panel1.add(panel2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
