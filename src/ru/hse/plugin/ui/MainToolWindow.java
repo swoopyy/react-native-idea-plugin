@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.JBColor;
+import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
@@ -56,19 +57,30 @@ public class MainToolWindow implements ToolWindowFactory {
     }
 
     private void createUIComponents() {
+        DefaultListModel<Component> iosModel = new DefaultListModel<>();
+        DefaultListModel<Component> androidModel = new DefaultListModel<>();
+        DefaultListModel<Component> commonModel = new DefaultListModel<>();
 
         for (Component component : builtinComponents) {
-            ComponentListItem item = new ComponentListItem(component);
             if (component.getPlatform() == Platform.IOS) {
-                iosPanel.add(item.$$$getRootComponent$$$());
+                iosModel.addElement(component);
             }
             if (component.getPlatform() == Platform.ANDROID) {
-                androidPanel.add(item.$$$getRootComponent$$$());
+                androidModel.addElement(component);
             }
             if (component.getPlatform() == Platform.BOTH) {
-                commonPanel.add(item.$$$getRootComponent$$$());
+                commonModel.addElement(component);
             }
         }
+        JBList iosList = new JBList(iosModel);
+        JBList androidList = new JBList(androidModel);
+        JBList commonList = new JBList(commonModel);
+        iosList.setCellRenderer(new ComponentCellRenderer());
+        androidList.setCellRenderer(new ComponentCellRenderer());
+        commonList.setCellRenderer(new ComponentCellRenderer());
+        iosPanel.add(iosList);
+        androidPanel.add(androidList);
+        commonPanel.add(commonList);
     }
 
     private void loadComponents() {

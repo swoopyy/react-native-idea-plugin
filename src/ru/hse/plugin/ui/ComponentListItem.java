@@ -33,6 +33,9 @@ public class ComponentListItem {
 
     public ComponentListItem() {
         $$$setupUI$$$();
+        namePanel.setBackground(new Color(0, 0, 0, 0));
+        urlPanel.setBackground(new Color(0, 0, 0, 0));
+        descriptionPanel.setBackground(new Color(0, 0, 0, 0));
     }
 
     public ComponentListItem(Component component) {
@@ -41,13 +44,8 @@ public class ComponentListItem {
         this.setIcon(component.getIconPath());
         this.setName(component.getName());
         this.setUrl(component.getUrl());
-        namePanel.setBackground(new Color(0, 0, 0, 0));
-        urlPanel.setBackground(new Color(0, 0, 0, 0));
-        descriptionPanel.setBackground(new Color(0, 0, 0, 0));
-        urlComponent = new JLabelLink(url);
-        urlPanel.add(urlComponent.getContentPane(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        descriptionPanel.add(new JMultilineLabel(description), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
+
 
     public String getDescription() {
         return description;
@@ -55,6 +53,7 @@ public class ComponentListItem {
 
     public void setDescription(String description) {
         this.description = description;
+        descriptionPanel.add(new JMultilineLabel(description), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     public String getUrl() {
@@ -63,6 +62,8 @@ public class ComponentListItem {
 
     public void setUrl(String url) {
         this.url = url;
+        urlComponent = new JLabelLink(url);
+        urlPanel.add(urlComponent.getContentPane(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     public String getIcon() {
