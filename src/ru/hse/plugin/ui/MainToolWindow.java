@@ -18,6 +18,10 @@ import ru.hse.plugin.core.Platform;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
@@ -43,6 +47,7 @@ public class MainToolWindow implements ToolWindowFactory {
         iosPanel.setLayout(new BoxLayout(iosPanel, BoxLayout.Y_AXIS));
         androidPanel.setLayout(new BoxLayout(androidPanel, BoxLayout.Y_AXIS));
         commonPanel.setLayout(new BoxLayout(commonPanel, BoxLayout.Y_AXIS));
+
         this.createUIComponents();
         this.loadComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
