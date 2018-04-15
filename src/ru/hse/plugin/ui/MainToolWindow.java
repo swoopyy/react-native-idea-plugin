@@ -3,6 +3,7 @@ package ru.hse.plugin.ui;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBList;
@@ -11,6 +12,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.thaiopensource.xml.dtd.om.Def;
 import org.jetbrains.annotations.NotNull;
 import ru.hse.plugin.core.ComponentCellRenderer;
 import ru.hse.plugin.core.ComponentCollection;
@@ -18,11 +20,11 @@ import ru.hse.plugin.core.Component;
 import ru.hse.plugin.core.Platform;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
@@ -36,9 +38,11 @@ public class MainToolWindow implements ToolWindowFactory {
     private JPanel iosPanel;
     private JPanel androidPanel;
     private JPanel commonPanel;
-    private JList<Component> iosList;
-    private JList<Component> androidList;
-    private JList<Component> commonList;
+    DefaultListModel<Component>[] models = new DefaultListModel[]{
+            new DefaultListModel<Component>(),
+            new DefaultListModel<Component>(),
+            new DefaultListModel<Component>()
+    };
     Component[] builtinComponents = ComponentCollection.getBuiltinComponents();
 
 
@@ -48,54 +52,79 @@ public class MainToolWindow implements ToolWindowFactory {
         iosPanel.setLayout(new BoxLayout(iosPanel, BoxLayout.Y_AXIS));
         androidPanel.setLayout(new BoxLayout(androidPanel, BoxLayout.Y_AXIS));
         commonPanel.setLayout(new BoxLayout(commonPanel, BoxLayout.Y_AXIS));
-
         this.createUIComponents();
-        this.loadComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);
         toolWindow.getContentManager().addContent(content);
     }
 
-    private void createUIComponents() {
-        DefaultListModel<Component> iosModel = new DefaultListModel<>();
-        DefaultListModel<Component> androidModel = new DefaultListModel<>();
-        DefaultListModel<Component> commonModel = new DefaultListModel<>();
-
+    private void refillModel(int index, String searchTerm) {
+        DefaultListModel<Component> model = models[index];
+        model.clear();
         for (Component component : builtinComponents) {
-            if (component.getPlatform() == Platform.IOS) {
-                iosModel.addElement(component);
+            if (index == 0
+                    && component.getPlatform() == Platform.IOS
+                    && component.meets(searchTerm)) {
+                model.addElement(component);
             }
-            if (component.getPlatform() == Platform.ANDROID) {
-                androidModel.addElement(component);
+            if (index == 1
+                    && component.getPlatform() == Platform.ANDROID
+                    && component.meets(searchTerm)) {
+                model.addElement(component);
             }
-            if (component.getPlatform() == Platform.BOTH) {
-                commonModel.addElement(component);
+            if (index == 2
+                    && component.getPlatform() == Platform.BOTH
+                    && component.meets(searchTerm)) {
+                model.addElement(component);
             }
         }
-        JBList iosList = new JBList(iosModel);
-        JBList androidList = new JBList(androidModel);
-        JBList commonList = new JBList(commonModel);
-        iosList.setCellRenderer(new ComponentCellRenderer());
-        androidList.setCellRenderer(new ComponentCellRenderer());
-        commonList.setCellRenderer(new ComponentCellRenderer());
-        iosPanel.add(iosList);
-        androidPanel.add(androidList);
-        commonPanel.add(commonList);
     }
 
-    private void loadComponents() {
-//        for (Component component : components) {
-//            if (component.getPlatform() == Platform.IOS) {
-//                iosList.add(component.getName(), null);
-//            }
-//            if (component.getPlatform() == Platform.ANDROID) {
-//                androidList.add(component.getName(), null);
-//            }
-//            if (component.getPlatform() == Platform.BOTH) {
-//                commonList.add(component.getName(), null);
-//            }
-//        }
+    private void updateTabView() {
+        JBList jbList = new JBList(models[tabbedPane1.getSelectedIndex()]);
+        jbList.setCellRenderer(new ComponentCellRenderer());
+        switch (tabbedPane1.getSelectedIndex()) {
+            case 0:
+                if (iosPanel.getComponentCount() > 0) {
+                    iosPanel.remove(0);
+                }
+                iosPanel.add(jbList);
+                break;
+            case 1:
+                if (androidPanel.getComponentCount() > 0) {
+                    androidPanel.remove(0);
+                }
+                androidPanel.add(jbList);
+                break;
+            case 2:
+                if (commonPanel.getComponentCount() > 0) {
+                    commonPanel.remove(0);
+                }
+                commonPanel.add(jbList);
+                break;
+        }
     }
+
+    private void createUIComponents() {
+        refillModel(0, "");
+        refillModel(1, "");
+        refillModel(2, "");
+        updateTabView();
+        searchField.getDocument().addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(DocumentEvent documentEvent) {
+                refillModel(tabbedPane1.getSelectedIndex(), searchField.getText());
+                updateTabView();
+            }
+        });
+        tabbedPane1.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                updateTabView();
+            }
+        });
+    }
+
 
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer

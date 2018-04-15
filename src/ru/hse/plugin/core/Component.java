@@ -58,6 +58,8 @@ public class Component {
         );
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -103,6 +105,11 @@ public class Component {
 
     public void setProperties(Property[] properties) {
         this.properties = properties;
+    }
+
+    public boolean meets(String searchTerm) {
+        String lower = searchTerm.toLowerCase();
+        return description.toLowerCase().indexOf(lower) != -1 || name.toLowerCase().indexOf(lower) != -1;
     }
 
     @Override

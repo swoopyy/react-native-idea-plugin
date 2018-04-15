@@ -1,6 +1,7 @@
 package ru.hse.plugin.ui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JMultilineLabel extends JTextArea {
     private static final long serialVersionUID = 1L;
@@ -8,9 +9,10 @@ public class JMultilineLabel extends JTextArea {
         super(text);
         setEditable(false);
         setCursor(null);
-     //   setOpaque(false);
+       // setRows(2);
+        setOpaque(false);
         setFocusable(false);
-        setWrapStyleWord(true);
-        setLineWrap(true);
+     //   setWrapStyleWord(true);
+      //  setLineWrap(true);
     }
 }

@@ -30,6 +30,14 @@ public class ComponentListItem {
     private String name;
     private String icon;
 
+    public JPanel getPanel2() {
+        return panel2;
+    }
+
+    public void setPanel2(JPanel panel2) {
+        this.panel2 = panel2;
+    }
+
 
     public ComponentListItem() {
         $$$setupUI$$$();
