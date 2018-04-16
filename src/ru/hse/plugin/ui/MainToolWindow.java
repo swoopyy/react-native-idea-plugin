@@ -4,27 +4,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.DocumentAdapter;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.thaiopensource.xml.dtd.om.Def;
 import org.jetbrains.annotations.NotNull;
-import ru.hse.plugin.core.ComponentCellRenderer;
-import ru.hse.plugin.core.ComponentCollection;
+import ru.hse.plugin.core.*;
 import ru.hse.plugin.core.Component;
-import ru.hse.plugin.core.Platform;
+import ru.hse.plugin.core.utils.SnippetInserted;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
+import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
@@ -44,7 +37,7 @@ public class MainToolWindow implements ToolWindowFactory {
             new DefaultListModel<Component>()
     };
     Component[] builtinComponents = ComponentCollection.getBuiltinComponents();
-
+    InsertionManager insertionManager;
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
@@ -53,6 +46,7 @@ public class MainToolWindow implements ToolWindowFactory {
         androidPanel.setLayout(new BoxLayout(androidPanel, BoxLayout.Y_AXIS));
         commonPanel.setLayout(new BoxLayout(commonPanel, BoxLayout.Y_AXIS));
         this.createUIComponents();
+        insertionManager = InsertionManager.getInstance();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);
         toolWindow.getContentManager().addContent(content);
@@ -81,8 +75,24 @@ public class MainToolWindow implements ToolWindowFactory {
     }
 
     private void updateTabView() {
-        JBList jbList = new JBList(models[tabbedPane1.getSelectedIndex()]);
+        DefaultListModel model = models[tabbedPane1.getSelectedIndex()];
+        JBList jbList = new JBList(model);
         jbList.setCellRenderer(new ComponentCellRenderer());
+        jbList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (jbList.getSelectedIndex() != -1) {
+                    Component component = (Component) model.getElementAt(jbList.getSelectedIndex());
+                    insertionManager.setSnippet(component.getSnippet(), new SnippetInserted() {
+                        @Override
+                        public void perform() {
+                            jbList.clearSelection();
+                            insertionManager.clear();
+                        }
+                    });
+                }
+            }
+        });
         switch (tabbedPane1.getSelectedIndex()) {
             case 0:
                 if (iosPanel.getComponentCount() > 0) {

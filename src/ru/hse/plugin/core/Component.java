@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Component {
@@ -107,11 +108,30 @@ public class Component {
         this.properties = properties;
     }
 
+    public List<Property> getRequiredProperties() {
+        List<Property> properties = new ArrayList<>();
+        for (Property property: properties) {
+            if (property.isRequired()) {
+                properties.add(property);
+            }
+        }
+        return properties;
+    }
+
     public boolean meets(String searchTerm) {
         String lower = searchTerm.toLowerCase();
         return description.toLowerCase().indexOf(lower) != -1 || name.toLowerCase().indexOf(lower) != -1;
     }
 
+    public String getSnippet() {
+        String snippet = "\n<" + name + "\n";
+        List<Property> properties = getRequiredProperties();
+        for (Property property: properties) {
+            snippet += "  " + property.getName() + "={}\n";
+        }
+        snippet += ">\n";
+        return snippet;
+    }
     @Override
     public String toString() {
         return this.name;
