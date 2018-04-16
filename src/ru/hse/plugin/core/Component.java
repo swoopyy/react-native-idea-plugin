@@ -14,16 +14,25 @@ public class Component {
     private String url;
     private String iconPath;
     private Property[] properties;
+    private boolean isContainer;
 
     public Component() { }
 
-    public Component(String name, String description, Platform platform, String url, String iconPath, Property[] properties) {
+    public Component(String name,
+                     String description,
+                     Platform platform,
+                     String url,
+                     String iconPath,
+                     Property[] properties,
+                     boolean isContainer
+    ) {
         this.description = description;
         this.platform = platform;
         this.url = url;
         this.iconPath = iconPath;
         this.properties = properties;
         this.name = name;
+        this.isContainer = isContainer;
     }
 
     public static Component fromJsonNode(JsonNode jsonNode) {
@@ -55,7 +64,8 @@ public class Component {
                 platform,
                 jsonNode.get("url").textValue(),
                 "",
-                properties.toArray(new Property[0])
+                properties.toArray(new Property[0]),
+                jsonNode.get("isContainer").booleanValue()
         );
     }
 
@@ -108,9 +118,17 @@ public class Component {
         this.properties = properties;
     }
 
+    public boolean isContainer() {
+        return isContainer;
+    }
+
+    public void setContainer(boolean container) {
+        isContainer = container;
+    }
+
     public List<Property> getRequiredProperties() {
         List<Property> properties = new ArrayList<>();
-        for (Property property: properties) {
+        for (Property property: this.properties) {
             if (property.isRequired()) {
                 properties.add(property);
             }
@@ -129,7 +147,11 @@ public class Component {
         for (Property property: properties) {
             snippet += "  " + property.getName() + "={}\n";
         }
-        snippet += ">\n";
+        if (isContainer) {
+            snippet += ">\n</" + name + ">\n";
+        } else {
+            snippet += "/>\n";
+        }
         return snippet;
     }
     @Override

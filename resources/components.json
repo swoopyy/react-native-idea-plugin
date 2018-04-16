@@ -4,6 +4,7 @@
     "description": "Displays a circular loading indicator.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/activityindicator.html",
+    "isContainer": false,
     "properties": {
       "animating": {
         "type": "bool",
@@ -29,6 +30,7 @@
     "description": "A basic button component that should render nicely on any platform. Supports a minimal level of customization.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/button.html",
+    "isContainer": false,
     "properties": {
       "onPress": {
         "type": "function",
@@ -66,6 +68,7 @@
     "description": "Use DatePickerIOS to render a date/time picker (selector) on iOS.",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/datepickerios.html",
+    "isContainer": false,
     "properties": {
       "date": {
         "type": "Date",
@@ -106,6 +109,7 @@
     "description": "React component that wraps the platform DrawerLayout (Android only). The Drawer (typically used for navigation) is rendered with renderNavigationView and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the drawerPosition prop and its width can be set by the drawerWidth prop.",
     "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/drawerlayoutandroid.html",
+    "isContainer": true,
     "properties": {
       "renderNavigationView": {
         "type": "function",
@@ -158,6 +162,7 @@
     "description": "A performant interface for rendering simple, flat lists, supporting the most handy features",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/flatlist.html",
+    "isContainer": false,
     "properties": {
       "renderItem": {
         "type": "function",
@@ -267,6 +272,7 @@
     "description": "A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/image.html",
+    "isContainer": false,
     "properties": {
       "style": {
         "type": "style",
@@ -354,6 +360,7 @@
     "description": "It is a component to solve the common problem of views that need to move out of the way of the virtual keyboard. It can automatically adjust either its position or bottom padding based on the position of the keyboard.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/keyboardavoidingview.html",
+    "isContainer": true,
     "properties": {
       "keyboardVerticalOffset": {
         "type": "number",
@@ -374,6 +381,7 @@
     "description": "DEPRECATED - use one of the new list components, such as FlatList or SectionList for bounded memory use, fewer bugs, better performance, an easier to use API, and more features. Check out this blog post for more details.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/listview.html",
+    "isContainer": false,
     "properties": {
       "dataSource": {
         "type": "ListViewDataSource",
@@ -450,6 +458,7 @@
     "description": "Renders the child view with a mask specified in the maskElement prop.",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/maskedviewios.html",
+    "isContainer": true,
     "properties": {
       "maskElement": {
         "type": "element",
@@ -462,6 +471,7 @@
     "description": "The Modal component is a simple way to present content above an enclosing view.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/modal.html",
+    "isContainer": true,
     "properties": {
       "visible": {
         "type": "bool",
@@ -516,6 +526,7 @@
     "description": "NavigatorIOS is a wrapper around UINavigationController, enabling you to implement a navigation stack. It works exactly the same as it would on a native app using UINavigationController, providing the same animations and behavior from UIKit.",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/navigatorios.html",
+    "isContainer": false,
     "properties": {
       "initialRoute": {
         "type": "object: {component: function,title: string,titleImage: Image.propTypes.source,passProps: object,backButtonIcon: Image.propTypes.source,backButtonTitle: string,leftButtonIcon: Image.propTypes.source,leftButtonTitle: string,leftButtonSystemIcon: Object.keys(SystemIcons),onLeftButtonPress: function,rightButtonIcon: Image.propTypes.source,rightButtonTitle: string,rightButtonSystemIcon: Object.keys(SystemIcons),onRightButtonPress: function,wrapperStyle: View.style,navigationBarHidden: bool,shadowHidden: bool,tintColor: string,barTintColor: string,barStyle: enum('default', 'black'),titleTextColor: string,translucent: bool}",
@@ -564,6 +575,7 @@
     "description": "Renders the native picker component on iOS and Android.",
     "url": "https://facebook.github.io/react-native/docs/picker.html",
     "platform": "both",
+    "isContainer": true,
     "properties": {
       "onValueChange": {
         "type": "function",
@@ -608,6 +620,7 @@
     "description": "IOS picker",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/pickerios.html",
+    "isContainer": true,
     "properties": {
       "itemStyle": {
         "type": "text styles",
@@ -628,6 +641,7 @@
     "description": "React component that wraps the Android-only ProgressBar. This component is used to indicate that the app is loading or there is some activity in the app.",
     "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/progressbarandroid.html",
+    "isContainer": false,
     "properties": {
       "animating": {
         "type": "bool",
@@ -660,6 +674,7 @@
     "description": "Use ProgressViewIOS to render a UIProgressView on iOS.",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/progressviewios.html",
+    "isContainer": false,
     "properties": {
       "progress": {
         "type": "number",
@@ -692,6 +707,7 @@
     "description": "This component is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at scrollY: 0, swiping down triggers an onRefresh event.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/refreshcontrol.html",
+    "isContainer": false,
     "properties": {
       "refreshing": {
         "type": "bool",
@@ -748,6 +764,7 @@
     "description": "The purpose of SafeAreaView is to render content within the safe area boundaries of a device. It is currently only applicable to iOS devices.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/scrollview.html",
+    "isContainer": true,
     "properties": {
       "alwaysBounceVertical": {
         "type": "bool",
@@ -954,6 +971,7 @@
     "description": "A performant interface for rendering sectioned lists, supporting the most handy features.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/sectionlist.html",
+    "isContainer": false,
     "properties": {
       "sections": {
         "type": "array of ",
@@ -1046,6 +1064,7 @@
     "description": "Use SegmentedControlIOS to render a UISegmentedControl iOS.",
     "url": "https://facebook.github.io/react-native/docs/segmentedcontrolios.html",
     "platform": "ios",
+    "isContainer": false,
     "properties": {
       "enabled": {
         "type": "bool",
@@ -1082,6 +1101,7 @@
     "description": "A component used to select a single value from a range of values.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/slider.html",
+    "isContainer": false,
     "properties": {
       "style": {
         "type": "View.style",
@@ -1159,6 +1179,7 @@
     "description": "IOS snapshot view",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/snapshotviewios.html",
+    "isContainer": false,
     "properties": {
       "onSnapshotReady": {
         "type": "function",
@@ -1175,6 +1196,7 @@
     "description": "Component to control the app status bar.",
     "url": "https://facebook.github.io/react-native/docs/statusbar.html",
     "platform": "both",
+    "isContainer": false,
     "properties": {
       "animated": {
         "type": "bool",
@@ -1215,6 +1237,7 @@
     "description": "Renders a boolean input. This is a controlled component that requires an onValueChange callback that updates the value prop in order for the component to reflect user actions. If the value prop is not updated, the component will continue to render the supplied value prop instead of the expected result of any user actions.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/switch.html",
+    "isContainer": false,
     "properties": {
       "disabled": {
         "type": "bool",
@@ -1251,6 +1274,7 @@
     "description": "IOS TabBar",
     "platform": "ios",
     "url": "https://facebook.github.io/react-native/docs/tabbarios.html",
+    "isContainer": true,
     "properties": {
       "barStyle": {
         "type": "enum('default', 'black')",
@@ -1291,6 +1315,7 @@
     "description": "ItemText of TabBarIOS",
     "url": "https://facebook.github.io/react-native/docs/tabbarios-item.html",
     "platform": "ios",
+    "isContainer": true,
     "properties": {
       "selected": {
         "type": "bool",
@@ -1344,6 +1369,7 @@
     "description": "A React component for displaying text. Text supports nesting, styling, and touch handling. In the following example, the nested title and body text will inherit the fontFamily from styles.baseText, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/text.html",
+    "isContainer": true,
     "properties": {
       "selectable": {
         "type": "bool",
@@ -1430,6 +1456,7 @@
     "description": "A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.The simplest use case is to plop down a TextInput and subscribe to the onChangeText events to read the user input. There are also other events, such as onSubmitEditing and onFocus that can be subscribed to. ",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/textinput.html",
+    "isContainer": false,
     "properties": {
       "placeholderTextColor": {
         "type": "color",
@@ -1641,6 +1668,7 @@
     "description": "React component that wraps the Android-only Toolbar widget. A Toolbar can display a logo, navigation icon (e.g. hamburger menu), a title & subtitle and a list of actions. The title and subtitle are expanded so the logo and navigation icons are displayed on the left, title and subtitle in the middle and the actions on the right.",
     "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/toolbarandroid.html",
+    "isContainer": false,
     "properties": {
       "overflowIcon": {
         "type": "optionalImageSource",
@@ -1705,6 +1733,7 @@
     "description": "A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, which allows the underlay color to show through, darkening or tinting the view.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablehighlight.html",
+    "isContainer": true,
     "properties": {
       "activeOpacity": {
         "type": "number",
@@ -1743,6 +1772,7 @@
     "description": "A wrapper for making views respond properly to touches (Android only). On Android this component uses native state drawable to display touch feedback.At the moment it only supports having a single View instance as a child node, as it's implemented by replacing that View with another instance of RCTView node with some additional properties set.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablenativefeedback.html",
+    "isContainer": true,
     "properties": {
       "background": {
         "type": "backgroundPropType",
@@ -1759,6 +1789,7 @@
     "description": "A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchableopacity.html",
+    "isContainer": true,
     "properties": {
       "activeOpacity": {
         "type": "number",
@@ -1780,6 +1811,7 @@
     "description": "Do not use unless you have a very good reason. All elements that respond to press should have a visual feedback when touched.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html",
+    "isContainer": true,
     "properties": {
       "hitSlop": {
         "type": "object: {top: number, left: number, bottom: number, right: number}",
@@ -1844,6 +1876,7 @@
     "description": "The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/view.html",
+    "isContainer": true,
     "properties": {
       "onStartShouldSetResponder": {
         "type": "function",
@@ -1981,6 +2014,7 @@
     "description": "Container that allows to flip left and right between child views. Each child view of the ViewPagerAndroid will be treated as a separate page and will be stretched to fill the ViewPagerAndroid.",
     "platform": "android",
     "url": "https://facebook.github.io/react-native/docs/viewpagerandroid.html",
+    "isContainer": true,
     "properties": {
       "initialPage": {
         "type": "number",
@@ -2021,6 +2055,7 @@
     "description": "Base implementation for the more convenient FlatList and SectionList components, which are also better documented. In general, this should only really be used if you need more flexibility than FlatList provides, e.g. for use with immutable data instead of plain arrays.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/virtualizedlist.html",
+    "isContainer": false,
     "properties": {
       "renderItem": {
         "type": "function",
@@ -2158,6 +2193,7 @@
     "description": "WebView renders web content in a native view.",
     "platform": "both",
     "url": "https://facebook.github.io/react-native/docs/webview.html",
+    "isContainer": false,
     "properties": {
       "source": {
         "type": "object: {uri: string,method: string,headers: object,body: string}, ,object: {html: string,baseUrl: string}, ,number",

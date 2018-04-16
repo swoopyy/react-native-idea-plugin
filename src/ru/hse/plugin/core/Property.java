@@ -6,6 +6,12 @@ public class Property {
     private boolean isRequired;
     private Platform platform;
 
+    public Property(String name, String type, boolean isRequired) {
+        this.name = name;
+        this.type = type;
+        this.isRequired = isRequired;
+    }
+
     public String getType() {
         return type;
     }
@@ -38,10 +44,8 @@ public class Property {
         this.name = name;
     }
 
-
-    public Property(String name, String type, boolean isRequired) {
-        this.name = name;
-        this.type = type;
-        this.isRequired = isRequired;
+    @Override
+    public String toString() {
+        return name + ": " + type;
     }
 }
