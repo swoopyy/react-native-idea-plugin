@@ -22,7 +22,6 @@ public class ComponentListItem {
     private JPanel panel2;
     private JPanel urlPanel;
     private JPanel namePanel;
-    private JPanel descriptionPanel;
     private JLabel iconComponent;
 
     private String description;
@@ -43,7 +42,6 @@ public class ComponentListItem {
         $$$setupUI$$$();
         namePanel.setBackground(new Color(0, 0, 0, 0));
         urlPanel.setBackground(new Color(0, 0, 0, 0));
-        descriptionPanel.setBackground(new Color(0, 0, 0, 0));
     }
 
     public ComponentListItem(Component component) {
@@ -61,7 +59,6 @@ public class ComponentListItem {
 
     public void setDescription(String description) {
         this.description = description;
-        descriptionPanel.add(new JMultilineLabel(description), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     public String getUrl() {
@@ -134,12 +131,12 @@ public class ComponentListItem {
         panel1.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
         panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(3, 1, new Insets(0, 1, 0, 0), -1, -1));
+        panel2.setLayout(new GridLayoutManager(2, 1, new Insets(0, 1, 0, 0), -1, -1));
         panel2.setBackground(new Color(-1));
         panel3.add(panel2);
         urlPanel = new JPanel();
         urlPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel2.add(urlPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel2.add(urlPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         namePanel = new JPanel();
         namePanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 3, 0, 0), -1, -1));
         panel2.add(namePanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -149,9 +146,6 @@ public class ComponentListItem {
         if (nameComponentFont != null) nameComponent.setFont(nameComponentFont);
         nameComponent.setText("Label");
         namePanel.add(nameComponent, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        descriptionPanel = new JPanel();
-        descriptionPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 3, 0, 0), -1, -1));
-        panel2.add(descriptionPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**

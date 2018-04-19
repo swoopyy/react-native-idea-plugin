@@ -18,6 +18,10 @@ import ru.hse.plugin.core.utils.SnippetInserted;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
@@ -91,6 +95,18 @@ public class MainToolWindow implements ToolWindowFactory {
                         }
                     });
                 }
+            }
+        });
+        jbList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int mod = e.getPoint().y % 60;
+                if (mod > 37 && mod < 51) {
+                    int index = jbList.locationToIndex(e.getPoint());
+                    Component component = (Component) jbList.getModel().getElementAt(index);
+                    new JLabelLink(component.getUrl()).click();
+                }
+                super.mouseClicked(e);
             }
         });
         switch (tabbedPane1.getSelectedIndex()) {

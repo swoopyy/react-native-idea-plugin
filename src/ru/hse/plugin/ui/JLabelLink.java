@@ -15,9 +15,11 @@ public class JLabelLink extends JFrame {
     private static final String HREF_END = "</a>";
     private static final String HTML = "<html>";
     private static final String HTML_END = "</html>";
+    private String link;
 
 
     public JLabelLink(String link) {
+        this.link = link;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Container contentPane = getContentPane();
@@ -32,6 +34,15 @@ public class JLabelLink extends JFrame {
         }
 
         pack();
+    }
+
+    public void click() {
+        try {
+            URI uri = new java.net.URI(link);
+            (new LinkRunner(uri)).execute();
+        } catch (URISyntaxException use) {
+            throw new AssertionError(use + ": " + link); //NOI18N
+        }
     }
 
     private static void makeLinkable(JLabel c, MouseListener ml) {
