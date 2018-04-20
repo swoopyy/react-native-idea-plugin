@@ -1,4 +1,4 @@
-package ru.hse.plugin.core;
+package ru.hse.plugin.core.entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,8 +7,6 @@ import java.io.InputStream;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 public class ComponentCollection {
     private static Component[] builtinComponents;

@@ -1,4 +1,4 @@
-package ru.hse.plugin.core;
+package ru.hse.plugin.core.managers;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
@@ -11,7 +11,7 @@ import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBus;
 import org.jetbrains.annotations.NotNull;
-import ru.hse.plugin.core.utils.ComponentInsertionEditorMouseAdapter;
+import ru.hse.plugin.core.entities.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +38,12 @@ public class EditorManager {
         this.removeListeners();
     }
 
-    protected Project getProject() {
+    public Project getProject() {
         return project;
     }
 
-    protected FileEditorManager getEditor() {
-        return fileEditorManager;
+    public Editor getEditor() {
+        return fileEditorManager.getSelectedTextEditor();
     }
 
 

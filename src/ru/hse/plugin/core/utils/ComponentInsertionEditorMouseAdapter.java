@@ -2,6 +2,7 @@ package ru.hse.plugin.core.utils;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.IndentGuideDescriptor;
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
 import com.intellij.openapi.editor.event.EditorMouseEvent;
 import com.intellij.openapi.project.Project;
@@ -9,7 +10,7 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
-import ru.hse.plugin.core.Component;
+import ru.hse.plugin.core.entities.Component;
 
 public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
     private Component component;
@@ -53,6 +54,7 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
 
     private void insertImportStatement() {
         PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
+
         String documentText = psiFile.getText();
         psiFile.getNode().getPsi().accept(new PsiRecursiveElementWalkingVisitor() {
             @Override

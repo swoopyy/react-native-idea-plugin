@@ -1,4 +1,6 @@
-package ru.hse.plugin.core;
+package ru.hse.plugin.core.entities;
+
+import ru.hse.plugin.core.entities.Platform;
 
 public class Property {
     private String name;

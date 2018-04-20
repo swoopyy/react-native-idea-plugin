@@ -1,10 +1,8 @@
-package ru.hse.plugin.core;
+package ru.hse.plugin.ui;
 
-import com.intellij.ui.components.JBLabel;
-import ru.hse.plugin.ui.ComponentListItem;
+import ru.hse.plugin.core.entities.Component;
 
 import javax.swing.*;
-import javax.swing.text.Document;
 
 public class ComponentCellRenderer  implements ListCellRenderer<Component> {
     @Override

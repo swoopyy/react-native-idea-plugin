@@ -1,8 +1,15 @@
 package ru.hse.plugin.ui;
 
+import com.intellij.lang.Language;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.IndentGuideDescriptor;
+import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.codeStyle.FileIndentOptionsProvider;
+import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
@@ -11,8 +18,10 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
-import ru.hse.plugin.core.*;
-import ru.hse.plugin.core.Component;
+import ru.hse.plugin.core.entities.Component;
+import ru.hse.plugin.core.entities.ComponentCollection;
+import ru.hse.plugin.core.entities.Platform;
+import ru.hse.plugin.core.managers.InsertionManager;
 import ru.hse.plugin.core.utils.SnippetInserted;
 
 import javax.swing.*;
@@ -20,8 +29,6 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
@@ -87,6 +94,19 @@ public class MainToolWindow implements ToolWindowFactory {
             public void valueChanged(ListSelectionEvent e) {
                 if (jbList.getSelectedIndex() != -1) {
                     Component component = (Component) model.getElementAt(jbList.getSelectedIndex());
+                    SelectionModel selectionModel = insertionManager.getEditor().getSelectionModel();
+                    if (selectionModel.hasSelection()) {
+                        int start = selectionModel.getSelectionStart();
+                        int end = selectionModel.getSelectionEnd();
+                        WriteCommandAction.runWriteCommandAction(insertionManager.getProject(), () -> {
+                            insertionManager.getEditor().getDocument().insertString(end, "\n" + component.getClosingTag());
+                            insertionManager.getEditor().getDocument().insertString(start, component.getOpeningTag());
+                            selectionModel.removeSelection();
+                        });
+                        jbList.clearSelection();
+                        insertionManager.clear();
+                        return;
+                    }
                     insertionManager.setComponent(component, new SnippetInserted() {
                         @Override
                         public void perform() {

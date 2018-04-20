@@ -1,11 +1,13 @@
-package ru.hse.plugin.core;
+package ru.hse.plugin.core.entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import ru.hse.plugin.core.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 
 public class Component {
     private String name;
@@ -162,22 +164,42 @@ public class Component {
 
     public boolean meets(String searchTerm) {
         String lower = searchTerm.toLowerCase();
-        return name.toLowerCase().indexOf(lower) != -1;
+        return name.toLowerCase().contains(lower);
     }
 
     public String getSnippet() {
-        String snippet = "\n<" + name + "\n";
+        if (isContainer) {
+            return getOpeningTag() + getClosingTag();
+        } else {
+            return getOpeningTag().replace(">", "/>");
+        }
+    }
+
+    public String getOpeningTag() {
+        String snippet = "\n<" + name;
         List<Property> properties = getRequiredProperties();
         for (Property property: properties) {
-            snippet += "  " + property.getName() + "={}\n";
+            snippet += "\n  " + property.getName() + "={}\n";
         }
-        if (isContainer) {
-            snippet += ">\n</" + name + ">\n";
-        } else {
-            snippet += "/>\n";
-        }
-        return snippet;
+        return snippet + ">\n";
     }
+
+    public String getClosingTag() {
+        return "<" + name + "/>\n";
+    }
+
+    public String getSnippet(char indent, int count) {
+        return "";
+    }
+
+    public String getOpeningTag(char indent, int count) {
+        return "";
+    }
+
+    public String getClosingTag(char indent, int count) {
+        return Utils.getIndent(indent, count) + getClosingTag();
+    }
+
     @Override
     public String toString() {
         return this.name;
