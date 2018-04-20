@@ -15,6 +15,8 @@ public class Component {
     private String iconPath;
     private Property[] properties;
     private boolean isContainer;
+    private boolean isDefault = false;
+    private String importPath = "react-native";
 
     public Component() { }
 
@@ -69,7 +71,21 @@ public class Component {
         );
     }
 
+    public boolean isDefault() {
+        return isDefault;
+    }
 
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    public String getImportPath() {
+        return importPath;
+    }
+
+    public void setImportPath(String importPath) {
+        this.importPath = importPath;
+    }
 
     public String getName() {
         return name;
