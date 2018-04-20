@@ -91,6 +91,14 @@ public class Component {
         return name;
     }
 
+    public String getImportName() {
+        if (name.contains(".")) {
+            return name.split("\\.")[0];
+        } else {
+            return name;
+        }
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -154,7 +162,7 @@ public class Component {
 
     public boolean meets(String searchTerm) {
         String lower = searchTerm.toLowerCase();
-        return description.toLowerCase().indexOf(lower) != -1 || name.toLowerCase().indexOf(lower) != -1;
+        return name.toLowerCase().indexOf(lower) != -1;
     }
 
     public String getSnippet() {

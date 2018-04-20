@@ -1311,8 +1311,8 @@
     }
   },
   {
-    "name": "TabBarIOS.ItemText",
-    "description": "ItemText of TabBarIOS",
+    "name": "TabBarIOS.Item",
+    "description": "Item of TabBarIOS",
     "url": "https://facebook.github.io/react-native/docs/tabbarios-item.html",
     "platform": "ios",
     "isContainer": true,

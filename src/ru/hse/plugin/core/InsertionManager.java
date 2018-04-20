@@ -18,18 +18,18 @@ import java.util.List;
 public class InsertionManager {
     private static InsertionManager insertionManager;
     private Project project;
-    private String snippet = "";
+    private Component component;
     private FileEditorManager fileEditorManager;
     private List<Editor> textEditors;
     private EditorMouseAdapter editorMouseAdapter;
     private SnippetInserted snippetInserted;
 
-    public String getSnippet() {
-        return snippet;
+    public Component getComponent() {
+        return component;
     }
 
-    public void setSnippet(String snippet, SnippetInserted snippetInserted) {
-        this.snippet = snippet;
+    public void setComponent(Component component, SnippetInserted snippetInserted) {
+        this.component = component;
         this.snippetInserted = snippetInserted;
         update();
     }
@@ -46,7 +46,7 @@ public class InsertionManager {
     }
 
     private void removeListeners() {
-        for(Editor editor: textEditors) {
+        for (Editor editor : textEditors) {
             editor.removeEditorMouseListener(editorMouseAdapter);
         }
     }
@@ -57,7 +57,7 @@ public class InsertionManager {
         if (!textEditors.contains(editor)) {
             textEditors.add(editor);
         }
-        editorMouseAdapter = new ComponentInsertionEditorMouseAdapter(project, editor, snippetInserted, snippet);
+        editorMouseAdapter = new ComponentInsertionEditorMouseAdapter(project, editor, snippetInserted, component);
         editor.addEditorMouseListener(editorMouseAdapter);
     }
 

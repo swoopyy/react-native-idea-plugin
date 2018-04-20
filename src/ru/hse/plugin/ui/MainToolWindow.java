@@ -87,7 +87,7 @@ public class MainToolWindow implements ToolWindowFactory {
             public void valueChanged(ListSelectionEvent e) {
                 if (jbList.getSelectedIndex() != -1) {
                     Component component = (Component) model.getElementAt(jbList.getSelectedIndex());
-                    insertionManager.setSnippet(component.getSnippet(), new SnippetInserted() {
+                    insertionManager.setComponent(component, new SnippetInserted() {
                         @Override
                         public void perform() {
                             jbList.clearSelection();
