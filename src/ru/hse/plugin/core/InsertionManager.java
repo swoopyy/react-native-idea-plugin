@@ -15,14 +15,9 @@ import ru.hse.plugin.core.utils.SnippetInserted;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertionManager {
+public class InsertionManager extends EditorManager {
     private static InsertionManager insertionManager;
-    private Project project;
     private Component component;
-    private FileEditorManager fileEditorManager;
-    private List<Editor> textEditors;
-    private EditorMouseAdapter editorMouseAdapter;
-    private SnippetInserted snippetInserted;
 
     public Component getComponent() {
         return component;
@@ -30,35 +25,12 @@ public class InsertionManager {
 
     public void setComponent(Component component, SnippetInserted snippetInserted) {
         this.component = component;
-        this.snippetInserted = snippetInserted;
-        update();
-    }
-
-    public void clear() {
-        this.removeListeners();
+        EditorMouseAdapter editorMouseAdapter = new ComponentInsertionEditorMouseAdapter(getProject(), getEditor().getSelectedTextEditor(), snippetInserted, component);
+        setEditorMouseAdapter(editorMouseAdapter);
     }
 
     private InsertionManager() {
-        project =  ProjectManager.getInstance().getOpenProjects()[0];
-        fileEditorManager = FileEditorManager.getInstance(project);
-        textEditors = new ArrayList<Editor>();
-        addEditorListener();
-    }
-
-    private void removeListeners() {
-        for (Editor editor : textEditors) {
-            editor.removeEditorMouseListener(editorMouseAdapter);
-        }
-    }
-
-    private void update() {
-        removeListeners();
-        Editor editor = fileEditorManager.getSelectedTextEditor();
-        if (!textEditors.contains(editor)) {
-            textEditors.add(editor);
-        }
-        editorMouseAdapter = new ComponentInsertionEditorMouseAdapter(project, editor, snippetInserted, component);
-        editor.addEditorMouseListener(editorMouseAdapter);
+       super();
     }
 
     public static InsertionManager getInstance() {
@@ -68,24 +40,4 @@ public class InsertionManager {
         return insertionManager;
     }
 
-    private void addEditorListener() {
-        MessageBus messageBus = project.getMessageBus();
-        messageBus.connect().subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerAdapter() {
-
-            @Override
-            public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-               super.fileOpened(source, file);
-            }
-
-            @Override
-            public void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                super.fileClosed(source, file);
-            }
-
-            @Override
-            public void selectionChanged(@NotNull FileEditorManagerEvent event) {
-                update();
-            }
-        });
-    }
 }
