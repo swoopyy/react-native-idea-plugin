@@ -185,7 +185,7 @@ public class Component {
     }
 
     public String getClosingTag() {
-        return "</" + name + ">\n";
+        return "</" + name + ">";
     }
 
     public String getSnippet(int tabCount) {
@@ -209,6 +209,10 @@ public class Component {
 
     public String getClosingTag(int tabCount) {
         return Utils.getIndent(tabCount) + getClosingTag();
+    }
+
+    public String wrapSnippet(String text) {
+        return getOpeningTag().replaceFirst("\n","") + text + "\n" + getClosingTag();
     }
 
     @Override

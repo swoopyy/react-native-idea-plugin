@@ -1,6 +1,11 @@
 package ru.hse.plugin.core.utils;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import ru.hse.plugin.core.managers.EditorManager;
 
@@ -13,7 +18,7 @@ public class Utils {
         boolean lFound = false;
         while (i > 0) {
             char ch = text.charAt(i);
-            if (ch == '<') {
+            if (ch == ' ' && text.charAt(i + 1) != ' ') {
                 lFound = true;
             }
             if (ch == '\n' && count != 0) {
@@ -49,5 +54,25 @@ public class Utils {
             out += type;
         }
         return out;
+    }
+
+    public static String indentText(String text, String firstLineIndent) {
+        String out = "";
+        String indent = Utils.getIndent(Utils.getTabCount());
+        for(String line: text.split("\n")) {
+            out += indent + line + "\n";
+        }
+        return firstLineIndent + out;
+    }
+
+    public static void reformatText(int start, int end) {
+        WriteCommandAction.runWriteCommandAction(manager.getProject(), () -> {
+            try {
+                PsiFile psiFile = PsiDocumentManager.getInstance(manager.getProject()).getPsiFile(manager.getEditor().getDocument());
+                CodeStyleManager.getInstance(manager.getProject()).reformatText(psiFile, start, end);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        });
     }
 }

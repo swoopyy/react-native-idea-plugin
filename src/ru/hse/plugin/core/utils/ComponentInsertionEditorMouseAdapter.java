@@ -102,13 +102,13 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
     public void mouseClicked(EditorMouseEvent e) {
         int offset = editor.getCaretModel().getOffset();
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            int indentCount = Utils.indentCount(editor.getDocument().getText(), offset);
-            System.out.println(component.getSnippet(indentCount));
-            insert(offset, component.getSnippet(indentCount));
+            insert(offset, component.getSnippet());
+            Utils.reformatText(offset, offset + component.getSnippet().length());
             insertImportStatement();
             if (snippetInserted != null) {
                 snippetInserted.perform();
             }
         });
+
     }
 }

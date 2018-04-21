@@ -2,14 +2,20 @@ package ru.hse.plugin.ui;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.IndentGuideDescriptor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.FileIndentOptionsProvider;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
@@ -23,6 +29,7 @@ import ru.hse.plugin.core.entities.ComponentCollection;
 import ru.hse.plugin.core.entities.Platform;
 import ru.hse.plugin.core.managers.InsertionManager;
 import ru.hse.plugin.core.utils.SnippetInserted;
+import ru.hse.plugin.core.utils.Utils;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -99,8 +106,12 @@ public class MainToolWindow implements ToolWindowFactory {
                         int start = selectionModel.getSelectionStart();
                         int end = selectionModel.getSelectionEnd();
                         WriteCommandAction.runWriteCommandAction(insertionManager.getProject(), () -> {
-                            insertionManager.getEditor().getDocument().insertString(end, "\n" + component.getClosingTag());
-                            insertionManager.getEditor().getDocument().insertString(start, component.getOpeningTag());
+                            Document document = insertionManager.getEditor().getDocument();
+                            String text = document.getText().substring(start, end);
+                            String toInsert = component.wrapSnippet(text);
+                            document.replaceString(start, end, toInsert);
+                            PsiDocumentManager.getInstance(insertionManager.getProject()).commitDocument(insertionManager.getEditor().getDocument());
+                            Utils.reformatText(start, start + toInsert.length());
                             selectionModel.removeSelection();
                         });
                         jbList.clearSelection();
