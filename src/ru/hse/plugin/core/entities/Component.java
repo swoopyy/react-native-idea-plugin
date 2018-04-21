@@ -179,25 +179,36 @@ public class Component {
         String snippet = "\n<" + name;
         List<Property> properties = getRequiredProperties();
         for (Property property: properties) {
-            snippet += "\n  " + property.getName() + "={}\n";
+            snippet += "\n  " + property.getName() + "={}";
         }
         return snippet + ">\n";
     }
 
     public String getClosingTag() {
-        return "<" + name + "/>\n";
+        return "</" + name + ">\n";
     }
 
-    public String getSnippet(char indent, int count) {
-        return "";
+    public String getSnippet(int tabCount) {
+        if (isContainer) {
+            return getOpeningTag(tabCount) + getClosingTag(tabCount);
+        } else {
+            return getOpeningTag(tabCount).replace(">\n", '\n' + Utils.getIndent(tabCount) +"/>");
+        }
     }
 
-    public String getOpeningTag(char indent, int count) {
-        return "";
+    public String getOpeningTag(int tabCount) {
+        String indent = Utils.getIndent(tabCount);
+        String snippet = String.format("\n%s<%s", indent, name);
+        System.out.println(snippet + tabCount);
+        List<Property> properties = getRequiredProperties();
+        for (Property property: properties) {
+            snippet += String.format("\n%s%s={}", indent + Utils.getIndent(Utils.getTabCount()), property.getName());
+        }
+        return indent + snippet + ">\n";
     }
 
-    public String getClosingTag(char indent, int count) {
-        return Utils.getIndent(indent, count) + getClosingTag();
+    public String getClosingTag(int tabCount) {
+        return Utils.getIndent(tabCount) + getClosingTag();
     }
 
     @Override
