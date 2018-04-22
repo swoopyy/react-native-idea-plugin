@@ -162,6 +162,10 @@ public class Component {
         return properties;
     }
 
+    public boolean hasRequiredProperties() {
+        return getRequiredProperties().size() != 0;
+    }
+
     public boolean meets(String searchTerm) {
         String lower = searchTerm.toLowerCase();
         return name.toLowerCase().contains(lower);

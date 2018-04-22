@@ -26,7 +26,11 @@ public class PropertiesInspectorEditorMouseAdapter extends EditorMouseAdapter {
             Component component = ComponentCollection.getComponent(children[1].getText());
             if (component != null) {
                 this.componentClicked.perform(element, component);
+            } else {
+                this.componentClicked.perform(element, null);
             }
+        } else {
+            this.componentClicked.perform(element,null);
         }
         super.mouseClicked(e);
     }
