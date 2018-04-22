@@ -1,21 +1,13 @@
 package ru.hse.plugin.ui;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.IndentGuideDescriptor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.codeStyle.FileIndentOptionsProvider;
-import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
@@ -24,11 +16,13 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
+import ru.hse.plugin.core.callbacks.ComponentClicked;
 import ru.hse.plugin.core.entities.Component;
 import ru.hse.plugin.core.entities.ComponentCollection;
 import ru.hse.plugin.core.entities.Platform;
 import ru.hse.plugin.core.managers.InsertionManager;
-import ru.hse.plugin.core.utils.SnippetInserted;
+import ru.hse.plugin.core.callbacks.SnippetInserted;
+import ru.hse.plugin.core.managers.PropertiesInspectorManager;
 import ru.hse.plugin.core.utils.Utils;
 
 import javax.swing.*;
@@ -68,6 +62,12 @@ public class MainToolWindow implements ToolWindowFactory {
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);
         toolWindow.getContentManager().addContent(content);
+        PropertiesInspectorManager.setHandler(new ComponentClicked() {
+            @Override
+            public void perform(PsiElement element, Component component) {
+                System.out.println(" NAME " + component.getName());
+            }
+        });
     }
 
     private void refillModel(int index, String searchTerm) {

@@ -1,8 +1,7 @@
-package ru.hse.plugin.core.utils;
+package ru.hse.plugin.core.handlers;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.IndentGuideDescriptor;
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
 import com.intellij.openapi.editor.event.EditorMouseEvent;
 import com.intellij.openapi.project.Project;
@@ -10,7 +9,9 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
+import ru.hse.plugin.core.callbacks.SnippetInserted;
 import ru.hse.plugin.core.entities.Component;
+import ru.hse.plugin.core.utils.Utils;
 
 public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
     private Component component;
@@ -52,9 +53,23 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
         editor.getDocument().insertString(offset, text);
     }
 
+    private void reformatImportPathNode() {
+        PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
+        String documentText = psiFile.getText();
+        psiFile.getNode().getPsi().accept(new PsiRecursiveElementWalkingVisitor() {
+            @Override
+            public void visitElement(PsiElement element) {
+                String text = element.getText();
+                if (isImportPathNode(text, documentText)) {
+                    Utils.reformatText(element.getTextOffset(), element.getTextOffset() + element.getTextLength());
+                }
+                super.visitElement(element);
+            }
+        });
+    }
+
     private void insertImportStatement() {
         PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
-
         String documentText = psiFile.getText();
         psiFile.getNode().getPsi().accept(new PsiRecursiveElementWalkingVisitor() {
             @Override
@@ -96,6 +111,7 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
                 insert(lastImportOffset, statement);
             }
         }
+        reformatImportPathNode();
     }
 
     @Override
@@ -109,6 +125,6 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
                 snippetInserted.perform();
             }
         });
-
+        super.mouseClicked(e);
     }
 }
