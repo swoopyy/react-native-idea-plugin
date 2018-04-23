@@ -1,1 +1,1 @@
-# react-native-idea-plugin
+# rn-plugin
