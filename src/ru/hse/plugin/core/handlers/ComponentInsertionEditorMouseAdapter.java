@@ -117,6 +117,7 @@ public class ComponentInsertionEditorMouseAdapter extends EditorMouseAdapter {
     @Override
     public void mouseClicked(EditorMouseEvent e) {
         int offset = editor.getCaretModel().getOffset();
+        System.out.println(offset);
         WriteCommandAction.runWriteCommandAction(project, () -> {
             insert(offset, component.getSnippet());
             Utils.reformatText(offset, offset + component.getSnippet().length());

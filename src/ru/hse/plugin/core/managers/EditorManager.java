@@ -2,6 +2,7 @@ package ru.hse.plugin.core.managers;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
+import com.intellij.openapi.editor.impl.EditorImpl;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerAdapter;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
@@ -18,15 +19,13 @@ import java.util.List;
 
 public class EditorManager {
     private Project project;
-    private Component component;
     private FileEditorManager fileEditorManager;
-    private List<Editor> textEditors;
+    private static Editor prevEditor;
     EditorMouseAdapter editorMouseAdapter;
 
     public EditorManager() {
         project =  ProjectManager.getInstance().getOpenProjects()[0];
         fileEditorManager = FileEditorManager.getInstance(project);
-        textEditors = new ArrayList<Editor>();
         addEditorListener();
     }
 
@@ -48,21 +47,19 @@ public class EditorManager {
 
 
     private void removeListeners() {
-        for (Editor editor : textEditors) {
-            editor.removeEditorMouseListener(editorMouseAdapter);
+        if (editorMouseAdapter != null && prevEditor != null) {
+            prevEditor.removeEditorMouseListener(editorMouseAdapter);
         }
     }
 
     private void update(EditorMouseAdapter editorMouseAdapter) {
         removeListeners();
         Editor editor = fileEditorManager.getSelectedTextEditor();
-        if (!textEditors.contains(editor)) {
-            textEditors.add(editor);
-        }
+        prevEditor = editor;
         if (editorMouseAdapter != null) {
             this.editorMouseAdapter = editorMouseAdapter;
+            editor.addEditorMouseListener(this.editorMouseAdapter);
         }
-        editor.addEditorMouseListener(this.editorMouseAdapter);
     }
 
     private void addEditorListener() {

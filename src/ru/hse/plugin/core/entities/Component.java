@@ -203,7 +203,6 @@ public class Component {
     public String getOpeningTag(int tabCount) {
         String indent = Utils.getIndent(tabCount);
         String snippet = String.format("\n%s<%s", indent, name);
-        System.out.println(snippet + tabCount);
         List<Property> properties = getRequiredProperties();
         for (Property property: properties) {
             snippet += String.format("\n%s%s={}", indent + Utils.getIndent(Utils.getTabCount()), property.getName());

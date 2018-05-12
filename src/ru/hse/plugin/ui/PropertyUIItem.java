@@ -1,18 +1,102 @@
 package ru.hse.plugin.ui;
 
+import ru.hse.plugin.core.entities.ComponentEntity;
 import ru.hse.plugin.core.entities.PropertyEntity;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PropertyUIItem {
     private JCheckBox checkbox;
     private JPanel panel1;
     PropertyEntity propertyEntity;
+    ComponentEntity componentEntity;
 
-    public PropertyUIItem(PropertyEntity propertyEntity) {
+    private JSlider getJSlider() {
+        JSlider jslider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        jslider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println(e.toString());
+            }
+        });
+        jslider.setMajorTickSpacing(10);
+        jslider.setMinorTickSpacing(0);
+        jslider.setPaintTicks(true);
+        jslider.setPaintLabels(true);
+        return jslider;
+    }
+
+    private JCheckBox getCheckbox() {
+        JCheckBox jCheckBox = new JCheckBox();
+        jCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println(e.getSource());
+            }
+        });
+        return jCheckBox;
+    }
+
+    private JTextField getTextField() {
+        JTextField jTextField = new JTextField(10);
+        jTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getSource());
+            }
+        });
+        return jTextField;
+    }
+
+    private JComboBox getCombobox() {
+        String repr = propertyEntity.getTypeStringRepr();
+        int from = repr.indexOf('(') + 1;
+        int to = repr.indexOf(')');
+        String enums = repr.substring(from + 1, to).replaceAll("\'", "");
+        String[] options = enums.split(",");
+        JComboBox comboBox = new JComboBox(options);
+        comboBox.setSelectedIndex(0);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getSource());
+            }
+        });
+        return comboBox;
+    }
+
+    public PropertyUIItem(PropertyEntity propertyEntity, ComponentEntity componentEntity) {
         this.propertyEntity = propertyEntity;
-        checkbox.setText(propertyEntity.getName());
+        this.componentEntity = componentEntity;
+        checkbox.setText(propertyEntity.getShortName());
+        checkbox.setSelected(propertyEntity.isSelected());
+        checkbox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                componentEntity.toggleProperty(propertyEntity);
+            }
+        });
+        switch (propertyEntity.getType()) {
+            case number:
+                panel1.add(getJSlider());
+                break;
+            case bool:
+                panel1.add(getCheckbox());
+                break;
+            case string:
+                panel1.add(getTextField());
+                break;
+            case enumeration:
+                panel1.add(getCombobox());
+                break;
+            default:
+                panel1.add(getTextField());
+        }
     }
 
     {

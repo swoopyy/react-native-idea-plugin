@@ -3,10 +3,20 @@ package ru.hse.plugin.core.entities;
 import ru.hse.plugin.core.entities.Platform;
 
 public class Property {
+
     private String name;
     private String type;
     private boolean isRequired;
     private Platform platform;
+
+    public enum Types {
+        number,
+        string,
+        bool,
+        color,
+        enumeration,
+        none
+    }
 
     public Property(String name, String type, boolean isRequired) {
         this.name = name;
@@ -14,7 +24,26 @@ public class Property {
         this.isRequired = isRequired;
     }
 
-    public String getType() {
+    public Types getType() {
+        if (type.equals("number")) {
+            return Types.number;
+        }
+        if (type.equals("string")) {
+            return Types.string;
+        }
+        if (type.equals("bool")) {
+            return Types.bool;
+        }
+        if (type.equals("color")) {
+            return Types.color;
+        }
+        if (type.contains("enum")) {
+            return Types.enumeration;
+        }
+        return Types.none;
+    }
+
+    public String getTypeStringRepr() {
         return type;
     }
 
@@ -40,6 +69,14 @@ public class Property {
 
     public String getName() {
         return name;
+    }
+
+    public String getShortName() {
+        if (name.length() > 12) {
+            return name.substring(0, 10) + "...";
+        } else {
+            return name;
+        }
     }
 
     public void setName(String name) {

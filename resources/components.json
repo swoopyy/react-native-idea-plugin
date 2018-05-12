@@ -905,7 +905,7 @@
         "platform": "iOS"
       },
       "decelerationRate": {
-        "type": "enum('fast', 'normal'), ,number",
+        "type": "enum('fast', 'normal')",
         "required": "No",
         "platform": "iOS"
       },

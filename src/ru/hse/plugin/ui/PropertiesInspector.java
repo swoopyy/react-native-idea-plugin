@@ -26,7 +26,7 @@ public class PropertiesInspector {
         requiredLabelPanel.add(requiredLabel);
         optionalLabelPanel = new JPanel();
         optionalLabelPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        JLabel optionalLabel = new JLabel("Optional label");
+        JLabel optionalLabel = new JLabel("Optional properties");
         optionalLabel.setHorizontalAlignment(SwingConstants.LEFT);
         optionalLabelPanel.add(optionalLabel);
     }
@@ -45,13 +45,13 @@ public class PropertiesInspector {
         if (requiredProperties.size() != 0) {
             propertiesPanel.add(requiredLabelPanel);
             for (PropertyEntity propertyEntity : componentEntity.getRequiredPropertyEntities()) {
-                propertiesPanel.add(new PropertyUIItem(propertyEntity).$$$getRootComponent$$$());
+                propertiesPanel.add(new PropertyUIItem(propertyEntity, componentEntity).$$$getRootComponent$$$());
             }
         }
         if (optionalProperties.size() != 0) {
             propertiesPanel.add(optionalLabelPanel);
             for (PropertyEntity propertyEntity : componentEntity.getOptionalEntities()) {
-                propertiesPanel.add(new PropertyUIItem(propertyEntity).$$$getRootComponent$$$());
+                propertiesPanel.add(new PropertyUIItem(propertyEntity, componentEntity).$$$getRootComponent$$$());
             }
         }
         jScrollPane.setViewportView(propertiesPanel);
