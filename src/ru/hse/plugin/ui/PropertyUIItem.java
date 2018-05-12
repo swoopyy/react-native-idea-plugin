@@ -70,15 +70,14 @@ public class PropertyUIItem {
         return comboBox;
     }
 
-    public PropertyUIItem(PropertyEntity propertyEntity, ComponentEntity componentEntity) {
+    public PropertyUIItem(PropertyEntity propertyEntity) {
         this.propertyEntity = propertyEntity;
-        this.componentEntity = componentEntity;
         checkbox.setText(propertyEntity.getShortName());
         checkbox.setSelected(propertyEntity.isSelected());
         checkbox.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                componentEntity.toggleProperty(propertyEntity);
+                propertyEntity.toggle();
             }
         });
         switch (propertyEntity.getType()) {

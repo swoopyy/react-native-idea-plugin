@@ -45,13 +45,13 @@ public class PropertiesInspector {
         if (requiredProperties.size() != 0) {
             propertiesPanel.add(requiredLabelPanel);
             for (PropertyEntity propertyEntity : componentEntity.getRequiredPropertyEntities()) {
-                propertiesPanel.add(new PropertyUIItem(propertyEntity, componentEntity).$$$getRootComponent$$$());
+                propertiesPanel.add(new PropertyUIItem(propertyEntity).$$$getRootComponent$$$());
             }
         }
         if (optionalProperties.size() != 0) {
             propertiesPanel.add(optionalLabelPanel);
             for (PropertyEntity propertyEntity : componentEntity.getOptionalEntities()) {
-                propertiesPanel.add(new PropertyUIItem(propertyEntity, componentEntity).$$$getRootComponent$$$());
+                propertiesPanel.add(new PropertyUIItem(propertyEntity).$$$getRootComponent$$$());
             }
         }
         jScrollPane.setViewportView(propertiesPanel);

@@ -21,7 +21,7 @@ public class ComponentEntity extends Component {
 
 
 
-    private boolean hasProperty(Property property) {
+    public boolean hasProperty(Property property) {
         final boolean[] hasProperty = {false};
         psiElement.accept(new PsiRecursiveElementWalkingVisitor() {
             @Override
@@ -35,7 +35,7 @@ public class ComponentEntity extends Component {
         return hasProperty[0];
     }
 
-    private String getPropertyValue(Property property) {
+    public String getPropertyValue(Property property) {
         PsiElement psiElement = getPropertyContainingPsiElement(property);
         if (psiElement == null) {
             return null;
@@ -53,7 +53,7 @@ public class ComponentEntity extends Component {
         return null;
     }
 
-    private PsiElement getPropertyContainingPsiElement(Property property) {
+    public PsiElement getPropertyContainingPsiElement(Property property) {
         final PsiElement[] propertyValue = {null};
         psiElement.accept(new PsiRecursiveElementWalkingVisitor() {
             @Override
@@ -82,50 +82,64 @@ public class ComponentEntity extends Component {
             if (hasProperty(property)) {
                 String value = getPropertyValue(property);
                 if (value.contains("'")) {
-                    propertyEntities.add(new PropertyEntity(property, value.replaceAll("'", ""), true));
+                    propertyEntities.add(
+                            new PropertyEntity(
+                                    property,
+                                    this,
+                                    value.replaceAll("'", ""),
+                                    true
+                            )
+                    );
                 } else if (value.contains("\'")) {
-                    propertyEntities.add(new PropertyEntity(property, value.replaceAll("\"", ""), true));
+                    propertyEntities.add(
+                            new PropertyEntity(
+                                    property,
+                                    this,
+                                    value.replaceAll("\"", ""),
+                                    true
+                            )
+                    );
                 } else if (value.equals("true") || value.equals("false")) {
-                    propertyEntities.add(new PropertyEntity(property, Boolean.parseBoolean(value), true));
+                    propertyEntities.add(
+                            new PropertyEntity(
+                                    property,
+                                    this,
+                                    Boolean.parseBoolean(value),
+                                    true
+                            )
+                    );
                 } else if (value.matches("-?\\d+(\\.\\d+)?")) {
-                    propertyEntities.add(new PropertyEntity(property, Double.parseDouble(value),true));
+                    propertyEntities.add(
+                            new PropertyEntity(
+                                    property,
+                                    this,
+                                    Double.parseDouble(value),
+                                    true
+                            )
+                    );
                 } else {
-                    propertyEntities.add(new PropertyEntity(property, null, true));
+                    propertyEntities.add(
+                            new PropertyEntity(
+                                    property,
+                                    this,
+                                    null,
+                                    true
+                            )
+                    );
                 }
             } else {
-                propertyEntities.add(new PropertyEntity(property, null, false));
+                propertyEntities.add(
+                        new PropertyEntity(
+                                property,
+                                this,
+                                null,
+                                false
+                        )
+                );
             }
         }
     }
 
-    public void toggleProperty(PropertyEntity propertyEntity) {
-        WriteCommandAction.runWriteCommandAction(editorManager.getProject(), () -> {
-            Document document = editorManager.getEditor().getDocument();
-            if (propertyEntity.isSelected()) {
-                PsiElement propertyPsi = getPropertyContainingPsiElement(propertyEntity);
-                String propertyText = propertyPsi.getText();
-                int start = propertyPsi.getTextOffset();
-                int end = start + propertyPsi.getTextLength();
-                propertyEntity.setSelected(false);
-                document.deleteString(start, end);
-            } else {
-                int closingTag;
-                int closingTag1 = psiElement.getText().indexOf('>');
-                int closingTag2 = psiElement.getText().indexOf("/>");
-                if (closingTag1 == closingTag2 + 1) {
-                    closingTag = closingTag2;
-                } else {
-                    closingTag = closingTag1;
-                }
-                int insertionStart = psiElement.getTextOffset() + closingTag;
-                document.insertString(insertionStart, " " + propertyEntity.getName() + "={}");
-                propertyEntity.setSelected(true);
-            }
-            Utils.reformatText(psiElement.getTextOffset(), psiElement.getTextOffset() + psiElement.getTextLength());
-        });
-    }
-
-  
 
     public List<PropertyEntity> getRequiredPropertyEntities() {
         List<PropertyEntity> entities = new ArrayList<>();
