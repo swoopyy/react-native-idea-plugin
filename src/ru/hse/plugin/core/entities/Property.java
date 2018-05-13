@@ -87,4 +87,32 @@ public class Property {
     public String toString() {
         return name + ": " + type;
     }
+
+    public String getDefaultValue() {
+        switch (getType()) {
+            case string:
+                return "";
+            case number:
+                return "0";
+            case bool:
+                return "false";
+            case color:
+                return "\"#00000\"";
+            case enumeration:
+                return String.format("\"%s\"", getEnumOptions()[0]);
+        }
+        return "";
+    }
+
+    public String[] getEnumOptions() {
+        if (getType() == Types.enumeration) {
+            String repr = this.getTypeStringRepr();
+            int from = repr.indexOf('(') + 1;
+            int to = repr.indexOf(')');
+            String enums = repr.substring(from + 1, to).replaceAll("\'", "");
+            return enums.split(", ");
+        } else {
+            return null;
+        }
+    }
 }

@@ -1,11 +1,13 @@
 package ru.hse.plugin.ui;
 
+import com.intellij.ui.DocumentAdapter;
 import ru.hse.plugin.core.entities.ComponentEntity;
 import ru.hse.plugin.core.entities.PropertyEntity;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,14 +16,31 @@ public class PropertyUIItem {
     private JCheckBox checkbox;
     private JPanel panel1;
     PropertyEntity propertyEntity;
-    ComponentEntity componentEntity;
+
+    private void activate() {
+        if (!checkbox.isSelected()) {
+            checkbox.setSelected(true);
+        }
+    }
+
+    private void deactivate() {
+        if (checkbox.isSelected()) {
+            checkbox.setSelected(false);
+        }
+    }
 
     private JSlider getJSlider() {
-        int[] value = new int[]{0};
-        final JSlider jslider = new JSlider(JSlider.HORIZONTAL, 0, 100, value[0]);
+        int maxVal = 100;
+        double val = Double.parseDouble(propertyEntity.getValue());
+        if (val > maxVal) {
+            val = 0;
+        }
+        int[] value = new int[]{(int) val};
+        final JSlider jslider = new JSlider(JSlider.HORIZONTAL, 0, maxVal, value[0]);
         jslider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                activate();
                 if (jslider.getValue() != value[0]) {
                     value[0] = jslider.getValue();
                     propertyEntity.setValue(jslider.getValue());
@@ -37,10 +56,12 @@ public class PropertyUIItem {
 
     private JCheckBox getCheckbox() {
         JCheckBox jCheckBox = new JCheckBox();
+        jCheckBox.setSelected(Boolean.parseBoolean(propertyEntity.getValue()));
         jCheckBox.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                propertyEntity.setValue(checkbox.getText());
+                activate();
+                propertyEntity.setValue(jCheckBox.isSelected());
             }
         });
         return jCheckBox;
@@ -48,26 +69,33 @@ public class PropertyUIItem {
 
     private JTextField getTextField() {
         JTextField jTextField = new JTextField(10);
-        jTextField.addActionListener(new ActionListener() {
+        jTextField.setText(propertyEntity.getValue());
+        jTextField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                propertyEntity.setValue(jTextField.getText());
+            protected void textChanged(DocumentEvent documentEvent) {
+                if (jTextField.getText().length() == 0) {
+                    deactivate();
+                } else {
+                    activate();
+                    propertyEntity.setValue(jTextField.getText());
+                }
             }
         });
         return jTextField;
     }
 
     private JComboBox getCombobox() {
-        String repr = propertyEntity.getTypeStringRepr();
-        int from = repr.indexOf('(') + 1;
-        int to = repr.indexOf(')');
-        String enums = repr.substring(from + 1, to).replaceAll("\'", "");
-        String[] options = enums.split(", ");
+        String[] options = propertyEntity.getEnumOptions();
         JComboBox comboBox = new JComboBox(options);
-        comboBox.setSelectedIndex(0);
+        for (int i = 0; i < options.length; ++i) {
+            if (options[i].equals(propertyEntity.getValue())) {
+                comboBox.setSelectedIndex(i);
+            }
+        }
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                activate();
                 propertyEntity.setValue(comboBox.getSelectedItem());
             }
         });
@@ -77,6 +105,7 @@ public class PropertyUIItem {
     public PropertyUIItem(PropertyEntity propertyEntity) {
         this.propertyEntity = propertyEntity;
         checkbox.setText(propertyEntity.getShortName());
+        checkbox.setToolTipText(propertyEntity.getName());
         checkbox.setSelected(propertyEntity.isSelected());
         checkbox.addChangeListener(new ChangeListener() {
             @Override

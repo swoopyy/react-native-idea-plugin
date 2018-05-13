@@ -15,7 +15,11 @@ public class PropertyEntity extends Property {
 
     public PropertyEntity(Property property, ComponentEntity componentEntity, Object value, boolean isSelected) {
         super(property.getName(), property.getTypeStringRepr(), property.isRequired());
-        this.value = value;
+        if (value != null) {
+            this.value = value;
+        } else {
+            this.value = getDefaultValue();
+        }
         this.isSelected = isSelected;
         this.componentEntity = componentEntity;
     }
@@ -28,8 +32,8 @@ public class PropertyEntity extends Property {
         isSelected = selected;
     }
 
-    public Object getValue() {
-        return this.value;
+    public String getValue() {
+        return this.value.toString();
     }
 
 
@@ -90,10 +94,11 @@ public class PropertyEntity extends Property {
                     closingTag = closingTag1;
                 }
                 int insertionStart = psiElement.getTextOffset() + closingTag;
-                document.insertString(insertionStart, " " + getName() + "={}");
+                document.insertString(insertionStart, String.format(" %s={%s}", getName(), getDefaultValue()));
                 setSelected(true);
             }
             Utils.reformatText(psiElement.getTextOffset(), psiElement.getTextOffset() + psiElement.getTextLength());
         });
     }
+
 }
