@@ -58,7 +58,9 @@ public class PropertiesInspector {
     }
 
     public void clear() {
-        propertiesPanel.removeAll();
+        if (propertiesPanel != null) {
+            propertiesPanel.removeAll();
+        }
     }
 
     public ComponentEntity getComponentEntity() {

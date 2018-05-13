@@ -17,11 +17,15 @@ public class PropertyUIItem {
     ComponentEntity componentEntity;
 
     private JSlider getJSlider() {
-        JSlider jslider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        int[] value = new int[]{0};
+        final JSlider jslider = new JSlider(JSlider.HORIZONTAL, 0, 100, value[0]);
         jslider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println(e.toString());
+                if (jslider.getValue() != value[0]) {
+                    value[0] = jslider.getValue();
+                    propertyEntity.setValue(jslider.getValue());
+                }
             }
         });
         jslider.setMajorTickSpacing(10);
@@ -36,7 +40,7 @@ public class PropertyUIItem {
         jCheckBox.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                System.out.println(e.getSource());
+                propertyEntity.setValue(checkbox.getText());
             }
         });
         return jCheckBox;
@@ -47,7 +51,7 @@ public class PropertyUIItem {
         jTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getSource());
+                propertyEntity.setValue(jTextField.getText());
             }
         });
         return jTextField;
@@ -58,13 +62,13 @@ public class PropertyUIItem {
         int from = repr.indexOf('(') + 1;
         int to = repr.indexOf(')');
         String enums = repr.substring(from + 1, to).replaceAll("\'", "");
-        String[] options = enums.split(",");
+        String[] options = enums.split(", ");
         JComboBox comboBox = new JComboBox(options);
         comboBox.setSelectedIndex(0);
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getSource());
+                propertyEntity.setValue(comboBox.getSelectedItem());
             }
         });
         return comboBox;

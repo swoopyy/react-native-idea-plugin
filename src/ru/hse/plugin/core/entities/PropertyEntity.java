@@ -32,8 +32,42 @@ public class PropertyEntity extends Property {
         return this.value;
     }
 
+
     public void setValue(Object value) {
         this.value = value;
+        WriteCommandAction.runWriteCommandAction(editorManager.getProject(), () -> {
+            Document document = editorManager.getEditor().getDocument();
+            if (isSelected()) {
+                PsiElement propertyPsi = componentEntity.getPropertyContainingPsiElement(this);
+                String psiText = propertyPsi.getText();
+                int offset = propertyPsi.getTextOffset();
+                String text = document.getText().substring(offset, offset + psiText.length());
+                int startBr = text.indexOf("{");
+                int startQ = text.indexOf("\"");
+                int startQuo = text.indexOf("\'");
+                int start = startQ;
+                int end = startBr + 1;
+                if (startBr != -1) {
+                    start = startBr;
+                    end = text.indexOf("}");
+                } else if (startQ != -1 && startQ < startQuo) {
+                    start = startQ;
+                    end = text.lastIndexOf('"');
+                } else if(startQuo != -1 && startQuo < startQ) {
+                    start = startQuo;
+                    end = text.lastIndexOf("'");
+                }
+                start += propertyPsi.getTextOffset();
+                end += propertyPsi.getTextOffset();
+                String val = value.toString();
+                if (super.getType() != Types.bool && super.getType() != Types.number) {
+                    val = '"' + val + '"';
+                }
+                if (end > start) {
+                    document.replaceString(start + 1, end, val);
+                }
+            }
+        });
     }
 
     public void toggle() {
@@ -42,7 +76,6 @@ public class PropertyEntity extends Property {
             PsiElement psiElement = componentEntity.getPsiElement();
             if (isSelected()) {
                 PsiElement propertyPsi = componentEntity.getPropertyContainingPsiElement(this);
-                String propertyText = propertyPsi.getText();
                 int start = propertyPsi.getTextOffset();
                 int end = start + propertyPsi.getTextLength();
                 setSelected(false);
