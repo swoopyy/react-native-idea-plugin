@@ -9,6 +9,13 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import ru.hse.plugin.core.managers.EditorManager;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
     private static EditorManager manager = new EditorManager();
 
@@ -74,5 +81,38 @@ public class Utils {
                 System.out.println(ex.getMessage());
             }
         });
+    }
+
+
+    public static List<String> getAllExportingFiles(String path) throws IOException{
+        List<String> files = new ArrayList<String>();
+        for(File file: new File(path).listFiles()) {
+            if (file.isFile() && isJsExportingComponentFile(file.getAbsolutePath())) {
+                files.add(file.getAbsolutePath());
+            }
+            if (isJsContainingDirectory(file)) {
+                files.addAll(getAllExportingFiles(file.getPath()));
+            }
+        }
+        return files;
+    }
+
+    private static boolean isJsFile(String path) {
+        return path.endsWith("jsx") || path.endsWith("mjs") || path.endsWith("js");
+    }
+
+    private static boolean isJsExportingComponentFile(String path) throws IOException{
+        String content = new String(Files.readAllBytes(Paths.get(path)));
+        return  content.contains("export")
+                && content.contains("class")
+                && content.contains("Component")
+                && isJsFile(path);
+    }
+    private static boolean isJsContainingDirectory(File file) {
+        String fileName = file.getName();
+        return file.isDirectory()
+                && !fileName.equals("ios")
+                && !fileName.equals("android")
+                && !fileName.equals("node_modules");
     }
 }

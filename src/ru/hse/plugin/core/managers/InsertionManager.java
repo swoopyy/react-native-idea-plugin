@@ -2,9 +2,9 @@ package ru.hse.plugin.core.managers;
 
 
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
+import ru.hse.plugin.core.callbacks.SnippetInserted;
 import ru.hse.plugin.core.entities.Component;
 import ru.hse.plugin.core.handlers.ComponentInsertionEditorMouseAdapter;
-import ru.hse.plugin.core.callbacks.SnippetInserted;
 
 public class InsertionManager extends EditorManager {
     private static InsertionManager insertionManager;
@@ -28,6 +28,7 @@ public class InsertionManager extends EditorManager {
     private InsertionManager() {
        super();
     }
+
 
     public synchronized static InsertionManager getInstance() {
         if (insertionManager == null) {

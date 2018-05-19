@@ -21,6 +21,7 @@ import ru.hse.plugin.core.entities.Component;
 import ru.hse.plugin.core.entities.ComponentCollection;
 import ru.hse.plugin.core.entities.ComponentEntity;
 import ru.hse.plugin.core.entities.Platform;
+import ru.hse.plugin.core.managers.CustomComponentsManager;
 import ru.hse.plugin.core.managers.InsertionManager;
 import ru.hse.plugin.core.callbacks.SnippetInserted;
 import ru.hse.plugin.core.managers.PropertiesInspectorManager;
@@ -81,6 +82,7 @@ public class MainToolWindow implements ToolWindowFactory {
                 }
             }
         });
+        CustomComponentsManager.getInstance().scanProject();
     }
 
     private void refillModel(int index, String searchTerm) {
