@@ -50,7 +50,7 @@ public class ComponentEntity extends Component {
             int end = text.indexOf("}");
             return text.substring(start + 1, end);
         }
-        return null;
+        return text;
     }
 
     public PsiElement getPropertyContainingPsiElement(Property property) {

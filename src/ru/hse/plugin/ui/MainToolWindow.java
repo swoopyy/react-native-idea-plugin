@@ -22,6 +22,7 @@ import ru.hse.plugin.core.entities.ComponentCollection;
 import ru.hse.plugin.core.entities.ComponentEntity;
 import ru.hse.plugin.core.entities.Platform;
 import ru.hse.plugin.core.managers.CustomComponentsManager;
+import ru.hse.plugin.core.managers.Inserter;
 import ru.hse.plugin.core.managers.InsertionManager;
 import ru.hse.plugin.core.callbacks.SnippetInserted;
 import ru.hse.plugin.core.managers.PropertiesInspectorManager;
@@ -127,6 +128,7 @@ public class MainToolWindow implements ToolWindowFactory {
                             document.replaceString(start, end, toInsert);
                             PsiDocumentManager.getInstance(insertionManager.getProject()).commitDocument(insertionManager.getEditor().getDocument());
                             Utils.reformatText(start, start + toInsert.length());
+                            new Inserter(insertionManager.getProject(), insertionManager.getEditor(), component).insertImportStatement();
                             selectionModel.removeSelection();
                         });
                         jbList.clearSelection();

@@ -14,7 +14,7 @@ public class PropertiesInspectorManager extends EditorManager {
         PropertiesInspectorManager instance = getInstance();
         if (instance.componentClicked != componentClicked) {
             instance.componentClicked = componentClicked;
-            instance.setEditorMouseAdapter(new PropertiesInspectorEditorMouseAdapter(componentClicked));
+            instance.setPropertyInspectorMouseAdapter(new PropertiesInspectorEditorMouseAdapter(componentClicked));
         }
     }
 

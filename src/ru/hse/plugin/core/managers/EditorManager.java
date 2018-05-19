@@ -22,6 +22,7 @@ public class EditorManager {
     private FileEditorManager fileEditorManager;
     private static Editor prevEditor;
     EditorMouseAdapter editorMouseAdapter;
+    EditorMouseAdapter propertyInspectorMouseAdapter;
 
     public EditorManager() {
         project =  ProjectManager.getInstance().getOpenProjects()[0];
@@ -31,6 +32,12 @@ public class EditorManager {
 
     protected void setEditorMouseAdapter(EditorMouseAdapter editorMouseAdapter) {
         update(editorMouseAdapter);
+    }
+
+    protected void setPropertyInspectorMouseAdapter(EditorMouseAdapter editorMouseAdapter) {
+        propertyInspectorMouseAdapter = editorMouseAdapter;
+        Editor editor = fileEditorManager.getSelectedTextEditor();
+        editor.addEditorMouseListener(editorMouseAdapter);
     }
 
     public void clear() {
@@ -59,6 +66,9 @@ public class EditorManager {
         if (editorMouseAdapter != null) {
             this.editorMouseAdapter = editorMouseAdapter;
             editor.addEditorMouseListener(this.editorMouseAdapter);
+        } else {
+            editor.removeEditorMouseListener(propertyInspectorMouseAdapter); // in case we already have this connected to editor
+            editor.addEditorMouseListener(propertyInspectorMouseAdapter);
         }
     }
 
