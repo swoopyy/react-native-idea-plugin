@@ -74,6 +74,18 @@ public class PropertyEntity extends Property {
         });
     }
 
+    private int closingTagOffset(PsiElement psiElement) {
+        for (PsiElement child: psiElement.getChildren()) {
+            if (child.toString().equals("XmlToken:XML_EMPTY_ELEMENT_END")) {
+                return child.getTextOffset();
+            }
+            if (child.toString().equals("XmlToken:XML_TAG_END")) {
+                return child.getTextOffset();
+            }
+        }
+        return psiElement.getTextOffset();
+    }
+
     public void toggle() {
         WriteCommandAction.runWriteCommandAction(editorManager.getProject(), () -> {
             Document document = editorManager.getEditor().getDocument();
@@ -85,15 +97,7 @@ public class PropertyEntity extends Property {
                 setSelected(false);
                 document.deleteString(start, end);
             } else {
-                int closingTag;
-                int closingTag1 = psiElement.getText().indexOf('>');
-                int closingTag2 = psiElement.getText().indexOf("/>");
-                if (closingTag1 == closingTag2 + 1) {
-                    closingTag = closingTag2;
-                } else {
-                    closingTag = closingTag1;
-                }
-                int insertionStart = psiElement.getTextOffset() + closingTag;
+                int insertionStart = closingTagOffset(psiElement);
                 document.insertString(insertionStart, String.format(" %s={%s}", getName(), getDefaultValue()));
                 setSelected(true);
             }
