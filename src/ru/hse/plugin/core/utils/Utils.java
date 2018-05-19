@@ -87,7 +87,7 @@ public class Utils {
     public static List<String> getAllExportingFiles(String path) throws IOException{
         List<String> files = new ArrayList<String>();
         for(File file: new File(path).listFiles()) {
-            if (file.isFile() && isJsExportingComponentFile(file.getAbsolutePath())) {
+            if (file.isFile()) {
                 files.add(file.getAbsolutePath());
             }
             if (isJsContainingDirectory(file)) {
@@ -97,17 +97,8 @@ public class Utils {
         return files;
     }
 
-    private static boolean isJsFile(String path) {
-        return path.endsWith("jsx") || path.endsWith("mjs") || path.endsWith("js");
-    }
 
-    private static boolean isJsExportingComponentFile(String path) throws IOException{
-        String content = new String(Files.readAllBytes(Paths.get(path)));
-        return  content.contains("export")
-                && content.contains("class")
-                && content.contains("Component")
-                && isJsFile(path);
-    }
+
     private static boolean isJsContainingDirectory(File file) {
         String fileName = file.getName();
         return file.isDirectory()

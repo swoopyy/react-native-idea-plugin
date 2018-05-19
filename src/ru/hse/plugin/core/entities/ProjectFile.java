@@ -31,9 +31,11 @@ public class ProjectFile {
         StringBuilder sbDef = new StringBuilder();
         for (String component: exportedComponents) {
             sbExp.append(component);
+            sbExp.append(" ");
         }
         for (String component: defaultlyExportedComponents) {
             sbDef.append(component);
+            sbDef.append(" ");
         }
         return String.format(
                 "Path: %s\n Exported components (%d): %s\n Default components (%d) %s",

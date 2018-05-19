@@ -1,7 +1,5 @@
 package ru.hse.plugin.core.managers;
 
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -32,14 +30,7 @@ public class CustomComponentsManager  {
         return instance;
     }
 
-    private String getComponentFrom(String psiElementText, List<String> components) {
-        for (String component: components) {
-            if (psiElementText.contains(component)) {
-                return component;
-            }
-        }
-        return null;
-    }
+
 
     public void scanProject() {
         new Thread(new Runnable() {
@@ -57,41 +48,54 @@ public class CustomComponentsManager  {
                         List<String> components = new ArrayList<>();
                         List<String> exportedComponents = new ArrayList<>();
                         List<String> defaultlyExportedComponents = new ArrayList<>();
-                        psiFile.accept(new PsiRecursiveElementWalkingVisitor() {
-                            @Override
-                            public void visitElement(PsiElement element) {
-                                String elementText = element.getText();
-                                if (elementText.contains("class")
-                                        && elementText.contains("Component")
-                                        && !elementText.equals(psiFile.getText())) {
-                                    PsiElement[] children = element.getChildren();
-                                    for (int i = 0; i < children.length; ++i) {
-                                        if (children[i].getText().contains("extends") && i != 0) {
-                                            if (children[i - 1].getText().split(" ").length == 1) {
-                                                components.add(children[i - 1].getText());
+                        try {
+                            psiFile.accept(new PsiRecursiveElementWalkingVisitor() {
+                                @Override
+                                public void visitElement(PsiElement element) {
+                                    if (element.toString().contains("ES6Class")) {
+                                        for (PsiElement child : element.getChildren()) {
+                                            if (child.toString().equals("JSReferenceExpression")) {
+                                                components.add(child.getText());
+                                                if (element.getParent().toString().equals("ES6ExportDefaultAssignment")) {
+                                                    if (defaultlyExportedComponents.size() == 1) {
+                                                        defaultlyExportedComponents.clear();
+                                                    }
+                                                    defaultlyExportedComponents.add(child.getText());
+                                                } else if (element.getParent().getText().indexOf("export") == 0 ||
+                                                            element.getText().indexOf("export") == 0) {
+                                                    exportedComponents.add(child.getText());
+                                                }
+
                                             }
                                         }
                                     }
-                                }
-                                if (elementText.contains("export")
-                                        && !elementText.equals(psiFile.getText())) {
-                                    String componentName = getComponentFrom(elementText, components);
-                                    if (componentName != null) {
-                                        if (elementText.contains("default")) {
-                                            defaultlyExportedComponents.add(componentName);
-                                        } else {
-                                            exportedComponents.add(componentName);
+                                    if (element.toString().equals("ES6ExportDefaultAssignment")) {
+                                        if (defaultlyExportedComponents.size() == 0) {
+                                            String fileName = psiFile.getName().substring(0, psiFile.getName().indexOf('.'));
+                                            defaultlyExportedComponents.add(fileName);
                                         }
                                     }
+                                    if (element.toString().equals("ES6ExportSpecifier")) {
+                                        String component = element.getText();
+                                        if (components.contains(component) && !exportedComponents.contains(component)) {
+                                            exportedComponents.add(component);
+                                        }
+                                    }
+                                    super.visitElement(element);
                                 }
-                                super.visitElement(element);
-                            }
-                        });
+                            });
+                        } catch(NullPointerException ex) {
+                            continue;
+                        }
+                        if (components.size() == 0) {
+                            defaultlyExportedComponents.clear();
+                        }
                         projectFiles.add(new ProjectFile(
                                 exportedComponents,
                                 defaultlyExportedComponents,
                                 path
                         ));
+
                     }
                     for (ProjectFile projectFile: projectFiles) {
                         System.out.println(projectFile.toString());
