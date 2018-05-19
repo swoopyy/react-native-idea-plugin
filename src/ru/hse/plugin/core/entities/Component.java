@@ -81,8 +81,12 @@ public class Component {
         isDefault = aDefault;
     }
 
-    public String getImportPath() {
-        return importPath;
+    public String getImportPathSingleQuoted() {
+        return String.format("'%s'", importPath);
+    }
+
+    public String getImportPathDoubleQuoted() {
+        return String.format("\"%s\"", importPath);
     }
 
     public void setImportPath(String importPath) {
