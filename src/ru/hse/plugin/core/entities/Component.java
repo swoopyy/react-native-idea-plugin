@@ -4,12 +4,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
+import ru.hse.plugin.core.utils.ResourceUtils;
 import ru.hse.plugin.core.utils.Utils;
 
+import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class Component {
@@ -93,17 +97,28 @@ public class Component {
     }
 
     public String getImportPathSingleQuoted(Editor activeEditor) {
-        return String.format("'%s'", getImportPath(activeEditor));
+        String path = getImportPath(activeEditor);
+        if (path == null) {
+            return null;
+        }
+        return String.format("'%s'", path);
     }
 
     public String getImportPathDoubleQuoted(Editor activeEditor) {
-        return String.format("\"%s\"", getImportPath(activeEditor));
+        String path = getImportPath(activeEditor);
+        if (path == null) {
+            return null;
+        }
+        return String.format("\"%s\"", path);
     }
 
     public String getImportPath(Editor activeEditor) {
+        if (importPath.equals("react-native")) {
+            return importPath;
+        }
         VirtualFile file = FileDocumentManager.getInstance().getFile(activeEditor.getDocument());
-        String path = file.getPath();
-        return importPath;
+        String editorPath = file.getPath();
+        return ResourceUtils.getRelativePath(importPath, editorPath, File.separator);
     }
 
     public void setImportPath(String importPath) {

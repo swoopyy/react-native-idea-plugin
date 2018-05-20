@@ -100,10 +100,15 @@ public class Inserter {
         });
         if (!importPathExists) {
             String statement;
+            String importName = component.getImportName();
+            String importPath = component.getImportPath(editor);
+            if (importPath == null) {
+                return;
+            }
             if (component.isDefault()) {
-                statement = String.format("import %s from '%s';\n", component.getImportName(), component.getImportPath(editor));
+                statement = String.format("import %s from '%s';\n", importName, importPath);
             } else {
-                statement = String.format("import { %s } from '%s';\n", component.getImportName(), component.getImportPath(editor));
+                statement = String.format("import { %s } from '%s';\n", importName, importPath);
             }
             if (lastImportOffset == -1) {
                 insert(0, statement);
