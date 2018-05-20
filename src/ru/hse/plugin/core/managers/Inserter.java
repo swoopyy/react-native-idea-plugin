@@ -28,7 +28,8 @@ public class Inserter {
 
     private boolean isImportPathNode(String nodeText, String documentText) {
         return nodeText.contains("import")
-                && (nodeText.contains(component.getImportPathSingleQuoted()) || nodeText.contains(component.getImportPathDoubleQuoted()))
+                && (nodeText.contains(component.getImportPathSingleQuoted(editor))
+                || nodeText.contains(component.getImportPathDoubleQuoted(editor)))
                 && !nodeText.equals(documentText);
     }
 
@@ -80,7 +81,7 @@ public class Inserter {
                         int rBracketOffset = text.indexOf('{');
                         int importOffset = documentText.indexOf(text);
                         if (component.isDefault()) {
-                            insert(importOffset + 1, String.format(" %s ", component.getImportName()));
+                            insert(importOffset + "import".length(), String.format(" %s, ", component.getImportName()));
                         } else {
                             if (rBracketOffset != -1) {
                                 insert(importOffset + rBracketOffset + 1, String.format(" %s,", component.getImportName()));
@@ -100,9 +101,9 @@ public class Inserter {
         if (!importPathExists) {
             String statement;
             if (component.isDefault()) {
-                statement = String.format("import %s from '%s';\n", component.getImportName(), component.getImportPathSingleQuoted());
+                statement = String.format("import %s from '%s';\n", component.getImportName(), component.getImportPath(editor));
             } else {
-                statement = String.format("import { %s } from '%s';\n", component.getImportName(), component.getImportPathSingleQuoted());
+                statement = String.format("import { %s } from '%s';\n", component.getImportName(), component.getImportPath(editor));
             }
             if (lastImportOffset == -1) {
                 insert(0, statement);

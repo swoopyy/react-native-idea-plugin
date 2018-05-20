@@ -6,11 +6,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
+import ru.hse.plugin.core.callbacks.ProjectScanned;
+import ru.hse.plugin.core.entities.Component;
 import ru.hse.plugin.core.entities.ProjectFile;
+import ru.hse.plugin.core.entities.Property;
 import ru.hse.plugin.core.utils.Utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +32,12 @@ public class CustomComponentsManager  {
         return instance;
     }
 
+    public List<ProjectFile> getProjectFiles() {
+        return projectFiles;
+    }
 
-
-    public void scanProject() {
+    public void scanProject(ProjectScanned projectScanned) {
+        projectFiles = new ArrayList<ProjectFile>();
         new Thread(new Runnable() {
             @Override
             public void run()  {
@@ -95,13 +100,22 @@ public class CustomComponentsManager  {
                                 defaultlyExportedComponents,
                                 path
                         ));
-
                     }
-                    for (ProjectFile projectFile: projectFiles) {
-                        System.out.println(projectFile.toString());
-                    }
+                    projectScanned.perform();
                 }
         }).start();
+    }
 
+    public Component[] components() {
+        List<Component> list = new ArrayList<>();
+        for(ProjectFile file: projectFiles) {
+            for(String component: file.getExportedComponents()) {
+                list.add(new Component(component, file.getPath(), new Property[0], false));
+            }
+            for(String component: file.getDefaultlyExportedComponents()) {
+                list.add(new Component(component, file.getPath(), new Property[0], true));
+            }
+        }
+        return list.toArray(new Component[0]);
     }
 }

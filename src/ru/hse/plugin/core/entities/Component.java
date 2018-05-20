@@ -1,6 +1,9 @@
 package ru.hse.plugin.core.entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.vfs.VirtualFile;
 import ru.hse.plugin.core.utils.Utils;
 
 import java.util.ArrayList;
@@ -22,6 +25,14 @@ public class Component {
 
     public Component() { }
 
+    // for custom components
+    public Component(String name, String path, Property[] properties, boolean isDefault) {
+        this(name, "", Platform.BOTH, path, "", properties, false);
+        this.importPath = path;
+        this.isDefault = isDefault;
+    }
+
+    // for builtin components
     public Component(String name,
                      String description,
                      Platform platform,
@@ -30,12 +41,12 @@ public class Component {
                      Property[] properties,
                      boolean isContainer
     ) {
+        this.name = name;
         this.description = description;
         this.platform = platform;
         this.url = url;
         this.iconPath = iconPath;
         this.properties = properties;
-        this.name = name;
         this.isContainer = isContainer;
     }
 
@@ -81,12 +92,18 @@ public class Component {
         isDefault = aDefault;
     }
 
-    public String getImportPathSingleQuoted() {
-        return String.format("'%s'", importPath);
+    public String getImportPathSingleQuoted(Editor activeEditor) {
+        return String.format("'%s'", getImportPath(activeEditor));
     }
 
-    public String getImportPathDoubleQuoted() {
-        return String.format("\"%s\"", importPath);
+    public String getImportPathDoubleQuoted(Editor activeEditor) {
+        return String.format("\"%s\"", getImportPath(activeEditor));
+    }
+
+    public String getImportPath(Editor activeEditor) {
+        VirtualFile file = FileDocumentManager.getInstance().getFile(activeEditor.getDocument());
+        String path = file.getPath();
+        return importPath;
     }
 
     public void setImportPath(String importPath) {

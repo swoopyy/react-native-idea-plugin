@@ -15,12 +15,12 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.sun.codemodel.internal.JBlock;
 import org.jetbrains.annotations.NotNull;
 import ru.hse.plugin.core.callbacks.ComponentClicked;
+import ru.hse.plugin.core.callbacks.ProjectScanned;
+import ru.hse.plugin.core.entities.*;
 import ru.hse.plugin.core.entities.Component;
-import ru.hse.plugin.core.entities.ComponentCollection;
-import ru.hse.plugin.core.entities.ComponentEntity;
-import ru.hse.plugin.core.entities.Platform;
 import ru.hse.plugin.core.managers.CustomComponentsManager;
 import ru.hse.plugin.core.managers.Inserter;
 import ru.hse.plugin.core.managers.InsertionManager;
@@ -48,15 +48,21 @@ public class MainToolWindow implements ToolWindowFactory {
     private JPanel androidPanel;
     private JPanel commonPanel;
     private JPanel propertiesPanel;
-    private PropertiesInspector propertiesInspector;
+    private JPanel custom;
+    private JPanel customPanel;
     private ComponentEntity componentEntity;
     private DefaultListModel<Component>[] models = new DefaultListModel[]{
+            new DefaultListModel<Component>(),
             new DefaultListModel<Component>(),
             new DefaultListModel<Component>(),
             new DefaultListModel<Component>()
     };
     private Component[] builtinComponents = ComponentCollection.getBuiltinComponents();
-    private InsertionManager insertionManager;
+    private Component[] customComponents = new Component[0]; // initialized asynchronously
+    private InsertionManager insertionManager = InsertionManager.getInstance();
+    private CustomComponentsManager customComponentsManager = CustomComponentsManager.getInstance();
+    private PropertiesInspector propertiesInspector = new PropertiesInspector();
+
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
@@ -64,14 +70,18 @@ public class MainToolWindow implements ToolWindowFactory {
         iosPanel.setLayout(new BoxLayout(iosPanel, BoxLayout.Y_AXIS));
         androidPanel.setLayout(new BoxLayout(androidPanel, BoxLayout.Y_AXIS));
         commonPanel.setLayout(new BoxLayout(commonPanel, BoxLayout.Y_AXIS));
+        customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
         propertiesPanel.setLayout(new BoxLayout(propertiesPanel, BoxLayout.Y_AXIS));
         this.createUIComponents();
-        insertionManager = InsertionManager.getInstance();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentPanel, "", false);
         toolWindow.getContentManager().addContent(content);
-        propertiesInspector = new PropertiesInspector();
         propertiesPanel.add(propertiesInspector.$$$getRootComponent$$$());
+        initPropertiesInspectorHandler();
+        rescanForCustomComponents();
+    }
+
+    private void initPropertiesInspectorHandler() {
         PropertiesInspectorManager.setHandler(new ComponentClicked() {
             @Override
             public void perform(PsiElement element, Component component) {
@@ -83,7 +93,16 @@ public class MainToolWindow implements ToolWindowFactory {
                 }
             }
         });
-        CustomComponentsManager.getInstance().scanProject();
+    }
+
+    private void rescanForCustomComponents() {
+        customComponentsManager.scanProject(new ProjectScanned() {
+            @Override
+            public void perform() {
+                customComponents =  customComponentsManager.components(); //customComponentsManager.components();
+                refillModel(3, "");
+            }
+        });
     }
 
     private void refillModel(int index, String searchTerm) {
@@ -106,6 +125,20 @@ public class MainToolWindow implements ToolWindowFactory {
                 model.addElement(component);
             }
         }
+        if (index == 3) {
+            for (Component component : customComponents) {
+                if (component.meets(searchTerm)) {
+                    model.addElement(component);
+                }
+            }
+        }
+    }
+
+    private void updateTabPanel(JBList jbList, JPanel jPanel) {
+        if (jPanel.getComponentCount() > 0) {
+            jPanel.remove(0);
+        }
+        jPanel.add(jbList);
     }
 
     private void updateTabView() {
@@ -159,23 +192,18 @@ public class MainToolWindow implements ToolWindowFactory {
         });
         switch (tabbedPane1.getSelectedIndex()) {
             case 0:
-                if (iosPanel.getComponentCount() > 0) {
-                    iosPanel.remove(0);
-                }
-                iosPanel.add(jbList);
+                updateTabPanel(jbList, iosPanel);
                 break;
             case 1:
-                if (androidPanel.getComponentCount() > 0) {
-                    androidPanel.remove(0);
-                }
-                androidPanel.add(jbList);
+                updateTabPanel(jbList, androidPanel);
                 break;
             case 2:
-                if (commonPanel.getComponentCount() > 0) {
-                    commonPanel.remove(0);
-                }
-                commonPanel.add(jbList);
+                updateTabPanel(jbList, commonPanel);
                 break;
+            case 3:
+                updateTabPanel(jbList, customPanel);
+                break;
+
         }
     }
 
@@ -183,6 +211,7 @@ public class MainToolWindow implements ToolWindowFactory {
         refillModel(0, "");
         refillModel(1, "");
         refillModel(2, "");
+        refillModel(3, "");
         updateTabView();
         searchField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
@@ -267,6 +296,14 @@ public class MainToolWindow implements ToolWindowFactory {
         commonPanel = new JPanel();
         commonPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         jBScrollPane3.setViewportView(commonPanel);
+        custom = new JPanel();
+        custom.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        tabbedPane1.addTab("Custom", custom);
+        final JBScrollPane jBScrollPane4 = new JBScrollPane();
+        custom.add(jBScrollPane4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        customPanel = new JPanel();
+        customPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        jBScrollPane4.setViewportView(customPanel);
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(1, 2, new Insets(0, 10, 0, 5), -1, -1));
         panel1.add(panel2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
