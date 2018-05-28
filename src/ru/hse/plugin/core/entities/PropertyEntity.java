@@ -3,6 +3,7 @@ package ru.hse.plugin.core.entities;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
 import ru.hse.plugin.core.managers.EditorManager;
 import ru.hse.plugin.core.utils.Utils;
 
@@ -12,6 +13,28 @@ public class PropertyEntity extends Property {
     private ComponentEntity componentEntity;
     private Object value;
     private boolean isSelected;
+
+    private int closingTagOffset(PsiElement psiElement) {
+        for (PsiElement child: psiElement.getChildren()) {
+            if (child.toString().equals("XmlToken:XML_EMPTY_ELEMENT_END")) {
+                return child.getTextOffset();
+            }
+            if (child.toString().equals("XmlToken:XML_TAG_END")) {
+                return child.getTextOffset();
+            }
+        }
+        return psiElement.getTextOffset();
+    }
+
+    private String embededValue() {
+        if (getType() == Types.color
+                || getType() == Types.string
+                || getType() == Types.enumeration) {
+            return "\"" + value + "\"";
+        } else {
+            return "{" + value + "}";
+        }
+    }
 
     public PropertyEntity(Property property, ComponentEntity componentEntity, Object value, boolean isSelected) {
         super(property.getName(), property.getTypeStringRepr(), property.isRequired());
@@ -43,48 +66,26 @@ public class PropertyEntity extends Property {
             Document document = editorManager.getEditor().getDocument();
             if (isSelected()) {
                 PsiElement propertyPsi = componentEntity.getPropertyContainingPsiElement(this);
-                String psiText = propertyPsi.getText();
-                int offset = propertyPsi.getTextOffset();
-                String text = document.getText().substring(offset, offset + psiText.length());
-                int startBr = text.indexOf("{");
-                int startQ = text.indexOf("\"");
-                int startQuo = text.indexOf("\'");
-                int start = startQ;
-                int end = startBr + 1;
-                if (startBr != -1) {
-                    start = startBr;
-                    end = text.indexOf("}");
-                } else if (startQ != -1 && startQ < startQuo) {
-                    start = startQ;
-                    end = text.lastIndexOf('"');
-                } else if(startQuo != -1 && startQuo < startQ) {
-                    start = startQuo;
-                    end = text.lastIndexOf("'");
-                }
-                start += propertyPsi.getTextOffset();
-                end += propertyPsi.getTextOffset();
-                String val = value.toString();
-                if (super.getType() != Types.bool && super.getType() != Types.number) {
-                    val = '"' + val + '"';
-                }
-                if (end > start) {
-                    document.replaceString(start + 1, end, val);
+                if (propertyPsi == null) {
+                    toggle();
+                } else {
+                    propertyPsi.accept(new PsiRecursiveElementWalkingVisitor() {
+                        @Override
+                        public void visitElement(PsiElement element) {
+                            if (element.toString().equals("PsiElement(XML_ATTRIBUTE_VALUE)")) {
+                                int start = element.getTextOffset();
+                                int end = element.getTextOffset() + element.getText().length() - 1;
+                                document.replaceString(start - 1, end, embededValue());
+                                return;
+                            }
+                            super.visitElement(element);
+                        }
+                    });
                 }
             }
         });
     }
 
-    private int closingTagOffset(PsiElement psiElement) {
-        for (PsiElement child: psiElement.getChildren()) {
-            if (child.toString().equals("XmlToken:XML_EMPTY_ELEMENT_END")) {
-                return child.getTextOffset();
-            }
-            if (child.toString().equals("XmlToken:XML_TAG_END")) {
-                return child.getTextOffset();
-            }
-        }
-        return psiElement.getTextOffset();
-    }
 
     public void toggle() {
         WriteCommandAction.runWriteCommandAction(editorManager.getProject(), () -> {
@@ -98,7 +99,7 @@ public class PropertyEntity extends Property {
                 document.deleteString(start, end);
             } else {
                 int insertionStart = closingTagOffset(psiElement);
-                document.insertString(insertionStart, String.format(" %s={%s}", getName(), getDefaultValue()));
+                document.insertString(insertionStart, String.format(" %s=%s", getName(), embededValue()));
                 setSelected(true);
             }
             Utils.reformatText(psiElement.getTextOffset(), psiElement.getTextOffset() + psiElement.getTextLength());

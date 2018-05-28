@@ -97,7 +97,7 @@ public class Property {
             case bool:
                 return "false";
             case color:
-                return "\"#00000\"";
+                return "#00000";
             case enumeration:
                 return String.format("\"%s\"", getEnumOptions()[0]);
         }

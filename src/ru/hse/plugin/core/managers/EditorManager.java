@@ -1,5 +1,7 @@
 package ru.hse.plugin.core.managers;
 
+import com.intellij.openapi.application.ApplicationAdapter;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorMouseAdapter;
 import com.intellij.openapi.editor.impl.EditorImpl;
@@ -9,6 +11,7 @@ import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.project.VetoableProjectManagerListener;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBus;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +20,7 @@ import ru.hse.plugin.core.entities.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditorManager {
+public class  EditorManager {
     private Project project;
     private FileEditorManager fileEditorManager;
     private static Editor prevEditor;
@@ -25,7 +28,7 @@ public class EditorManager {
     EditorMouseAdapter propertyInspectorMouseAdapter;
 
     public EditorManager() {
-        project =  ProjectManager.getInstance().getOpenProjects()[0];
+        project = ProjectManager.getInstance().getOpenProjects()[0];
         fileEditorManager = FileEditorManager.getInstance(project);
         addEditorListener();
     }

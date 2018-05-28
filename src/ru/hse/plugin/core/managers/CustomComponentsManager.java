@@ -1,5 +1,6 @@
 package ru.hse.plugin.core.managers;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -38,7 +39,7 @@ public class CustomComponentsManager  {
 
     public void scanProject(ProjectScanned projectScanned) {
         projectFiles = new ArrayList<ProjectFile>();
-        new Thread(new Runnable() {
+        ApplicationManager.getApplication().runReadAction((new Runnable() {
             @Override
             public void run()  {
                     List<String> paths;
@@ -103,7 +104,7 @@ public class CustomComponentsManager  {
                     }
                     projectScanned.perform();
                 }
-        }).start();
+        }));
     }
 
     public Component[] components() {

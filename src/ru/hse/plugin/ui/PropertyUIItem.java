@@ -1,7 +1,6 @@
 package ru.hse.plugin.ui;
 
 import com.intellij.ui.DocumentAdapter;
-import ru.hse.plugin.core.entities.ComponentEntity;
 import ru.hse.plugin.core.entities.PropertyEntity;
 
 import javax.swing.*;
@@ -11,6 +10,8 @@ import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class PropertyUIItem {
     private JCheckBox checkbox;
@@ -57,9 +58,10 @@ public class PropertyUIItem {
     private JCheckBox getCheckbox() {
         JCheckBox jCheckBox = new JCheckBox();
         jCheckBox.setSelected(Boolean.parseBoolean(propertyEntity.getValue()));
-        jCheckBox.addChangeListener(new ChangeListener() {
+        jCheckBox.addItemListener(new ItemListener() {
             @Override
-            public void stateChanged(ChangeEvent e) {
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println("HEY");
                 activate();
                 propertyEntity.setValue(jCheckBox.isSelected());
             }
