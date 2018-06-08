@@ -70,7 +70,7 @@ public class  EditorManager {
             this.editorMouseAdapter = editorMouseAdapter;
             editor.addEditorMouseListener(this.editorMouseAdapter);
         } else {
-            editor.removeEditorMouseListener(propertyInspectorMouseAdapter); // in case we already have this connected to editor
+            //editor.removeEditorMouseListener(propertyInspectorMouseAdapter); // in case we already have this connected to editor
             editor.addEditorMouseListener(propertyInspectorMouseAdapter);
         }
     }

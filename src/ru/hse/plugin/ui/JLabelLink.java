@@ -41,15 +41,17 @@ public class JLabelLink extends JFrame {
             URI uri = new java.net.URI(link);
             (new LinkRunner(uri)).execute();
         } catch (URISyntaxException use) {
-            throw new AssertionError(use + ": " + link); //NOI18N
+            System.out.print("not a url");
         }
     }
 
     private static void makeLinkable(JLabel c, MouseListener ml) {
         assert ml != null;
-        c.setText(htmlIfy(linkIfy(c.getText())));
-        c.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        c.addMouseListener(ml);
+        if (c.getText().contains("http")) {
+            c.setText(htmlIfy(linkIfy(c.getText())));
+            c.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            c.addMouseListener(ml);
+        }
     }
 
     private static boolean isBrowsingSupported() {
