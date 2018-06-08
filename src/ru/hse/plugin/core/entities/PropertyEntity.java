@@ -30,7 +30,11 @@ public class PropertyEntity extends Property {
         if (getType() == Types.color
                 || getType() == Types.string
                 || getType() == Types.enumeration) {
-            return "\"" + value + "\"";
+            if (!value.toString().contains("\"")) {
+                return "\"" + value + "\"";
+            } else {
+                return value.toString();
+            }
         } else {
             return "{" + value + "}";
         }
@@ -75,6 +79,10 @@ public class PropertyEntity extends Property {
                             if (element.toString().equals("PsiElement(XML_ATTRIBUTE_VALUE)")) {
                                 int start = element.getTextOffset();
                                 int end = element.getTextOffset() + element.getText().length() - 1;
+                                char endChar = document.getText().charAt(end);
+                                if (endChar == '}' || endChar == '"') {
+                                    end += 1;
+                                }
                                 document.replaceString(start - 1, end, embededValue());
                                 return;
                             }
