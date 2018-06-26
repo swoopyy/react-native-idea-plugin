@@ -1,22 +1,17 @@
 package ru.hse.plugin.ui;
 
+import com.intellij.ui.Colors;
 import com.intellij.ui.components.JBLabel;
 import ru.hse.plugin.core.entities.Component;
 import ru.hse.plugin.core.entities.Platform;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.*;
 
 public class ComponentCellRenderer  implements ListCellRenderer<Component> {
-    private FileSystemView fileSystemView = FileSystemView.getFileSystemView();
     private ImageIcon reactIcon = new ImageIcon(ComponentCellRenderer.class.getResource("/icons/react.png"));
     private ImageIcon androidIcon = new ImageIcon(ComponentCellRenderer.class.getResource("/icons/android.png"));
     private ImageIcon appleIcon = new ImageIcon(ComponentCellRenderer.class.getResource("/icons/apple.png"));
-    private ImageIcon androidIosIcon = new ImageIcon(ComponentCellRenderer.class.getResource("/icons/android-ios.png"));
 
     @Override
     public java.awt.Component getListCellRendererComponent(JList<? extends Component> list, Component value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -33,8 +28,8 @@ public class ComponentCellRenderer  implements ListCellRenderer<Component> {
             label.setIcon(reactIcon);
         }
         if (isSelected) {
-            label.setBackground(list.getSelectionBackground());
-            label.setForeground(list.getSelectionForeground());
+            label.setForeground(Colors.DARK_RED);
+            label.setBackground(Colors.DARK_RED);
         } else {
             label.setForeground(list.getForeground());
             label.setBackground(list.getBackground());

@@ -30,22 +30,18 @@ import ru.hse.plugin.core.utils.Utils;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MainToolWindow implements ToolWindowFactory {
     private ToolWindow mainToolWindow;
     private JPanel contentPanel;
     private JTabbedPane tabbedPane1;
-    private JPanel builtIn;
+    private JPanel builtInPanel;
     private JTextField searchField;
     private JLabel searchLabel;
-    private JPanel builtInPanel;
     private JPanel propertiesPanel;
-    private JPanel custom;
     private JPanel customPanel;
     private ComponentEntity componentEntity;
-    private DefaultListModel<Component>[] models = new DefaultListModel[]{
+    private DefaultListModel[] models = new DefaultListModel[]{
             new DefaultListModel<Component>(),
             new DefaultListModel<Component>(),
     };
@@ -66,8 +62,6 @@ public class MainToolWindow implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         mainToolWindow = toolWindow;
-        builtInPanel.setLayout(new BoxLayout(builtInPanel, BoxLayout.Y_AXIS));
-        customPanel.setLayout(new BoxLayout(customPanel, BoxLayout.Y_AXIS));
         propertiesPanel.setLayout(new BoxLayout(propertiesPanel, BoxLayout.Y_AXIS));
         this.createUIComponents();
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
@@ -97,13 +91,15 @@ public class MainToolWindow implements ToolWindowFactory {
             @Override
             public void perform() {
                 customComponents = customComponentsManager.components(); //customComponentsManager.components();
-                refillModel(3, "");
+                refillModel(1, "");
             }
         });
     }
 
     private void refillModel(int index, String searchTerm) {
         DefaultListModel<Component> model = models[index];
+        System.out.println("Index " + index);
+        System.out.println("Custom components length " + customComponents.length);
         model.clear();
         if (index == 0) {
             for (Component component : builtinComponents) {
@@ -123,7 +119,7 @@ public class MainToolWindow implements ToolWindowFactory {
         if (jPanel.getComponentCount() > 0) {
             jPanel.remove(0);
         }
-        jPanel.add(jbList, BorderLayout.CENTER);
+        jPanel.add(new JBScrollPane(jbList), BorderLayout.CENTER);
     }
 
     private void updateTabView() {
@@ -237,22 +233,12 @@ public class MainToolWindow implements ToolWindowFactory {
         panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         tabbedPane1 = new JTabbedPane();
         panel1.add(tabbedPane1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
-        builtIn = new JPanel();
-        builtIn.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane1.addTab("Built in", builtIn);
-        final JBScrollPane jBScrollPane1 = new JBScrollPane();
-        builtIn.add(jBScrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         builtInPanel = new JPanel();
         builtInPanel.setLayout(new BorderLayout(0, 0));
-        jBScrollPane1.setViewportView(builtInPanel);
-        custom = new JPanel();
-        custom.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane1.addTab("Custom", custom);
-        final JBScrollPane jBScrollPane2 = new JBScrollPane();
-        custom.add(jBScrollPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        tabbedPane1.addTab("Built in", builtInPanel);
         customPanel = new JPanel();
         customPanel.setLayout(new BorderLayout(0, 0));
-        jBScrollPane2.setViewportView(customPanel);
+        tabbedPane1.addTab("Custom", customPanel);
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(1, 2, new Insets(0, 10, 0, 5), -1, -1));
         panel1.add(panel2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
