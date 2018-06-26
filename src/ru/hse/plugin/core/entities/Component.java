@@ -27,6 +27,16 @@ public class Component {
     private boolean isDefault = false;
     private String importPath = "react-native";
 
+    public boolean isCustom() {
+        return isCustom;
+    }
+
+    public void setCustom(boolean custom) {
+        isCustom = custom;
+    }
+
+    private boolean isCustom = false;
+
     public Component() { }
 
     // for custom components

@@ -11,6 +11,7 @@ import ru.hse.plugin.core.entities.Component;
 public class ComponentListItem {
     private JPanel panel1;
     private JLabelLink urlComponent;
+    private Component component;
     private JLabel nameComponent;
     private JPanel panel2;
     private JPanel urlPanel;
@@ -39,6 +40,7 @@ public class ComponentListItem {
 
     public ComponentListItem(Component component) {
         this();
+        this.component = component;
         this.setDescription(component.getDescription());
         this.setIcon(component.getIconPath());
         this.setName(component.getName());

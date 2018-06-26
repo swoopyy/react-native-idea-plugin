@@ -4,6 +4,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.psi.PsiDocumentManager;
@@ -15,7 +16,6 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.sun.codemodel.internal.JBlock;
 import org.jetbrains.annotations.NotNull;
 import ru.hse.plugin.core.callbacks.ComponentClicked;
 import ru.hse.plugin.core.callbacks.ProjectScanned;
@@ -29,7 +29,6 @@ import ru.hse.plugin.core.managers.PropertiesInspectorManager;
 import ru.hse.plugin.core.utils.Utils;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -57,12 +56,19 @@ public class MainToolWindow implements ToolWindowFactory {
             new DefaultListModel<Component>(),
             new DefaultListModel<Component>()
     };
-    private Component[] builtinComponents = ComponentCollection.getBuiltinComponents();
-    private Component[] customComponents = new Component[0]; // initialized asynchronously
-    private InsertionManager insertionManager = InsertionManager.getInstance();
-    private CustomComponentsManager customComponentsManager = CustomComponentsManager.getInstance();
-    private PropertiesInspector propertiesInspector = new PropertiesInspector();
+    private Component[] builtinComponents;
+    private Component[] customComponents; // initialized asynchronously
+    private InsertionManager insertionManager;
+    private CustomComponentsManager customComponentsManager;
+    private PropertiesInspector propertiesInspector;
 
+    public MainToolWindow() {
+        builtinComponents = ComponentCollection.getBuiltinComponents();
+        customComponents = new Component[0];
+        insertionManager = InsertionManager.getInstance();
+        customComponentsManager = CustomComponentsManager.getInstance();
+        propertiesInspector = new PropertiesInspector();
+    }
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
@@ -99,7 +105,7 @@ public class MainToolWindow implements ToolWindowFactory {
         customComponentsManager.scanProject(new ProjectScanned() {
             @Override
             public void perform() {
-                customComponents =  customComponentsManager.components(); //customComponentsManager.components();
+                customComponents = customComponentsManager.components(); //customComponentsManager.components();
                 refillModel(3, "");
             }
         });

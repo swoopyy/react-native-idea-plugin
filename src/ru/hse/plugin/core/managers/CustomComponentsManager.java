@@ -111,10 +111,14 @@ public class CustomComponentsManager  {
         List<Component> list = new ArrayList<>();
         for(ProjectFile file: projectFiles) {
             for(String component: file.getExportedComponents()) {
-                list.add(new Component(component, file.getPath(), new Property[0], false));
+                Component component1 = new Component(component, file.getPath(), new Property[0], false);
+                component1.setCustom(true);
+                list.add(component1);
             }
             for(String component: file.getDefaultlyExportedComponents()) {
-                list.add(new Component(component, file.getPath(), new Property[0], true));
+                Component component1 = new Component(component, file.getPath(), new Property[0], true);
+                component1.setCustom(true);
+                list.add(component1);
             }
         }
         return list.toArray(new Component[0]);
