@@ -29,61 +29,10 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="efb3a" binding="ios" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="7298" binding="builtIn" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <tabbedpane title="IOS"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <scrollpane id="5403f" class="com.intellij.ui.components.JBScrollPane">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children>
-                      <grid id="5cd01" binding="iosPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-                        <constraints/>
-                        <properties/>
-                        <border type="none"/>
-                        <children/>
-                      </grid>
-                    </children>
-                  </scrollpane>
-                </children>
-              </grid>
-              <grid id="9159a" binding="android" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <tabbedpane title="Android"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <scrollpane id="5b054" class="com.intellij.ui.components.JBScrollPane">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children>
-                      <grid id="516d1" binding="androidPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
-                        <constraints/>
-                        <properties/>
-                        <border type="none"/>
-                        <children/>
-                      </grid>
-                    </children>
-                  </scrollpane>
-                </children>
-              </grid>
-              <grid id="7298" binding="common" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <tabbedpane title="Common"/>
+                  <tabbedpane title="Built in"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -95,8 +44,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <grid id="4b01d" binding="commonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
+                      <grid id="4b01d" binding="builtInPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
                         <constraints/>
                         <properties/>
                         <border type="none"/>
@@ -121,8 +69,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <grid id="37514" binding="customPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
+                      <grid id="37514" binding="customPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
                         <constraints/>
                         <properties/>
                         <border type="none"/>

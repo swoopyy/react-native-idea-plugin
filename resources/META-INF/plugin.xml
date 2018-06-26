@@ -23,7 +23,7 @@
     <toolWindow id="RN Interactive"
                 anchor="right"
                 factoryClass="ru.hse.plugin.ui.MainToolWindow"
-                icon="/icons/plugin_icon.png"
+                icon="/icons/react.png"
                 secondary="false">
     </toolWindow>
   </extensions>
